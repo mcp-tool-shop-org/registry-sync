@@ -1,0 +1,64 @@
+{
+  "name": "@mcptoolshop/registry-sync",
+  "version": "1.0.0",
+  "description": "Desired-state sync engine for multi-registry package publishing",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "bin": {
+    "registry-sync": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run build && node dist/cli.js help",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "registry",
+    "sync",
+    "npm",
+    "ghcr",
+    "publish",
+    "audit",
+    "drift",
+    "multi-registry",
+    "mcp"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://mcp-tool-shop-org.github.io/registry-sync/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/registry-sync.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
+  }
+}
