@@ -1,4 +1,8 @@
 <p align="center">
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
+</p>
+
+<p align="center">
   <a href="https://mcp-tool-shop-org.github.io/registry-sync/">
     <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/registry-sync/readme.png" width="400" alt="registry-sync" />
   </a>
@@ -124,14 +128,17 @@ console.log(planResult.summary);
 // { publish: 9, update: 1, scaffold: 26, prune: 3, skip: 45 }
 ```
 
-## Security
+## Security & Threat Model
 
-See [SECURITY.md](./SECURITY.md) for the full security model and threat assessment.
+See [SECURITY.md](./SECURITY.md) for the full security model.
 
-- Tokens are never logged or cached to disk
-- All apply actions create issues/PRs only (no direct publish)
-- No telemetry, no analytics
-- Connects only to `api.github.com` and `registry.npmjs.org`
+**What it touches:** Public GitHub API (repo metadata, file contents, issues, PRs) and the public npm registry (read-only package metadata). Creates issues and PRs on repos you have write access to when `apply --confirm` is used.
+
+**What it does NOT touch:** No local files are modified (read-only config lookup). No npm publish, no Docker push, no credential storage. No data leaves your machine beyond GitHub/npm API calls.
+
+**Permissions required:** GitHub token with `repo` scope (read for audit, write for apply). No npm token needed.
+
+**No telemetry.** No analytics. No phone-home. No data collection of any kind.
 
 ---
 

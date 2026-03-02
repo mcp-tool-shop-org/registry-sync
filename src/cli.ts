@@ -202,7 +202,7 @@ ${DIM}Built by MCP Tool Shop — https://mcp-tool-shop.github.io/${RESET}`);
 function printVersion(): void {
   // Read version from package.json at build time isn't simple with tsup,
   // so we hardcode and keep in sync with package.json
-  console.log('1.0.0');
+  console.log('1.0.1');
 }
 
 // --- Main ---
