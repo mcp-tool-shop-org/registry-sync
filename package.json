@@ -1,6 +1,6 @@
 {
   "name": "@mcptoolshop/registry-sync",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Desired-state sync engine for multi-registry package publishing",
   "type": "module",
   "main": "./dist/index.cjs",

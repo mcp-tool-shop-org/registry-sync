@@ -210,6 +210,62 @@ describe('plan', () => {
     expect(targets).toEqual(['npmjs']);
   });
 
+  it('skips suspected VS Code extensions from npm publish', () => {
+    const audit = makeAudit({
+      repoCount: 2,
+      rows: [
+        {
+          repo: {
+            name: 'my-tool-vscode',
+            fullName: 'test-org/my-tool-vscode',
+            language: 'TypeScript',
+            archived: false,
+            isPrivate: false,
+            pushedAt: '2026-01-01',
+            topics: ['vscode-extension'],
+            defaultBranch: 'main',
+            hasPackageJson: true,
+            hasDockerfile: false,
+            packageJsonName: 'my-tool-vscode',
+            packageJsonVersion: '1.0.0',
+          },
+          presence: [
+            { registry: 'npmjs', published: false, drift: 'missing' },
+          ],
+        },
+        {
+          repo: {
+            name: 'real-npm-lib',
+            fullName: 'test-org/real-npm-lib',
+            language: 'TypeScript',
+            archived: false,
+            isPrivate: false,
+            pushedAt: '2026-01-01',
+            topics: ['typescript'],
+            defaultBranch: 'main',
+            hasPackageJson: true,
+            hasDockerfile: false,
+            packageJsonName: '@test/real-npm-lib',
+            packageJsonVersion: '1.0.0',
+          },
+          presence: [
+            { registry: 'npmjs', published: false, drift: 'missing' },
+          ],
+        },
+      ],
+    });
+
+    const result = plan(audit, config);
+    const publish = result.actions.filter((a) => a.type === 'publish');
+    const skip = result.actions.filter((a) => a.type === 'skip');
+    expect(publish).toHaveLength(1);
+    expect(publish[0].repo).toBe('real-npm-lib');
+    expect(skip).toHaveLength(1);
+    expect(skip[0].repo).toBe('my-tool-vscode');
+    expect(skip[0].skipReason).toBe('suspected-vscode-extension');
+    expect(skip[0].suggestedTarget).toBe('vscode-marketplace');
+  });
+
   it('sorts actions: publish > update > scaffold > prune > skip', () => {
     const audit = makeAudit({
       repoCount: 3,

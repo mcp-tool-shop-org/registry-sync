@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.3 (2026-03-02)
+
+### Added
+
+- VS Code extension detection in plan — repos with `vscode-extension` topic, `-vscode` suffix, or `vscode-` prefix are auto-skipped from npm publish with `skipReason: 'suspected-vscode-extension'` and `suggestedTarget: 'vscode-marketplace'`
+- `SkipReason` type exported from library API
+
+## 1.0.2 (2026-03-02)
+
+### Added
+
+- `--concurrency <n>` flag for parallel GitHub API requests (1-20, default: 5)
+- `--from <file>` flag to load audit results from file (avoids re-running audit)
+- `--out <file>` / `-o` flag to write output to file instead of stdout
+- `--limit <n>` flag for wave batching (apply at most N actions per run)
+- `--type` alias for `--target`
+- `--json` shorthand for `--format json`
+- `AuditOptions` and `ApplyOptions` exported from library API
+
 ## 1.0.1 (2026-03-02)
 
 ### Added

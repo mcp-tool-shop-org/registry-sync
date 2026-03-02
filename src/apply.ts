@@ -9,6 +9,10 @@ import { fetchGitHub } from './fetch.js';
 import { SyncError } from './errors.js';
 import { getGitHubToken } from './auth.js';
 
+export interface ApplyOptions {
+  limit?: number;
+}
+
 export interface ApplyProgress {
   current: number;
   total: number;
@@ -18,8 +22,15 @@ export async function apply(
   planResult: PlanResult,
   config: SyncConfig,
   onProgress?: (p: ApplyProgress) => void,
+  options?: ApplyOptions,
 ): Promise<ApplyResult> {
-  const actionable = planResult.actions.filter((a) => a.type !== 'skip');
+  let actionable = planResult.actions.filter((a) => a.type !== 'skip');
+
+  // Apply limit if set
+  if (options?.limit && options.limit > 0) {
+    actionable = actionable.slice(0, options.limit);
+  }
+
   const results: ApplyAction[] = [];
   let succeeded = 0;
   let failed = 0;
@@ -98,7 +109,6 @@ async function createIssue(
   );
 
   if (!res.ok) {
-    // Label may not exist — try without label
     if (res.status === 422) {
       const retry = await fetch(
         `https://api.github.com/repos/${org}/${action.repo}/issues`,
@@ -186,7 +196,6 @@ async function createWorkflowPR(
   const repo = action.repo;
   const branchName = 'registry-sync/add-publish-workflow';
 
-  // 1. Get default branch SHA
   const repoData = await fetchGitHub<{ default_branch: string }>(
     `/repos/${org}/${repo}`,
   );
@@ -202,7 +211,6 @@ async function createWorkflowPR(
   }
   const baseSha = refData.object.sha;
 
-  // 2. Create branch
   const createRef = await fetch(
     `https://api.github.com/repos/${org}/${repo}/git/refs`,
     {
@@ -228,8 +236,7 @@ async function createWorkflowPR(
     );
   }
 
-  // 3. Create workflow file
-  const workflowContent = generatePublishWorkflow(repo);
+  const workflowContent = generatePublishWorkflow();
   const contentRes = await fetch(
     `https://api.github.com/repos/${org}/${repo}/contents/.github/workflows/publish.yml`,
     {
@@ -256,7 +263,6 @@ async function createWorkflowPR(
     );
   }
 
-  // 4. Create PR
   const prRes = await fetch(
     `https://api.github.com/repos/${org}/${repo}/pulls`,
     {
@@ -288,7 +294,7 @@ async function createWorkflowPR(
   return prData.html_url;
 }
 
-function generatePublishWorkflow(repo: string): string {
+function generatePublishWorkflow(): string {
   return `name: Publish
 
 on:

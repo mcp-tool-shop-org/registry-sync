@@ -1,3 +1,4 @@
+import { readFileSync, writeFileSync } from 'node:fs';
 import { loadConfig } from './config.js';
 import { audit } from './audit.js';
 import { plan } from './plan.js';
@@ -6,7 +7,7 @@ import { SyncError } from './errors.js';
 import { formatAuditTable, formatPlanTable } from './format/table.js';
 import { formatAuditJson, formatPlanJson, formatApplyJson } from './format/json.js';
 import { formatAuditMarkdown, formatPlanMarkdown } from './format/markdown.js';
-import type { OutputFormat, RegistryTarget } from './types.js';
+import type { OutputFormat, RegistryTarget, AuditResult } from './types.js';
 
 // --- ANSI helpers ---
 
@@ -30,6 +31,10 @@ interface ParsedArgs {
   repo?: string;
   includeArchived?: boolean;
   noSkip?: boolean;
+  concurrency?: number;
+  from?: string;
+  out?: string;
+  limit?: number;
 }
 
 function parseArgs(argv: string[]): ParsedArgs {
@@ -46,6 +51,7 @@ function parseArgs(argv: string[]): ParsedArgs {
         args.format = argv[++i] as OutputFormat;
         break;
       case '--target':
+      case '--type':
       case '-t':
         args.target = argv[++i] as RegistryTarget | 'all';
         break;
@@ -63,6 +69,36 @@ function parseArgs(argv: string[]): ParsedArgs {
         break;
       case '--no-skip':
         args.noSkip = true;
+        break;
+      case '--concurrency':
+      case '-c': {
+        const val = parseInt(argv[++i], 10);
+        if (isNaN(val) || val < 1 || val > 20) {
+          console.error(`${RED}Error:${RESET} --concurrency must be between 1 and 20`);
+          process.exit(1);
+        }
+        args.concurrency = val;
+        break;
+      }
+      case '--from': {
+        args.from = argv[++i];
+        break;
+      }
+      case '--out':
+      case '-o':
+        args.out = argv[++i];
+        break;
+      case '--limit': {
+        const val = parseInt(argv[++i], 10);
+        if (isNaN(val) || val < 1) {
+          console.error(`${RED}Error:${RESET} --limit must be a positive integer`);
+          process.exit(1);
+        }
+        args.limit = val;
+        break;
+      }
+      case '--json':
+        args.format = 'json';
         break;
       case '--help':
       case '-h':
@@ -83,6 +119,30 @@ function parseArgs(argv: string[]): ParsedArgs {
   return args;
 }
 
+// --- Helpers ---
+
+function loadAuditFromFile(filePath: string): AuditResult {
+  try {
+    const raw = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(raw) as AuditResult;
+    if (!data.org || !data.rows) {
+      throw new SyncError(
+        'INPUT_INVALID_FILE',
+        `File ${filePath} is not a valid audit result`,
+        'Run "registry-sync audit --json -o audit.json" first',
+      );
+    }
+    return data;
+  } catch (err) {
+    if (err instanceof SyncError) throw err;
+    throw new SyncError(
+      'INPUT_FILE_NOT_FOUND',
+      `Could not read ${filePath}: ${err instanceof Error ? err.message : String(err)}`,
+      'Check the file path and try again',
+    );
+  }
+}
+
 // --- Commands ---
 
 async function runAudit(args: ParsedArgs): Promise<void> {
@@ -91,20 +151,29 @@ async function runAudit(args: ParsedArgs): Promise<void> {
 
   const result = await audit(config, (p) => {
     process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-  });
+  }, { concurrency: args.concurrency });
   process.stderr.write('\r\x1b[K'); // Clear progress line
 
   const format = args.format || 'table';
+  let output: string;
   switch (format) {
-    case 'table':
-      console.log(formatAuditTable(result));
-      break;
     case 'json':
-      console.log(formatAuditJson(result));
+      output = formatAuditJson(result);
       break;
     case 'markdown':
-      console.log(formatAuditMarkdown(result));
+      output = formatAuditMarkdown(result);
       break;
+    case 'table':
+    default:
+      output = formatAuditTable(result);
+      break;
+  }
+
+  if (args.out) {
+    writeFileSync(args.out, output, 'utf-8');
+    process.stderr.write(`${GREEN}✓${RESET} Wrote audit to ${args.out}\n`);
+  } else {
+    console.log(output);
   }
 }
 
@@ -112,25 +181,42 @@ async function runPlan(args: ParsedArgs): Promise<void> {
   const config = loadConfig();
   if (args.org) config.org = args.org;
 
-  process.stderr.write(`${DIM}Running audit...${RESET}\n`);
-  const auditResult = await audit(config, (p) => {
-    process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-  });
-  process.stderr.write('\r\x1b[K');
+  let auditResult: AuditResult;
+
+  if (args.from) {
+    process.stderr.write(`${DIM}Loading audit from ${args.from}...${RESET}\n`);
+    auditResult = loadAuditFromFile(args.from);
+    process.stderr.write(`${GREEN}✓${RESET} Loaded ${auditResult.rows.length} repos from ${args.from}\n`);
+  } else {
+    process.stderr.write(`${DIM}Running audit...${RESET}\n`);
+    auditResult = await audit(config, (p) => {
+      process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
+    }, { concurrency: args.concurrency });
+    process.stderr.write('\r\x1b[K');
+  }
 
   const result = plan(auditResult, config, args.target);
 
   const format = args.format || 'table';
+  let output: string;
   switch (format) {
-    case 'table':
-      console.log(formatPlanTable(result));
-      break;
     case 'json':
-      console.log(formatPlanJson(result));
+      output = formatPlanJson(result);
       break;
     case 'markdown':
-      console.log(formatPlanMarkdown(result));
+      output = formatPlanMarkdown(result);
       break;
+    case 'table':
+    default:
+      output = formatPlanTable(result);
+      break;
+  }
+
+  if (args.out) {
+    writeFileSync(args.out, output, 'utf-8');
+    process.stderr.write(`${GREEN}✓${RESET} Wrote plan to ${args.out}\n`);
+  } else {
+    console.log(output);
   }
 }
 
@@ -148,20 +234,43 @@ async function runApply(args: ParsedArgs): Promise<void> {
   const config = loadConfig();
   if (args.org) config.org = args.org;
 
-  process.stderr.write(`${DIM}Running audit...${RESET}\n`);
-  const auditResult = await audit(config, (p) => {
-    process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-  });
-  process.stderr.write('\r\x1b[K');
+  let auditResult: AuditResult;
+
+  if (args.from) {
+    process.stderr.write(`${DIM}Loading audit from ${args.from}...${RESET}\n`);
+    auditResult = loadAuditFromFile(args.from);
+    process.stderr.write(`${GREEN}✓${RESET} Loaded ${auditResult.rows.length} repos from ${args.from}\n`);
+  } else {
+    process.stderr.write(`${DIM}Running audit...${RESET}\n`);
+    auditResult = await audit(config, (p) => {
+      process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
+    }, { concurrency: args.concurrency });
+    process.stderr.write('\r\x1b[K');
+  }
 
   const planResult = plan(auditResult, config, args.target);
+
+  const actionable = planResult.actions.filter((a) => a.type !== 'skip');
+  const effectiveLimit = args.limit ?? actionable.length;
+
+  process.stderr.write(
+    `${BOLD}Applying ${Math.min(effectiveLimit, actionable.length)} of ${actionable.length} actions${RESET}` +
+    (args.limit ? ` ${DIM}(--limit ${args.limit})${RESET}` : '') +
+    '\n',
+  );
+
   const result = await apply(planResult, config, (p) => {
     process.stderr.write(`\r${DIM}Applying... ${p.current}/${p.total}${RESET}`);
-  });
+  }, { limit: args.limit });
   process.stderr.write('\r\x1b[K');
 
-  const format = args.format || 'json';
-  console.log(formatApplyJson(result));
+  const output = formatApplyJson(result);
+  if (args.out) {
+    writeFileSync(args.out, output, 'utf-8');
+    process.stderr.write(`${GREEN}✓${RESET} Wrote results to ${args.out}\n`);
+  } else {
+    console.log(output);
+  }
 
   const s = result.summary;
   console.error(
@@ -181,13 +290,33 @@ ${BOLD}Commands:${RESET}
   ${CYAN}apply${RESET}    Execute the plan (requires --confirm)
   ${CYAN}help${RESET}     Show this help message
 
-${BOLD}Flags:${RESET}
+${BOLD}Common Flags:${RESET}
   --org <org>          GitHub org to scan (default: from config)
   --format <fmt>       Output format: table, json, markdown (default: table)
+  --json               Shorthand for --format json
   --target <target>    Filter by registry: npmjs, ghcr, all (default: all)
-  --confirm            Required for apply — execute actions
+  --type <target>      Alias for --target
+  --out <file>         Write output to file instead of stdout
   --include-archived   Include archived repos in audit
+
+${BOLD}Scale Flags:${RESET}
+  --concurrency <n>    Parallel GitHub API requests (1-20, default: 5)
+  --from <file>        Load audit from file instead of re-running
+  --limit <n>          Apply at most N actions (wave batching)
+
+${BOLD}Apply Flags:${RESET}
+  --confirm            Required for apply — execute actions
   --no-skip            Hide skip actions from plan output
+
+${BOLD}Examples:${RESET}
+  ${DIM}# Full audit → save to file${RESET}
+  registry-sync audit --org my-org --json -o audit.json
+
+  ${DIM}# Plan from saved audit, npm only${RESET}
+  registry-sync plan --from audit.json --target npmjs
+
+  ${DIM}# Apply first 20 actions from saved audit${RESET}
+  registry-sync apply --from audit.json --confirm --limit 20
 
 ${BOLD}Config:${RESET}
   Place ${CYAN}registry-sync.config.json${RESET} in your project root.
@@ -200,9 +329,7 @@ ${DIM}Built by MCP Tool Shop — https://mcp-tool-shop.github.io/${RESET}`);
 }
 
 function printVersion(): void {
-  // Read version from package.json at build time isn't simple with tsup,
-  // so we hardcode and keep in sync with package.json
-  console.log('1.0.1');
+  console.log('1.0.3');
 }
 
 // --- Main ---

@@ -1,10 +1,31 @@
 import type {
   AuditResult,
+  AuditRow,
   SyncConfig,
   PlanResult,
   PlannedAction,
   RegistryTarget,
 } from './types.js';
+
+/**
+ * Detects if a repo is a VS Code extension (should not be published to npm).
+ * Rules:
+ *  - topics include 'vscode-extension' (high confidence)
+ *  - repo name ends with '-vscode'
+ *  - package name ends with '-vscode' or starts with 'vscode-'
+ */
+function isSuspectedVscodeExtension(row: AuditRow): boolean {
+  const topics = row.repo.topics.map((t) => t.toLowerCase());
+  if (topics.includes('vscode-extension')) return true;
+
+  const repoName = row.repo.name.toLowerCase();
+  if (repoName.endsWith('-vscode')) return true;
+
+  const pkgName = (row.repo.packageJsonName || '').toLowerCase();
+  if (pkgName.endsWith('-vscode') || pkgName.startsWith('vscode-')) return true;
+
+  return false;
+}
 
 export function plan(
   auditResult: AuditResult,
@@ -34,14 +55,27 @@ export function plan(
 
         case 'missing':
           if (presence.registry === 'npmjs') {
-            actions.push({
-              type: 'publish',
-              target: presence.registry,
-              repo: row.repo.name,
-              toVersion: row.repo.packageJsonVersion,
-              details: `Not yet published to npmjs (repo has v${row.repo.packageJsonVersion || 'unknown'})`,
-              risk: 'medium',
-            });
+            // Check if this is a VS Code extension — skip npm publish
+            if (isSuspectedVscodeExtension(row)) {
+              actions.push({
+                type: 'skip',
+                target: presence.registry,
+                repo: row.repo.name,
+                details: 'Suspected VS Code extension — not an npm publish target',
+                risk: 'low',
+                skipReason: 'suspected-vscode-extension',
+                suggestedTarget: 'vscode-marketplace',
+              });
+            } else {
+              actions.push({
+                type: 'publish',
+                target: presence.registry,
+                repo: row.repo.name,
+                toVersion: row.repo.packageJsonVersion,
+                details: `Not yet published to npmjs (repo has v${row.repo.packageJsonVersion || 'unknown'})`,
+                risk: 'medium',
+              });
+            }
           } else if (presence.registry === 'ghcr') {
             actions.push({
               type: 'scaffold-workflow',
@@ -65,6 +99,7 @@ export function plan(
                 ? `Up to date (${presence.publishedVersion})`
                 : `Skipped (${presence.drift})`,
             risk: 'low',
+            skipReason: presence.drift,
           });
           break;
       }

@@ -17,7 +17,7 @@ import {
 import { getNpmPackageInfo } from './providers/npm.js';
 import { listGhcrPackages } from './providers/ghcr.js';
 
-const CONCURRENCY = 5;
+const DEFAULT_CONCURRENCY = 5;
 
 export interface AuditProgress {
   phase: string;
@@ -25,10 +25,16 @@ export interface AuditProgress {
   total: number;
 }
 
+export interface AuditOptions {
+  concurrency?: number;
+}
+
 export async function audit(
   config: SyncConfig,
   onProgress?: (p: AuditProgress) => void,
+  options?: AuditOptions,
 ): Promise<AuditResult> {
+  const concurrency = options?.concurrency ?? DEFAULT_CONCURRENCY;
   const progress = (phase: string, current: number, total: number) =>
     onProgress?.({ phase, current, total });
 
@@ -43,7 +49,7 @@ export async function audit(
   );
 
   // 3. Enrich each repo with package.json + Dockerfile info
-  const limit = pLimit(CONCURRENCY);
+  const limit = pLimit(concurrency);
   const enriched: RepoInfo[] = [];
   let done = 0;
 

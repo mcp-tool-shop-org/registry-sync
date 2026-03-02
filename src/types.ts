@@ -71,6 +71,12 @@ export interface OrphanEntry {
 
 // --- Plan ---
 
+export type SkipReason =
+  | 'current'
+  | 'private'
+  | 'excluded'
+  | 'suspected-vscode-extension';
+
 export interface PlannedAction {
   type: ActionType;
   target: RegistryTarget;
@@ -79,6 +85,8 @@ export interface PlannedAction {
   toVersion?: string;
   details: string;
   risk: RiskLevel;
+  skipReason?: SkipReason;
+  suggestedTarget?: string;
 }
 
 export interface PlanResult {

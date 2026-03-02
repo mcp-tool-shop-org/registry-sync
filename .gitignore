@@ -5,3 +5,4 @@ site/dist/
 site/.astro/
 .polyglot-cache.json
 *.tgz
+audit.json
