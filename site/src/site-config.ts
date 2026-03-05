@@ -15,7 +15,7 @@ export const config: SiteConfig = {
     headlineAccent: 'Terraform for package registries.',
     description: 'Audit your GitHub org against npmjs and GHCR. Detect version drift, find orphaned packages, and generate action plans.',
     primaryCta: { href: '#usage', label: 'Get started' },
-    secondaryCta: { href: '#features', label: 'How it works' },
+    secondaryCta: { href: 'handbook/', label: 'Read the Handbook' },
     previews: [
       { label: 'Audit', code: 'npx @mcptoolshop/registry-sync audit --org my-org' },
       { label: 'Plan', code: 'registry-sync plan --format markdown' },
