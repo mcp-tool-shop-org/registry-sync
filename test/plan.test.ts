@@ -380,4 +380,81 @@ describe('plan', () => {
     const types = result.actions.map((a) => a.type);
     expect(types).toEqual(['publish', 'update', 'prune', 'skip']);
   });
+
+  it('generates skip for excluded drift', () => {
+    const audit = makeAudit({
+      repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'excluded-tool', fullName: 'test-org/excluded-tool',
+          language: null, archived: false, isPrivate: false,
+          pushedAt: '2026-01-01', topics: [], defaultBranch: 'main',
+          hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: false, drift: 'excluded' }],
+      }],
+    });
+    const result = plan(audit, config);
+    expect(result.actions[0].type).toBe('skip');
+    expect(result.actions[0].skipReason).toBe('excluded');
+    expect(result.actions[0].details).toContain('excluded');
+  });
+
+  it('generates skip for private drift', () => {
+    const audit = makeAudit({
+      repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'priv-tool', fullName: 'test-org/priv-tool',
+          language: null, archived: false, isPrivate: false,
+          pushedAt: '2026-01-01', topics: [], defaultBranch: 'main',
+          hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: false, drift: 'private' }],
+      }],
+    });
+    const result = plan(audit, config);
+    expect(result.actions[0].type).toBe('skip');
+    expect(result.actions[0].skipReason).toBe('private');
+    expect(result.actions[0].details).toContain('private');
+  });
+
+  it('target filter ghcr excludes npm actions', () => {
+    const audit = makeAudit({
+      repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'tool', fullName: 'test-org/tool',
+          language: null, archived: false, isPrivate: false,
+          pushedAt: '2026-01-01', topics: [], defaultBranch: 'main',
+          hasPackageJson: true, hasDockerfile: true,
+        },
+        presence: [
+          { registry: 'npmjs', published: false, drift: 'missing' },
+          { registry: 'ghcr', published: false, drift: 'missing' },
+        ],
+      }],
+    });
+    const result = plan(audit, config, 'ghcr');
+    expect(result.actions.every(a => a.target === 'ghcr')).toBe(true);
+  });
+
+  it('target filter also applies to orphan prune actions', () => {
+    const audit = makeAudit({
+      orphans: [
+        { registry: 'ghcr', packageName: 'orphan-ghcr' },
+        { registry: 'npmjs', packageName: 'orphan-npm' },
+      ],
+    });
+    const result = plan(audit, config, 'ghcr');
+    const pruneTargets = result.actions.filter(a => a.type === 'prune').map(a => a.target);
+    expect(pruneTargets).toEqual(['ghcr']);
+  });
+
+  it('returns all zeros for empty audit', () => {
+    const audit = makeAudit();
+    const result = plan(audit, config);
+    expect(result.actions).toEqual([]);
+    expect(result.summary).toEqual({ publish: 0, update: 0, scaffold: 0, prune: 0, skip: 0 });
+  });
 });

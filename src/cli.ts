@@ -25,7 +25,7 @@ const RESET = '\x1b[0m';
 
 // --- Arg parsing ---
 
-interface ParsedArgs {
+export interface ParsedArgs {
   command: string;
   org?: string;
   format?: OutputFormat;
@@ -42,7 +42,7 @@ interface ParsedArgs {
   limit?: number;
 }
 
-function parseArgs(argv: string[]): ParsedArgs {
+export function parseArgs(argv: string[]): ParsedArgs {
   const args: ParsedArgs = { command: '' };
 
   for (let i = 0; i < argv.length; i++) {
@@ -130,7 +130,7 @@ function parseArgs(argv: string[]): ParsedArgs {
 
 // --- Helpers ---
 
-function loadAuditFromFile(filePath: string): AuditResult {
+export function loadAuditFromFile(filePath: string): AuditResult {
   try {
     const raw = readFileSync(filePath, 'utf-8');
     const data = JSON.parse(raw) as AuditResult;
@@ -432,4 +432,7 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+// Only auto-run when executed directly (not when imported for testing)
+if (!process.env.VITEST) {
+  main();
+}

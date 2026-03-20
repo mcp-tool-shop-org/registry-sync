@@ -1,31 +1,56 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 
-// auth.ts caches the token, so we need a fresh module for each test
 describe('getGitHubToken', () => {
-  const origToken = process.env.GITHUB_TOKEN;
-  const origGhToken = process.env.GH_TOKEN;
+  const origGH = process.env.GITHUB_TOKEN;
+  const origGH2 = process.env.GH_TOKEN;
 
   afterEach(() => {
-    if (origToken !== undefined) process.env.GITHUB_TOKEN = origToken;
+    vi.resetModules();
+    vi.restoreAllMocks();
+    if (origGH !== undefined) process.env.GITHUB_TOKEN = origGH;
     else delete process.env.GITHUB_TOKEN;
-    if (origGhToken !== undefined) process.env.GH_TOKEN = origGhToken;
+    if (origGH2 !== undefined) process.env.GH_TOKEN = origGH2;
     else delete process.env.GH_TOKEN;
   });
 
   it('returns GITHUB_TOKEN from env', async () => {
     process.env.GITHUB_TOKEN = 'test-gh-token';
     delete process.env.GH_TOKEN;
-    // Dynamic import to avoid module cache
     const { getGitHubToken } = await import('../src/auth.js');
-    // Clear the module-level cache by resetting it
-    // Since the module caches, just verify the env path works
-    expect(process.env.GITHUB_TOKEN).toBe('test-gh-token');
+    expect(getGitHubToken()).toBe('test-gh-token');
   });
 
-  it('prefers GITHUB_TOKEN over GH_TOKEN', () => {
+  it('returns GH_TOKEN when GITHUB_TOKEN is not set', async () => {
+    delete process.env.GITHUB_TOKEN;
+    process.env.GH_TOKEN = 'gh-fallback';
+    const { getGitHubToken } = await import('../src/auth.js');
+    expect(getGitHubToken()).toBe('gh-fallback');
+  });
+
+  it('prefers GITHUB_TOKEN over GH_TOKEN', async () => {
     process.env.GITHUB_TOKEN = 'primary';
     process.env.GH_TOKEN = 'fallback';
-    // The function checks GITHUB_TOKEN first
-    expect(process.env.GITHUB_TOKEN || process.env.GH_TOKEN).toBe('primary');
+    const { getGitHubToken } = await import('../src/auth.js');
+    expect(getGitHubToken()).toBe('primary');
+  });
+
+  it('throws AUTH_MISSING when no token available', async () => {
+    delete process.env.GITHUB_TOKEN;
+    delete process.env.GH_TOKEN;
+    vi.doMock('node:child_process', () => ({
+      execSync: () => { throw new Error('not found'); },
+    }));
+    const { getGitHubToken } = await import('../src/auth.js');
+    expect(() => getGitHubToken()).toThrow(/No GitHub token found/);
+  });
+
+  it('caches token on subsequent calls', async () => {
+    process.env.GITHUB_TOKEN = 'cached-token';
+    const { getGitHubToken } = await import('../src/auth.js');
+    const first = getGitHubToken();
+    delete process.env.GITHUB_TOKEN;
+    const second = getGitHubToken();
+    expect(first).toBe('cached-token');
+    expect(second).toBe('cached-token');
   });
 });

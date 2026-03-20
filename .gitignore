@@ -6,3 +6,4 @@ site/.astro/
 .polyglot-cache.json
 *.tgz
 audit.json
+.claude/settings.local.json

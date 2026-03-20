@@ -179,4 +179,107 @@ describe('markdown formatter', () => {
     const output = formatAuditMarkdown(aheadAudit);
     expect(output).toContain('2.0.0');
   });
+
+  it('renders ahead drift with ⬇️ icon in markdown', () => {
+    const aheadAudit: AuditResult = {
+      org: 'test-org', generatedAt: '2026-01-01T00:00:00Z', repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'tool-x', fullName: 'test-org/tool-x', language: null,
+          archived: false, isPrivate: false, pushedAt: '2026-01-01',
+          topics: [], defaultBranch: 'main', hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: true, publishedVersion: '2.0.0', drift: 'ahead' }],
+      }],
+      orphans: [],
+    };
+    const output = formatAuditMarkdown(aheadAudit);
+    expect(output).toContain('⬇️');
+  });
+
+  it('does NOT include Orphaned section when no orphans', () => {
+    const noOrphans: AuditResult = {
+      org: 'test-org', generatedAt: '2026-01-01T00:00:00Z', repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'tool', fullName: 'test-org/tool', language: null,
+          archived: false, isPrivate: false, pushedAt: '2026-01-01',
+          topics: [], defaultBranch: 'main', hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: true, publishedVersion: '1.0.0', drift: 'current' }],
+      }],
+      orphans: [],
+    };
+    const output = formatAuditMarkdown(noOrphans);
+    expect(output).not.toContain('Orphaned Packages');
+  });
+
+  it('renders risk icons in markdown plan', () => {
+    const output = formatPlanMarkdown(planResult);
+    expect(output).toContain('🟡'); // medium risk
+    expect(output).toContain('🟢'); // low risk
+  });
+
+  it('renders private drift as _private_ in markdown', () => {
+    const privateAudit: AuditResult = {
+      org: 'test-org', generatedAt: '2026-01-01T00:00:00Z', repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'priv-tool', fullName: 'test-org/priv-tool', language: null,
+          archived: false, isPrivate: false, pushedAt: '2026-01-01',
+          topics: [], defaultBranch: 'main', hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: false, drift: 'private' }],
+      }],
+      orphans: [],
+    };
+    const output = formatAuditMarkdown(privateAudit);
+    expect(output).toContain('_private_');
+  });
+});
+
+// --- Table formatter additional tests ---
+
+describe('table formatter (additional)', () => {
+  it('renders ahead drift with ↓ indicator', () => {
+    const aheadAudit: AuditResult = {
+      org: 'test-org', generatedAt: '2026-01-01T00:00:00Z', repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'tool-x', fullName: 'test-org/tool-x', language: null,
+          archived: false, isPrivate: false, pushedAt: '2026-01-01',
+          topics: [], defaultBranch: 'main', hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: true, publishedVersion: '2.0.0', drift: 'ahead' }],
+      }],
+      orphans: [],
+    };
+    const output = formatAuditTable(aheadAudit);
+    expect(output).toContain('↓');
+    expect(output).toContain('2.0.0');
+  });
+
+  it('renders private drift in table', () => {
+    const privateAudit: AuditResult = {
+      org: 'test-org', generatedAt: '2026-01-01T00:00:00Z', repoCount: 1,
+      rows: [{
+        repo: {
+          name: 'priv-tool', fullName: 'test-org/priv-tool', language: null,
+          archived: false, isPrivate: false, pushedAt: '2026-01-01',
+          topics: [], defaultBranch: 'main', hasPackageJson: true, hasDockerfile: false,
+        },
+        presence: [{ registry: 'npmjs', published: false, drift: 'private' }],
+      }],
+      orphans: [],
+    };
+    const output = formatAuditTable(privateAudit);
+    expect(output).toContain('private');
+  });
+
+  it('summary line includes correct counts', () => {
+    const output = formatAuditTable(auditResult);
+    expect(output).toContain('1 current');
+    expect(output).toContain('1 behind');
+    expect(output).toContain('1 orphans');
+  });
 });
