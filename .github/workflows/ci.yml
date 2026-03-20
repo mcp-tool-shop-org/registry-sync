@@ -8,6 +8,7 @@ on:
       - 'package-lock.json'
       - 'src/**'
       - 'test/**'
+      - 'vitest.config.ts'
       - '.github/workflows/**'
   pull_request:
     branches: [main]
@@ -16,6 +17,7 @@ on:
       - 'package-lock.json'
       - 'src/**'
       - 'test/**'
+      - 'vitest.config.ts'
       - '.github/workflows/**'
   workflow_dispatch:
 
