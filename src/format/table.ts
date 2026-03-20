@@ -24,6 +24,7 @@ function driftCell(p: RegistryPresence): string {
   const ver = p.publishedVersion || '?';
   if (p.drift === 'current') return `${GREEN}${ver} ✓${RESET}`;
   if (p.drift === 'behind') return `${YELLOW}${ver} ⚠${RESET}`;
+  if (p.drift === 'ahead') return `${RED}${ver} ↓${RESET}`;
   if (p.drift === 'orphan') return `${RED}${ver} ○${RESET}`;
   return ver;
 }

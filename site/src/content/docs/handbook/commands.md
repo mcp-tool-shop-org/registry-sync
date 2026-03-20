@@ -1,11 +1,11 @@
 ---
 title: Commands
-description: Detailed reference for the audit, plan, and apply commands in registry-sync.
+description: Detailed reference for the audit, plan, diff, and apply commands in registry-sync.
 sidebar:
   order: 2
 ---
 
-registry-sync provides three commands that form a progressive workflow: **audit** to observe, **plan** to decide, and **apply** to act.
+registry-sync provides four commands that form a progressive workflow: **audit** to observe, **plan** to decide, **diff** to compare, and **apply** to act.
 
 ## audit
 
@@ -24,6 +24,7 @@ The audit output uses these symbols to show drift status per registry:
 | **✓** | Current | Published version matches the repo version |
 | **⚠** | Behind | Repo version is ahead of the published version |
 | — | Missing | Not yet published to this registry |
+| **↓** | Ahead | Published version is ahead of repo (rollback or hotfix) |
 | **○** | Orphan | Published package with no matching repo |
 
 ### Output formats
@@ -50,6 +51,41 @@ registry-sync plan [--org <org>] [--target npmjs|ghcr|all]
 | **prune** | Orphaned package needs cleanup | High |
 
 Actions are sorted by risk level so you can review the most impactful changes first.
+
+## diff
+
+Compares two previously-saved audit snapshots to surface what changed between runs. No new API calls are made — the diff is pure computation over the two JSON files.
+
+```bash
+registry-sync diff --before audit-old.json --from audit-new.json [--format table|json|markdown]
+```
+
+### Change types
+
+| Change | Meaning |
+|--------|---------|
+| **new_drift** | Repo was current, now behind/missing/ahead |
+| **resolved** | Drift was present, now current |
+| **worsened** | Drift deepened (e.g. behind → missing) |
+| **new_repo** | Repo appeared in the newer snapshot |
+| **removed_repo** | Repo disappeared from the newer snapshot |
+
+The diff also tracks orphan changes (new and resolved orphaned packages).
+
+### Workflow
+
+```bash
+# Save a baseline audit
+registry-sync audit --json -o baseline.json
+
+# ... time passes, repos change ...
+
+# Save a new audit
+registry-sync audit --json -o current.json
+
+# See what changed
+registry-sync diff --before baseline.json --from current.json
+```
 
 ## apply
 

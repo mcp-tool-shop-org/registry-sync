@@ -6,7 +6,6 @@ const config: SyncConfig = {
   org: 'test-org',
   exclude: [],
   targets: { npm: { enabled: true }, ghcr: { enabled: true } },
-  workflowProfiles: {},
 };
 
 function makeAudit(overrides?: Partial<AuditResult>): AuditResult {
@@ -264,6 +263,45 @@ describe('plan', () => {
     expect(skip[0].repo).toBe('my-tool-vscode');
     expect(skip[0].skipReason).toBe('suspected-vscode-extension');
     expect(skip[0].suggestedTarget).toBe('vscode-marketplace');
+  });
+
+  it('generates skip with medium risk for ahead (published > repo)', () => {
+    const audit = makeAudit({
+      repoCount: 1,
+      rows: [
+        {
+          repo: {
+            name: 'rolled-back',
+            fullName: 'test-org/rolled-back',
+            language: 'TypeScript',
+            archived: false,
+            isPrivate: false,
+            pushedAt: '2026-01-01',
+            topics: [],
+            defaultBranch: 'main',
+            hasPackageJson: true,
+            hasDockerfile: false,
+            packageJsonName: '@test/rolled-back',
+            packageJsonVersion: '1.0.0',
+          },
+          presence: [
+            {
+              registry: 'npmjs',
+              published: true,
+              publishedVersion: '2.0.0',
+              drift: 'ahead',
+            },
+          ],
+        },
+      ],
+    });
+
+    const result = plan(audit, config);
+    expect(result.actions).toHaveLength(1);
+    expect(result.actions[0].type).toBe('skip');
+    expect(result.actions[0].skipReason).toBe('ahead');
+    expect(result.actions[0].risk).toBe('medium');
+    expect(result.actions[0].details).toContain('rollback');
   });
 
   it('sorts actions: publish > update > scaffold > prune > skip', () => {

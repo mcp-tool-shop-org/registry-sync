@@ -1,5 +1,5 @@
 import { fetchGitHub, fetchGitHubPaginated } from '../fetch.js';
-import type { RepoInfo, ContainerPackage } from '../types.js';
+import type { RepoInfo } from '../types.js';
 
 // --- Raw GitHub API response shapes ---
 
@@ -19,14 +19,6 @@ interface GitHubContent {
   type: string;
   content?: string;
   encoding?: string;
-}
-
-interface GitHubPackage {
-  name: string;
-  package_type: string;
-  created_at: string;
-  updated_at: string;
-  visibility: string;
 }
 
 // --- Public API ---
@@ -96,40 +88,3 @@ export async function hasDockerfile(
   return data !== null;
 }
 
-export async function listContainerPackages(
-  org: string,
-): Promise<ContainerPackage[]> {
-  const raw = await fetchGitHubPaginated<GitHubPackage>(
-    `/orgs/${org}/packages?package_type=container&per_page=100`,
-  );
-
-  return raw.map((p) => ({
-    name: p.name,
-    packageType: p.package_type,
-    createdAt: p.created_at,
-    updatedAt: p.updated_at,
-    visibility: p.visibility,
-  }));
-}
-
-export async function hasPublishWorkflow(
-  owner: string,
-  repo: string,
-): Promise<boolean> {
-  interface WorkflowList {
-    total_count: number;
-    workflows: { path: string; name: string }[];
-  }
-
-  const data = await fetchGitHub<WorkflowList>(
-    `/repos/${owner}/${repo}/actions/workflows`,
-  );
-  if (!data) return false;
-
-  // Check if any workflow name/path suggests publishing
-  const publishKeywords = ['publish', 'release', 'deploy', 'npm'];
-  return data.workflows.some((w) => {
-    const lower = (w.name + ' ' + w.path).toLowerCase();
-    return publishKeywords.some((k) => lower.includes(k));
-  });
-}

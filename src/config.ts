@@ -13,11 +13,6 @@ export function defaultConfig(): SyncConfig {
       npm: { enabled: true },
       ghcr: { enabled: true },
     },
-    workflowProfiles: {
-      'node-lib': 'ci-node-lib.yml',
-      'node-cli': 'ci-node-cli.yml',
-      container: 'ci-container.yml',
-    },
   };
 }
 
@@ -38,7 +33,6 @@ export function loadConfig(startDir?: string): SyncConfig {
         npm: { enabled: parsed.targets?.npm?.enabled ?? defaults.targets.npm.enabled },
         ghcr: { enabled: parsed.targets?.ghcr?.enabled ?? defaults.targets.ghcr.enabled },
       },
-      workflowProfiles: parsed.workflowProfiles || defaults.workflowProfiles,
     };
   } catch (err) {
     throw new SyncError(

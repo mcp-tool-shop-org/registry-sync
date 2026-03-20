@@ -7,6 +7,10 @@ export type { ApplyOptions, ApplyProgress } from './apply.js';
 export { loadConfig, defaultConfig, starterConfig } from './config.js';
 export { SyncError, wrapError } from './errors.js';
 export { compareSemver, isDrift } from './semver.js';
+export { diff } from './diff.js';
+
+// Formatters
+export { formatDiffTable, formatDiffJson, formatDiffMarkdown } from './format/diff.js';
 
 // Types
 export type {
@@ -28,4 +32,7 @@ export type {
   SyncConfig,
   NpmPackageInfo,
   ContainerPackage,
+  DriftChange,
+  DiffEntry,
+  DiffResult,
 } from './types.js';

@@ -16,10 +16,7 @@ describe('getNpmPackageInfo', () => {
     const mockResponse = {
       name: '@mcptoolshop/registry-stats',
       'dist-tags': { latest: '1.2.4' },
-      time: {
-        modified: '2026-01-15T00:00:00Z',
-        '1.2.4': '2026-01-15T00:00:00Z',
-      },
+      modified: '2026-01-15T00:00:00Z',
     };
 
     vi.mocked(globalThis.fetch).mockResolvedValue(

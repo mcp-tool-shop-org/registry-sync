@@ -87,6 +87,17 @@ export function plan(
           }
           break;
 
+        case 'ahead':
+          actions.push({
+            type: 'skip',
+            target: presence.registry,
+            repo: row.repo.name,
+            details: `Published ${presence.publishedVersion} > repo ${row.repo.packageJsonVersion ?? 'unknown'} (rollback or hotfix?)`,
+            risk: 'medium',
+            skipReason: 'ahead',
+          });
+          break;
+
         case 'current':
         case 'private':
         case 'excluded':

@@ -6,8 +6,7 @@ interface NpmRegistryResponse {
   'dist-tags'?: {
     latest?: string;
   };
-  time?: Record<string, string>;
-  versions?: Record<string, unknown>;
+  modified?: string;
 }
 
 /**
@@ -17,7 +16,6 @@ interface NpmRegistryResponse {
 export async function getNpmPackageInfo(
   packageName: string,
 ): Promise<NpmPackageInfo | null> {
-  // Use abbreviated metadata for speed
   const encoded = encodeURIComponent(packageName);
   const url = `https://registry.npmjs.org/${encoded}`;
 
@@ -27,12 +25,7 @@ export async function getNpmPackageInfo(
   const latestVersion = data['dist-tags']?.latest;
   if (!latestVersion) return null;
 
-  // Get last publish time from the `time` field
-  let lastPublished = '';
-  if (data.time) {
-    // time.modified is the most recent publish
-    lastPublished = data.time.modified || data.time[latestVersion] || '';
-  }
+  const lastPublished = data.modified || '';
 
   return {
     name: data.name,

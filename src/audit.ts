@@ -12,7 +12,6 @@ import {
   listOrgRepos,
   readPackageJson,
   hasDockerfile as checkDockerfile,
-  hasPublishWorkflow,
 } from './providers/github.js';
 import { getNpmPackageInfo } from './providers/npm.js';
 import { listGhcrPackages } from './providers/ghcr.js';
@@ -95,12 +94,13 @@ export async function audit(
               repo.packageJsonVersion || '0.0.0',
               npmInfo.latestVersion,
             );
+            const drift = cmp === 1 ? 'behind' : cmp === 0 ? 'current' : 'ahead';
             presence.push({
               registry: 'npmjs',
               published: true,
               publishedVersion: npmInfo.latestVersion,
               lastPublished: npmInfo.lastPublished,
-              drift: cmp === 1 ? 'behind' : cmp === 0 ? 'current' : 'current',
+              drift,
             });
           } else {
             presence.push({

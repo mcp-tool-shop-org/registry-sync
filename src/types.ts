@@ -5,6 +5,7 @@ export type RegistryTarget = 'npmjs' | 'github-npm' | 'ghcr';
 export type DriftStatus =
   | 'current'   // repo version === published version
   | 'behind'    // repo version > published version
+  | 'ahead'     // published version > repo version (rollback or hotfix)
   | 'missing'   // repo has package.json but not published
   | 'orphan'    // published but no matching repo
   | 'private'   // repo marked private or package.json private
@@ -73,6 +74,7 @@ export interface OrphanEntry {
 
 export type SkipReason =
   | 'current'
+  | 'ahead'
   | 'private'
   | 'excluded'
   | 'suspected-vscode-extension';
@@ -122,6 +124,46 @@ export interface ApplyResult {
   };
 }
 
+// --- Diff ---
+
+export type DriftChange =
+  | 'new_drift'       // was current/missing → now behind/ahead
+  | 'resolved'        // was behind/missing/ahead → now current
+  | 'worsened'        // was behind → now missing, or drift deepened
+  | 'unchanged'       // same drift status
+  | 'new_repo'        // repo exists in "after" but not "before"
+  | 'removed_repo';   // repo exists in "before" but not "after"
+
+export interface DiffEntry {
+  repo: string;
+  registry: RegistryTarget;
+  change: DriftChange;
+  before?: { drift: DriftStatus; version?: string };
+  after?: { drift: DriftStatus; version?: string };
+  details: string;
+}
+
+export interface DiffResult {
+  org: string;
+  beforeDate: string;
+  afterDate: string;
+  entries: DiffEntry[];
+  orphans: {
+    added: OrphanEntry[];
+    removed: OrphanEntry[];
+  };
+  summary: {
+    newDrift: number;
+    resolved: number;
+    worsened: number;
+    unchanged: number;
+    newRepos: number;
+    removedRepos: number;
+    newOrphans: number;
+    removedOrphans: number;
+  };
+}
+
 // --- Config ---
 
 export interface SyncConfig {
@@ -131,7 +173,6 @@ export interface SyncConfig {
     npm: { enabled: boolean };
     ghcr: { enabled: boolean };
   };
-  workflowProfiles: Record<string, string>;
 }
 
 // --- Provider data ---

@@ -1,4 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { loadConfig } from './config.js';
 import { audit } from './audit.js';
 import { plan } from './plan.js';
@@ -7,6 +9,8 @@ import { SyncError } from './errors.js';
 import { formatAuditTable, formatPlanTable } from './format/table.js';
 import { formatAuditJson, formatPlanJson, formatApplyJson } from './format/json.js';
 import { formatAuditMarkdown, formatPlanMarkdown } from './format/markdown.js';
+import { formatDiffTable, formatDiffJson, formatDiffMarkdown } from './format/diff.js';
+import { diff } from './diff.js';
 import type { OutputFormat, RegistryTarget, AuditResult } from './types.js';
 
 // --- ANSI helpers ---
@@ -33,6 +37,7 @@ interface ParsedArgs {
   noSkip?: boolean;
   concurrency?: number;
   from?: string;
+  before?: string;
   out?: string;
   limit?: number;
 }
@@ -82,6 +87,10 @@ function parseArgs(argv: string[]): ParsedArgs {
       }
       case '--from': {
         args.from = argv[++i];
+        break;
+      }
+      case '--before': {
+        args.before = argv[++i];
         break;
       }
       case '--out':
@@ -278,6 +287,43 @@ async function runApply(args: ParsedArgs): Promise<void> {
   );
 }
 
+async function runDiff(args: ParsedArgs): Promise<void> {
+  if (!args.before || !args.from) {
+    console.error(
+      `${RED}Error:${RESET} diff requires --before <old.json> --from <new.json>`,
+    );
+    console.error(`${DIM}Hint: Run "registry-sync audit --json -o audit.json" to create snapshots${RESET}`);
+    process.exit(1);
+  }
+
+  const beforeResult = loadAuditFromFile(args.before);
+  const afterResult = loadAuditFromFile(args.from);
+
+  const result = diff(beforeResult, afterResult);
+
+  const format = args.format || 'table';
+  let output: string;
+  switch (format) {
+    case 'json':
+      output = formatDiffJson(result);
+      break;
+    case 'markdown':
+      output = formatDiffMarkdown(result);
+      break;
+    case 'table':
+    default:
+      output = formatDiffTable(result);
+      break;
+  }
+
+  if (args.out) {
+    writeFileSync(args.out, output, 'utf-8');
+    process.stderr.write(`${GREEN}✓${RESET} Wrote diff to ${args.out}\n`);
+  } else {
+    console.log(output);
+  }
+}
+
 function printHelp(): void {
   console.log(`${BOLD}registry-sync${RESET} — Multi-registry package sync engine
 
@@ -288,6 +334,7 @@ ${BOLD}Commands:${RESET}
   ${CYAN}audit${RESET}    Scan org repos and build presence matrix
   ${CYAN}plan${RESET}     Generate action plan from audit
   ${CYAN}apply${RESET}    Execute the plan (requires --confirm)
+  ${CYAN}diff${RESET}     Compare two audit snapshots
   ${CYAN}help${RESET}     Show this help message
 
 ${BOLD}Common Flags:${RESET}
@@ -318,6 +365,9 @@ ${BOLD}Examples:${RESET}
   ${DIM}# Apply first 20 actions from saved audit${RESET}
   registry-sync apply --from audit.json --confirm --limit 20
 
+  ${DIM}# Compare two audit snapshots${RESET}
+  registry-sync diff --before audit-old.json --from audit-new.json
+
 ${BOLD}Config:${RESET}
   Place ${CYAN}registry-sync.config.json${RESET} in your project root.
   Falls back to sensible defaults if not found.
@@ -329,7 +379,13 @@ ${DIM}Built by MCP Tool Shop — https://mcp-tool-shop.github.io/${RESET}`);
 }
 
 function printVersion(): void {
-  console.log('1.0.3');
+  try {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const pkg = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf-8'));
+    console.log(pkg.version);
+  } catch {
+    console.log('unknown');
+  }
 }
 
 // --- Main ---
@@ -347,6 +403,9 @@ async function main(): Promise<void> {
         break;
       case 'apply':
         await runApply(args);
+        break;
+      case 'diff':
+        await runDiff(args);
         break;
       case 'version':
         printVersion();

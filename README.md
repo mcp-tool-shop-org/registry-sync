@@ -60,6 +60,7 @@ registry-sync audit [--org <org>] [--format table|json|markdown]
 Output shows drift status per registry:
 - **✓** current — published version matches repo
 - **⚠** behind — repo version is ahead of published
+- **↓** ahead — published version is ahead of repo (rollback or hotfix)
 - **missing** — not yet published
 - **○** orphan — published but no matching repo
 
@@ -76,6 +77,22 @@ Action types:
 - **update** — version bump needed (repo ahead of published)
 - **scaffold-workflow** — add CI publish workflow via PR
 - **prune** — orphaned package needs cleanup
+
+### `diff`
+
+Compares two audit snapshots to surface what changed between runs — new drift, resolved drift, worsened drift, new/removed repos, and orphan changes.
+
+```
+registry-sync diff --before audit-old.json --from audit-new.json [--format table|json|markdown]
+```
+
+Requires two previously-saved audit JSON files (from `registry-sync audit --json -o <file>`). No new API calls are made — the diff is pure computation over the two snapshots.
+
+Change types:
+- **new_drift** — repo was current, now behind/missing/ahead
+- **resolved** — drift was present, now current
+- **worsened** — drift deepened (e.g. behind → missing)
+- **new_repo** / **removed_repo** — repo added or removed between snapshots
 
 ### `apply`
 
@@ -118,7 +135,7 @@ npm token is not required in v1 (read-only registry queries).
 ## Library Usage
 
 ```typescript
-import { audit, plan, loadConfig } from '@mcptoolshop/registry-sync';
+import { audit, plan, diff, loadConfig } from '@mcptoolshop/registry-sync';
 
 const config = loadConfig();
 const auditResult = await audit(config);
@@ -126,6 +143,12 @@ const planResult = plan(auditResult, config);
 
 console.log(planResult.summary);
 // { publish: 9, update: 1, scaffold: 26, prune: 3, skip: 45 }
+
+// Compare two snapshots
+const oldAudit = JSON.parse(readFileSync('audit-old.json', 'utf-8'));
+const diffResult = diff(oldAudit, auditResult);
+console.log(diffResult.summary);
+// { newDrift: 2, resolved: 1, worsened: 0, unchanged: 40, ... }
 ```
 
 ## Security & Threat Model

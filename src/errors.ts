@@ -11,7 +11,8 @@ export type SyncErrorCode =
   | 'APPLY_FAILED'
   | 'APPLY_PARTIAL'
   | 'INPUT_UNKNOWN_COMMAND'
-  | 'INPUT_INVALID'
+  | 'INPUT_INVALID_FILE'
+  | 'INPUT_FILE_NOT_FOUND'
   | 'RUNTIME_UNKNOWN';
 
 export class SyncError extends Error {

@@ -116,7 +116,7 @@ export async function fetchGitHubPaginated<T>(path: string): Promise<T[]> {
     const token = getGitHubToken();
     await acquireSlot('github');
 
-    const res = await fetch(url, {
+    const res: Response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: 'application/vnd.github+json',
@@ -136,10 +136,10 @@ export async function fetchGitHubPaginated<T>(path: string): Promise<T[]> {
     results.push(...data);
 
     // Parse Link header for next page
-    const link = res.headers.get('link');
+    const link: string | null = res.headers.get('link');
     url = null;
     if (link) {
-      const match = link.match(/<([^>]+)>;\s*rel="next"/);
+      const match: RegExpMatchArray | null = link.match(/<([^>]+)>;\s*rel="next"/);
       if (match) url = match[1];
     }
   }
@@ -158,7 +158,7 @@ export async function fetchNpm<T>(url: string): Promise<T | null> {
     let res: Response;
     try {
       res = await fetch(url, {
-        headers: { Accept: 'application/json' },
+        headers: { Accept: 'application/vnd.npm.install.v1+json' },
       });
     } catch (err) {
       lastError = wrapError(err, 'NPM_API', 'Network error calling npm registry');

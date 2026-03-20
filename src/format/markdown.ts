@@ -9,6 +9,7 @@ function driftMd(p: RegistryPresence): string {
   const ver = p.publishedVersion || '?';
   if (p.drift === 'current') return `${ver} ✅`;
   if (p.drift === 'behind') return `${ver} ⚠️`;
+  if (p.drift === 'ahead') return `${ver} ⬇️`;
   if (p.drift === 'orphan') return `${ver} 🔴`;
   return ver;
 }

@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.1.0 (2026-03-19)
+
+### Added
+
+- `diff` command — compare two audit snapshots to surface new drift, resolved drift, worsened drift, new/removed repos, and orphan changes
+- `diff` formatters: table (ANSI), JSON, Markdown
+- `diff()` function exported from library API with full TypeScript types (`DiffResult`, `DiffEntry`, `DriftChange`)
+- `--before <file>` CLI flag for diff's baseline snapshot
+- `ahead` drift status — detects when published version is ahead of repo version (rollback or hotfix scenarios)
+- `ahead` handling in plan (skip with medium risk) and formatters (↓ symbol in table, ⬇️ in markdown)
+
+### Fixed
+
+- Semver comparison bug where `cmp === -1` (published ahead of repo) was silently treated as `current` instead of `ahead`
+- GHCR provider now uses shared `fetchGitHubPaginated` with auth, retry, and throttle (was manual pagination bypassing all infrastructure)
+- npm registry queries now use abbreviated metadata endpoint (`application/vnd.npm.install.v1+json`) reducing bandwidth
+- Removed dead code: `listContainerPackages`, `hasPublishWorkflow`, unused `workflowProfiles` config field
+- CLI version now reads dynamically from package.json instead of hardcoded string
+- Error codes `INPUT_INVALID_FILE` and `INPUT_FILE_NOT_FOUND` added to `SyncErrorCode` union
+
+### Tests
+
+- 66 tests across 9 test files (up from ~30)
+- New test suites: diff (11 tests), apply (8), config (4), errors (7), format (10), auth (2)
+
 ## 1.0.3 (2026-03-02)
 
 ### Added
