@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 (2026-03-25)
+
+### Added
+- 3 version alignment tests (semver, >= 1.0.0, CLI --version match)
+
+### Fixed
+- SHA-pinned CI actions for supply-chain safety
+
 ## 1.1.0 (2026-03-19)
 
 ### Added
