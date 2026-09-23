@@ -1,0 +1,1858 @@
+{
+  "boundaries": [
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "ebe5dcce6c5d198112ff7626acb58d7dfcd72264f4f87af2a79627579e5f4b36",
+          "path": ".claude/context/brand-rules.md"
+        },
+        {
+          "hash": "f554dc87c3c55d41faff36fb12298b18651165a32abd029d0fed1c40042461a1",
+          "path": ".claude/context/current-priorities.md"
+        },
+        {
+          "hash": "c08a92077c43c17b9a9a0e948fc91223e2e63df6870632bb4503b833d6a64909",
+          "path": ".claude/context/product-brief.md"
+        },
+        {
+          "hash": "18f338dc6f6b7377dc935f3777877f43d6686a15aff9e4cbc1f709a69e179017",
+          "path": ".claude/context/repo-map.md"
+        },
+        {
+          "hash": "f2e4d3a3c3c09615dcda19d41f6ddf9c6720b39cbc4af89a561017f568f1090a",
+          "path": ".claude/workflows/protect-mutation-truth.md"
+        }
+      ],
+      "globs": [
+        ".claude/**"
+      ],
+      "importConfidence": "full",
+      "name": ".claude",
+      "origin": "authored",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "b340f423367f125308dfff9dba555d54086e24d1db1a5105ef55761ed2fc1d22",
+          "path": ".github/workflows/ci.yml"
+        },
+        {
+          "hash": "4eb81eeb113bdba84a09846e4b80ab63d20507cb41935566c110e37f99afe899",
+          "path": ".github/workflows/pages.yml"
+        },
+        {
+          "hash": "cc36c3caefb876a59be4d3357d57b18695a667db46208a1480891df4ccbe2821",
+          "path": ".github/workflows/publish.yml"
+        }
+      ],
+      "globs": [
+        ".github/**"
+      ],
+      "importConfidence": "full",
+      "name": ".github",
+      "origin": "authored",
+      "role": "config",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "9c9a45f053dc8b111cc92cae2cc55b681d05ab969de272c463ddb5bd61b23435",
+          "path": ".gitignore"
+        },
+        {
+          "hash": "fcfa5e3357f1be73559f89e0f67b4a3fa49c7d291109be60a1c2941f8e6e8a3b",
+          "path": "CHANGELOG.md"
+        },
+        {
+          "hash": "5ae6b3c8f446f0a7cb95176e4dadb91b68aaffb16b3be09f64f5de248b6a973a",
+          "path": "LICENSE"
+        },
+        {
+          "hash": "e52a34723db075f71775155c910f1ca31cfbd32434b747325e15f925e08a10be",
+          "path": "README.es.md"
+        },
+        {
+          "hash": "1516c37cb53b1464f2f710af6b613e219246c3d0ded09d912f1967bb23c909bc",
+          "path": "README.fr.md"
+        },
+        {
+          "hash": "c385b69954e800f5689fcdbc8452b21c8a6e15bfec7738f72acaf07afee762ee",
+          "path": "README.hi.md"
+        },
+        {
+          "hash": "bdc623ff2fff9944c397ea7c2a57265752db250c303f010c92f6788c59e9e84b",
+          "path": "README.it.md"
+        },
+        {
+          "hash": "293390c5323ab092a2bbaee48ab3fb72cf5407c85628fd54a5cd4bc2eb6386dd",
+          "path": "README.ja.md"
+        },
+        {
+          "hash": "3320b0f558666829be6e7948c96f62a4f088c7d885905ca76b2f03038ff18ccb",
+          "path": "README.md"
+        },
+        {
+          "hash": "9cd59c19ccfa0536e85721298db2410f1fae70855dfe1618d04fa011a7ed3337",
+          "path": "README.pt-BR.md"
+        },
+        {
+          "hash": "f3693d50fee13ccd5468556d7c04dfdea6b5e047ce8e127b712d42ccd4f67a95",
+          "path": "README.zh.md"
+        },
+        {
+          "hash": "3c97799787538a61aed96675d7e9a21bf189a77e9bd7afa414113c5aa7840dfc",
+          "path": "SCORECARD.md"
+        },
+        {
+          "hash": "cba6ed8601e066319ab84287152c9b10a12c4d14ba4f94f740427b6752294b55",
+          "path": "SECURITY.md"
+        },
+        {
+          "hash": "f2d6a4877ece5f08b24d923046dcdef741a2c6772b6e33fe5cba738be52590f4",
+          "path": "SHIP_GATE.md"
+        },
+        {
+          "hash": "ed96ac15561d363006aa8ace6c2fb7c7f1dbc37ae4670a0670b36254758cb1e4",
+          "path": "TEST-PLAN.md"
+        },
+        {
+          "hash": "7b9f6ac1efd7b367896c8fe74a60cb49a076a9b1bcf3a5c87dc927097b8ffc0f",
+          "path": "package-lock.json"
+        },
+        {
+          "hash": "501ef8f7522b59f0f40fb6b6a2153591c64c04669b39341a66dfd25a9c896529",
+          "path": "package.json"
+        },
+        {
+          "hash": "b42dbdd450647c847725c2d9ab3fe639edd10ab65572844dfd03fb1e32c09a37",
+          "path": "tsconfig.json"
+        },
+        {
+          "hash": "aa42e2be62556832f67a4a7c3d244715ff37c8dfd60e6a1983d5f039aeb974d8",
+          "path": "tsup.config.ts"
+        },
+        {
+          "hash": "e259aa2c81c3cd27fff00e29aa7db39a0eebe40baf21621dd9ed2ff6783c2e36",
+          "path": "vitest.config.ts"
+        }
+      ],
+      "globs": [
+        "*"
+      ],
+      "importConfidence": "full",
+      "name": "root",
+      "origin": "authored",
+      "role": "config",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "32294be09fcc6335fc2e69085da43b15f989c99ab90f59a063a4623f5262dc02",
+          "path": "site/astro.config.mjs"
+        },
+        {
+          "hash": "934153a7438b652e94617d97ea19396905ac28d8481a6899c6b07e7bd6157780",
+          "path": "site/package-lock.json"
+        },
+        {
+          "hash": "c91d5c08ebc3433d5387a07fa206e35009b1a69e3ef9f003e6fb367b2de4dac1",
+          "path": "site/package.json"
+        },
+        {
+          "hash": "ec030f2e4bf6dc57eaca075d390c228b3212cf29db267e32ef92e110de1acdcc",
+          "path": "site/src/content.config.ts"
+        },
+        {
+          "hash": "76cbc18232fc997a673dfbc42556dce279dfae705fa5d081ff78e841377e33e7",
+          "path": "site/src/content/docs/handbook/beginners.md"
+        },
+        {
+          "hash": "b259d2a1a9fde494211e2c1e627b866a305bac888b3aaaad176c3ad1cfd0bfc2",
+          "path": "site/src/content/docs/handbook/commands.md"
+        },
+        {
+          "hash": "67e9baed2efd8207611df3c93162fdabf0c7032514c633e49fc5c7d30c8bc58e",
+          "path": "site/src/content/docs/handbook/configuration.md"
+        },
+        {
+          "hash": "c252511e9690104995801ee4cdd94853c47187008f0faa9bf9085c7764febf72",
+          "path": "site/src/content/docs/handbook/getting-started.md"
+        },
+        {
+          "hash": "abc8865075280e39eb0cb3d46c839cdca1a9b99b629dea9402d9e8dcc1e97efb",
+          "path": "site/src/content/docs/handbook/index.md"
+        },
+        {
+          "hash": "cb2ccacb586e8884ec27f5fb1d1feabc3485b36389c02cde9e3885f7934d4634",
+          "path": "site/src/content/docs/handbook/security.md"
+        },
+        {
+          "hash": "a699ad78a6d27d6864ccfe4c3a4a01993aca28ecb4a3d20893f37db9f9b1a522",
+          "path": "site/src/pages/index.astro"
+        },
+        {
+          "hash": "0a1adba857cb49a555617f3e958be49ecc94313c7b1f604efcdcfb07b8a6ac49",
+          "path": "site/src/site-config.ts"
+        },
+        {
+          "hash": "5995279a40a9a63426a93feec129006b261cc7200426a398914d0317722ef19b",
+          "path": "site/src/styles/global.css"
+        },
+        {
+          "hash": "9d8dddc46c99a1863e6980810ca6375e764db806f99696446751cbdc5be1a1d9",
+          "path": "site/src/styles/starlight-custom.css"
+        },
+        {
+          "hash": "61fc24492db9aef7ec38eb91cfeebaef96155014bb5f22648fd8ed2327c6cae2",
+          "path": "site/tsconfig.json"
+        }
+      ],
+      "globs": [
+        "site/**"
+      ],
+      "importConfidence": "full",
+      "name": "site",
+      "origin": "authored",
+      "role": "site",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 1,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 4,
+      "entryPoints": [
+        "src/cli.ts",
+        "src/index.ts"
+      ],
+      "externals": 0,
+      "files": [
+        {
+          "entry": "apply",
+          "entryRule": 3,
+          "exports": [
+            "apply"
+          ],
+          "hash": "d44781a85e9356c920b38d05c79a55866cb46822f60a60ef816e406e09991380",
+          "importsFiles": [
+            "src/auth.ts",
+            "src/errors.ts",
+            "src/fetch.ts",
+            "src/types.ts"
+          ],
+          "path": "src/apply.ts",
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 91,
+                  "name": "getGitHubToken",
+                  "target": {
+                    "file": "src/auth.ts"
+                  },
+                  "via": "createIssue"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "apply"
+            },
+            {
+              "calls": [
+                {
+                  "line": 91,
+                  "name": "getGitHubToken",
+                  "target": {
+                    "file": "src/auth.ts"
+                  },
+                  "via": "createIssue"
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "executeAction"
+            },
+            {
+              "calls": [
+                {
+                  "line": 91,
+                  "name": "getGitHubToken",
+                  "target": {
+                    "file": "src/auth.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "createIssue"
+            },
+            {
+              "calls": [
+                {
+                  "line": 195,
+                  "name": "getGitHubToken",
+                  "target": {
+                    "file": "src/auth.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "createWorkflowPR"
+            }
+          ]
+        },
+        {
+          "entry": "audit",
+          "entryRule": 3,
+          "exports": [
+            "audit"
+          ],
+          "hash": "c7efee9881fd41afc2b1e5e0a4c27058838770515d1533cf8859971f4a4bb886",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/providers/ghcr.ts",
+            "src/providers/github.ts",
+            "src/providers/npm.ts",
+            "src/semver.ts",
+            "src/types.ts"
+          ],
+          "path": "src/audit.ts",
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 42,
+                  "name": "listOrgRepos",
+                  "target": {
+                    "file": "src/providers/github.ts"
+                  }
+                },
+                {
+                  "line": 51,
+                  "name": "pLimit",
+                  "target": {
+                    "file": "src/fetch.ts"
+                  }
+                },
+                {
+                  "line": 59,
+                  "name": "readPackageJson",
+                  "target": {
+                    "file": "src/providers/github.ts"
+                  }
+                },
+                {
+                  "line": 60,
+                  "name": "hasDockerfile",
+                  "target": {
+                    "file": "src/providers/github.ts"
+                  }
+                },
+                {
+                  "line": 88,
+                  "name": "getNpmPackageInfo",
+                  "target": {
+                    "file": "src/providers/npm.ts"
+                  }
+                },
+                {
+                  "line": 93,
+                  "name": "compareSemver",
+                  "target": {
+                    "file": "src/semver.ts"
+                  }
+                },
+                {
+                  "line": 141,
+                  "name": "listGhcrPackages",
+                  "target": {
+                    "file": "src/providers/ghcr.ts"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "audit"
+            }
+          ]
+        },
+        {
+          "exports": [
+            "getGitHubToken"
+          ],
+          "hash": "765d26ac7e4f1b41f1e6a742f264b01647ce4f64e85fbad4b8325545e5204d40",
+          "importsFiles": [
+            "src/errors.ts"
+          ],
+          "path": "src/auth.ts"
+        },
+        {
+          "entry": "main",
+          "entryRule": 1,
+          "exports": [
+            "loadAuditFromFile",
+            "parseArgs"
+          ],
+          "hash": "d7f139c03d612e07fb25bb09505d9391332d50008e4d65d50a7d850561833000",
+          "importsFiles": [
+            "src/apply.ts",
+            "src/audit.ts",
+            "src/config.ts",
+            "src/diff.ts",
+            "src/errors.ts",
+            "src/format/diff.ts",
+            "src/format/json.ts",
+            "src/format/markdown.ts",
+            "src/format/table.ts",
+            "src/plan.ts",
+            "src/types.ts"
+          ],
+          "path": "src/cli.ts",
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 158,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  }
+                },
+                {
+                  "line": 161,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  }
+                },
+                {
+                  "line": 170,
+                  "name": "formatAuditJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  }
+                },
+                {
+                  "line": 173,
+                  "name": "formatAuditMarkdown",
+                  "target": {
+                    "file": "src/format/markdown.ts"
+                  }
+                },
+                {
+                  "line": 177,
+                  "name": "formatAuditTable",
+                  "target": {
+                    "file": "src/format/table.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "runAudit"
+            },
+            {
+              "calls": [
+                {
+                  "line": 190,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  }
+                },
+                {
+                  "line": 201,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  }
+                },
+                {
+                  "line": 207,
+                  "name": "plan",
+                  "target": {
+                    "file": "src/plan.ts"
+                  }
+                },
+                {
+                  "line": 213,
+                  "name": "formatPlanJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  }
+                },
+                {
+                  "line": 216,
+                  "name": "formatPlanMarkdown",
+                  "target": {
+                    "file": "src/format/markdown.ts"
+                  }
+                },
+                {
+                  "line": 220,
+                  "name": "formatPlanTable",
+                  "target": {
+                    "file": "src/format/table.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "runPlan"
+            },
+            {
+              "calls": [
+                {
+                  "line": 190,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 201,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 207,
+                  "name": "plan",
+                  "target": {
+                    "file": "src/plan.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 213,
+                  "name": "formatPlanJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 216,
+                  "name": "formatPlanMarkdown",
+                  "target": {
+                    "file": "src/format/markdown.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 220,
+                  "name": "formatPlanTable",
+                  "target": {
+                    "file": "src/format/table.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 243,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  }
+                },
+                {
+                  "line": 254,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  }
+                },
+                {
+                  "line": 260,
+                  "name": "plan",
+                  "target": {
+                    "file": "src/plan.ts"
+                  }
+                },
+                {
+                  "line": 271,
+                  "name": "apply",
+                  "target": {
+                    "file": "src/apply.ts"
+                  }
+                },
+                {
+                  "line": 276,
+                  "name": "formatApplyJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "runApply"
+            },
+            {
+              "calls": [
+                {
+                  "line": 302,
+                  "name": "diff",
+                  "target": {
+                    "file": "src/diff.ts"
+                  }
+                },
+                {
+                  "line": 308,
+                  "name": "formatDiffJson",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  }
+                },
+                {
+                  "line": 311,
+                  "name": "formatDiffMarkdown",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  }
+                },
+                {
+                  "line": 315,
+                  "name": "formatDiffTable",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "runDiff"
+            },
+            {
+              "calls": [
+                {
+                  "line": 158,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  },
+                  "via": "runAudit"
+                },
+                {
+                  "inner": [
+                    {
+                      "line": 42,
+                      "name": "listOrgRepos",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 51,
+                      "name": "pLimit",
+                      "target": {
+                        "file": "src/fetch.ts"
+                      }
+                    },
+                    {
+                      "line": 59,
+                      "name": "readPackageJson",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 60,
+                      "name": "hasDockerfile",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 88,
+                      "name": "getNpmPackageInfo",
+                      "target": {
+                        "file": "src/providers/npm.ts"
+                      }
+                    },
+                    {
+                      "line": 93,
+                      "name": "compareSemver",
+                      "target": {
+                        "file": "src/semver.ts"
+                      }
+                    },
+                    {
+                      "line": 141,
+                      "name": "listGhcrPackages",
+                      "target": {
+                        "file": "src/providers/ghcr.ts"
+                      }
+                    }
+                  ],
+                  "line": 161,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  },
+                  "via": "runAudit"
+                },
+                {
+                  "line": 170,
+                  "name": "formatAuditJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  },
+                  "via": "runAudit"
+                },
+                {
+                  "line": 173,
+                  "name": "formatAuditMarkdown",
+                  "target": {
+                    "file": "src/format/markdown.ts"
+                  },
+                  "via": "runAudit"
+                },
+                {
+                  "line": 177,
+                  "name": "formatAuditTable",
+                  "target": {
+                    "file": "src/format/table.ts"
+                  },
+                  "via": "runAudit"
+                },
+                {
+                  "line": 190,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "inner": [
+                    {
+                      "line": 42,
+                      "name": "listOrgRepos",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 51,
+                      "name": "pLimit",
+                      "target": {
+                        "file": "src/fetch.ts"
+                      }
+                    },
+                    {
+                      "line": 59,
+                      "name": "readPackageJson",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 60,
+                      "name": "hasDockerfile",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 88,
+                      "name": "getNpmPackageInfo",
+                      "target": {
+                        "file": "src/providers/npm.ts"
+                      }
+                    },
+                    {
+                      "line": 93,
+                      "name": "compareSemver",
+                      "target": {
+                        "file": "src/semver.ts"
+                      }
+                    },
+                    {
+                      "line": 141,
+                      "name": "listGhcrPackages",
+                      "target": {
+                        "file": "src/providers/ghcr.ts"
+                      }
+                    }
+                  ],
+                  "line": 201,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 207,
+                  "name": "plan",
+                  "target": {
+                    "file": "src/plan.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 213,
+                  "name": "formatPlanJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 216,
+                  "name": "formatPlanMarkdown",
+                  "target": {
+                    "file": "src/format/markdown.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 220,
+                  "name": "formatPlanTable",
+                  "target": {
+                    "file": "src/format/table.ts"
+                  },
+                  "via": "runPlan"
+                },
+                {
+                  "line": 243,
+                  "name": "loadConfig",
+                  "target": {
+                    "file": "src/config.ts"
+                  },
+                  "via": "runApply"
+                },
+                {
+                  "inner": [
+                    {
+                      "line": 42,
+                      "name": "listOrgRepos",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 51,
+                      "name": "pLimit",
+                      "target": {
+                        "file": "src/fetch.ts"
+                      }
+                    },
+                    {
+                      "line": 59,
+                      "name": "readPackageJson",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 60,
+                      "name": "hasDockerfile",
+                      "target": {
+                        "file": "src/providers/github.ts"
+                      }
+                    },
+                    {
+                      "line": 88,
+                      "name": "getNpmPackageInfo",
+                      "target": {
+                        "file": "src/providers/npm.ts"
+                      }
+                    },
+                    {
+                      "line": 93,
+                      "name": "compareSemver",
+                      "target": {
+                        "file": "src/semver.ts"
+                      }
+                    },
+                    {
+                      "line": 141,
+                      "name": "listGhcrPackages",
+                      "target": {
+                        "file": "src/providers/ghcr.ts"
+                      }
+                    }
+                  ],
+                  "line": 254,
+                  "name": "audit",
+                  "target": {
+                    "file": "src/audit.ts"
+                  },
+                  "via": "runApply"
+                },
+                {
+                  "line": 260,
+                  "name": "plan",
+                  "target": {
+                    "file": "src/plan.ts"
+                  },
+                  "via": "runApply"
+                },
+                {
+                  "inner": [
+                    {
+                      "line": 91,
+                      "name": "getGitHubToken",
+                      "target": {
+                        "file": "src/auth.ts"
+                      },
+                      "via": "createIssue"
+                    }
+                  ],
+                  "line": 271,
+                  "name": "apply",
+                  "target": {
+                    "file": "src/apply.ts"
+                  },
+                  "via": "runApply"
+                },
+                {
+                  "line": 276,
+                  "name": "formatApplyJson",
+                  "target": {
+                    "file": "src/format/json.ts"
+                  },
+                  "via": "runApply"
+                },
+                {
+                  "line": 302,
+                  "name": "diff",
+                  "target": {
+                    "file": "src/diff.ts"
+                  },
+                  "via": "runDiff"
+                },
+                {
+                  "line": 308,
+                  "name": "formatDiffJson",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  },
+                  "via": "runDiff"
+                },
+                {
+                  "line": 311,
+                  "name": "formatDiffMarkdown",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  },
+                  "via": "runDiff"
+                },
+                {
+                  "line": 315,
+                  "name": "formatDiffTable",
+                  "target": {
+                    "file": "src/format/diff.ts"
+                  },
+                  "via": "runDiff"
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": true,
+              "isDefaultExport": false,
+              "name": "main"
+            }
+          ]
+        },
+        {
+          "exports": [
+            "defaultConfig",
+            "loadConfig",
+            "starterConfig"
+          ],
+          "hash": "c46d811b50eda0277cadf93bf8c8d7b10a5a927d7410c1c8c3ed527b5ae09d3d",
+          "importsFiles": [
+            "src/errors.ts",
+            "src/types.ts"
+          ],
+          "path": "src/config.ts"
+        },
+        {
+          "entry": "diff",
+          "entryRule": 3,
+          "exports": [
+            "diff"
+          ],
+          "hash": "22fc59ae76dc59fc45448aa03ef6477e2a30c458a8ff4beef1d136467db4cadd",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/diff.ts",
+          "sequences": []
+        },
+        {
+          "exports": [
+            "wrapError"
+          ],
+          "hash": "5d6e4a379e092f8a431152102e313b671ed45f0a2d4ac8619774fa663cb1f02d",
+          "path": "src/errors.ts"
+        },
+        {
+          "exports": [
+            "fetchGitHub",
+            "fetchGitHubPaginated",
+            "fetchNpm",
+            "pLimit"
+          ],
+          "hash": "b368188325fd0108ea6f8f039511c585172968361058aa83b4a3d2f34522a8e5",
+          "importsFiles": [
+            "src/auth.ts",
+            "src/errors.ts"
+          ],
+          "path": "src/fetch.ts"
+        },
+        {
+          "exports": [
+            "formatDiffJson",
+            "formatDiffMarkdown",
+            "formatDiffTable"
+          ],
+          "hash": "75104c3af021d5c79025a4809c13c09d16d2c9b587b39f2689d967a847a9fe1d",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/format/diff.ts"
+        },
+        {
+          "exports": [
+            "formatApplyJson",
+            "formatAuditJson",
+            "formatPlanJson"
+          ],
+          "hash": "a2ab522142a76e9165edcd5c5706bb0f6f787b3ac141e26d547df375954d6929",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/format/json.ts"
+        },
+        {
+          "exports": [
+            "formatAuditMarkdown",
+            "formatPlanMarkdown"
+          ],
+          "hash": "f6bd047ff0f2b8c8904b86529460a6ed99b18ab7bbdbc684922e4de604f58e92",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/format/markdown.ts"
+        },
+        {
+          "exports": [
+            "formatAuditTable",
+            "formatPlanTable"
+          ],
+          "hash": "21069f46c0e7b784fa2f1b6fbf44e7a05ba4c822119a3c52fb423fe859a804d4",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/format/table.ts"
+        },
+        {
+          "hash": "c4b245349b2379523dbb408dd735f67a929e9f64cbbd9af8869fef8724259223",
+          "importsFiles": [
+            "src/apply.ts",
+            "src/audit.ts",
+            "src/config.ts",
+            "src/diff.ts",
+            "src/errors.ts",
+            "src/format/diff.ts",
+            "src/plan.ts",
+            "src/semver.ts",
+            "src/types.ts"
+          ],
+          "path": "src/index.ts"
+        },
+        {
+          "entry": "plan",
+          "entryRule": 3,
+          "exports": [
+            "plan"
+          ],
+          "hash": "5f57f41ab5bdcd922446118ab1be208a6f51b52f1942124109a421dad85c7a8d",
+          "importsFiles": [
+            "src/types.ts"
+          ],
+          "path": "src/plan.ts",
+          "sequences": []
+        },
+        {
+          "exports": [
+            "getGhcrPackage",
+            "listGhcrPackages"
+          ],
+          "hash": "ac06644731f04cd6d1040d2571112b95afd5eb1544c4c410c78f685eb5f12874",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/types.ts"
+          ],
+          "path": "src/providers/ghcr.ts"
+        },
+        {
+          "exports": [
+            "hasDockerfile",
+            "listOrgRepos",
+            "readFileContent",
+            "readPackageJson"
+          ],
+          "hash": "4277221940b408d9a9d5a3675cb212a9f7b6180a23ee8f22d96cce7b8109dafe",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/types.ts"
+          ],
+          "path": "src/providers/github.ts"
+        },
+        {
+          "exports": [
+            "getNpmPackageInfo"
+          ],
+          "hash": "70045520dc1600db3f7bcc95a48f415b6feb198595ce00c24c570ff5fc411834",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/types.ts"
+          ],
+          "path": "src/providers/npm.ts"
+        },
+        {
+          "exports": [
+            "compareSemver",
+            "isDrift"
+          ],
+          "hash": "509575016a155f84f9473ac6c40fd78661466d8bd58c8d7b2021cf088a3611b1",
+          "path": "src/semver.ts"
+        },
+        {
+          "hash": "cabd14f5286a7b3e5230f87c9f42f40e47f0a044c4a4d9061dd202efa52a28bc",
+          "path": "src/types.ts"
+        }
+      ],
+      "globs": [
+        "src/**"
+      ],
+      "importConfidence": "full",
+      "name": "src",
+      "origin": "authored",
+      "role": "code",
+      "testedBy": 14,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "3ec6c0e439f1c1e83691f6a0e53e13620c2dfa803045d7ea50ee4cc529d3845d",
+          "path": "templates/ci-container.yml"
+        },
+        {
+          "hash": "42807081140b90f63485a5ae22433096fcf116a04ef632d8af380f8b611609e1",
+          "path": "templates/ci-node-cli.yml"
+        },
+        {
+          "hash": "261e1315d4b14c0a5eb0832a89c08fa63d9ef7f01b4d608ca85f0f539f6ec63e",
+          "path": "templates/ci-node-lib.yml"
+        }
+      ],
+      "globs": [
+        "templates/**"
+      ],
+      "importConfidence": "full",
+      "name": "templates",
+      "origin": "authored",
+      "role": "config",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "7a2b16bf3aa13a268878becdbbf2be39fdcf59d57304981020648b6917869e64",
+          "importsFiles": [
+            "src/apply.ts",
+            "src/fetch.ts",
+            "src/types.ts"
+          ],
+          "path": "test/apply.test.ts"
+        },
+        {
+          "hash": "786cd242c10297e13a00a01c90a1bad4f3879cd2291afb47958055cb94cce30f",
+          "importsFiles": [
+            "src/audit.ts",
+            "src/providers/ghcr.ts",
+            "src/providers/github.ts",
+            "src/providers/npm.ts",
+            "src/types.ts"
+          ],
+          "path": "test/audit.test.ts"
+        },
+        {
+          "hash": "576293307a7001138d0f7a6bd5abd86d201688d433f41dbb5454eba63180380c",
+          "importsFiles": [
+            "src/auth.ts"
+          ],
+          "path": "test/auth.test.ts"
+        },
+        {
+          "hash": "8fea44cfa220c172e8550bed9069110b2f88221e25a3420c7fc09d4e64caa560",
+          "importsFiles": [
+            "src/cli.ts"
+          ],
+          "path": "test/cli.test.ts"
+        },
+        {
+          "hash": "884da570403562c9049c941d2fe11cabf33facf19fed1beca75ec983f374ea58",
+          "importsFiles": [
+            "src/config.ts"
+          ],
+          "path": "test/config.test.ts"
+        },
+        {
+          "hash": "9747474388ee972577278137c7251f03d91dc1c788ba0573ab6ce406ee257a6c",
+          "importsFiles": [
+            "src/diff.ts",
+            "src/types.ts"
+          ],
+          "path": "test/diff.test.ts"
+        },
+        {
+          "hash": "3c1e024664fc5fd4f333bc48b7410e6a7246d396e9107730ccfdf2313dfe55ea",
+          "importsFiles": [
+            "src/errors.ts"
+          ],
+          "path": "test/errors.test.ts"
+        },
+        {
+          "hash": "33edf26cfb35aa55653f47d067879954a231dd9da50019939a04425d9082d0e9",
+          "importsFiles": [
+            "src/fetch.ts"
+          ],
+          "path": "test/fetch.test.ts"
+        },
+        {
+          "hash": "999b45bd829882e5b7a3fbc396cdf090eaa44b701244b3a77e5e7529536bd1da",
+          "importsFiles": [
+            "src/format/json.ts",
+            "src/format/markdown.ts",
+            "src/format/table.ts",
+            "src/types.ts"
+          ],
+          "path": "test/format.test.ts"
+        },
+        {
+          "hash": "9acf1f05a534f3dde581e77fb018b075e4ba9a99d6f1ffd589ccd6d8b01bad42",
+          "importsFiles": [
+            "src/plan.ts",
+            "src/types.ts"
+          ],
+          "path": "test/plan.test.ts"
+        },
+        {
+          "hash": "77d4b48639a0e7f4d51685c9d11681aa581494d6a2fb763ba3d35919c50d7fad",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/providers/ghcr.ts"
+          ],
+          "path": "test/providers/ghcr.test.ts"
+        },
+        {
+          "hash": "b78b185b92f76748fbb143e01aa6ab2c6de1a0cab2e6b19c0b2327e8ff913701",
+          "importsFiles": [
+            "src/fetch.ts",
+            "src/providers/github.ts"
+          ],
+          "path": "test/providers/github.test.ts"
+        },
+        {
+          "hash": "c1b8adfdee88d35cf1876bedb7c5c80b19afacfaab9206be8c5981aacabf9018",
+          "importsFiles": [
+            "src/providers/npm.ts"
+          ],
+          "path": "test/providers/npm.test.ts"
+        },
+        {
+          "hash": "7537cfb0677bc3629919e79c3ba4fc9d918b2ad8fcfa80d282a52724a704b379",
+          "importsFiles": [
+            "src/semver.ts"
+          ],
+          "path": "test/semver.test.ts"
+        },
+        {
+          "hash": "a1704bcc574982f0b9cd7c5afe2b9ebff0f75cea8ee3ad1a207e5bff210631e6",
+          "path": "test/version.test.ts"
+        }
+      ],
+      "globs": [
+        "test/**"
+      ],
+      "importConfidence": "full",
+      "name": "test",
+      "origin": "authored",
+      "role": "test",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    }
+  ],
+  "doors": [
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "job": "test",
+          "step": "2",
+          "text": "npm ci"
+        },
+        {
+          "job": "test",
+          "step": "3",
+          "text": "npm run build"
+        },
+        {
+          "job": "test",
+          "step": "4",
+          "text": "npm test"
+        },
+        {
+          "job": "test",
+          "step": "5",
+          "text": "node dist/cli.js help"
+        },
+        {
+          "job": "test",
+          "step": "6",
+          "text": "npm audit --audit-level=moderate"
+        },
+        {
+          "job": "test",
+          "step": "7",
+          "text": "npm pack --dry-run"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/ci.yml",
+      "landings": [],
+      "mentions": [],
+      "name": "CI",
+      "permissions": [],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "test",
+          "depth": 0,
+          "files": 15
+        },
+        {
+          "boundary": "src",
+          "depth": 1,
+          "enters": {
+            "file": "src/apply.ts",
+            "from": "test/apply.test.ts"
+          },
+          "files": 18
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "directory": true,
+          "job": "test",
+          "matched": true,
+          "path": "test/",
+          "runKind": "executes",
+          "via": "vitest vitest.config.ts"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "pull_request",
+          "paths": [
+            ".github/workflows/**",
+            "package-lock.json",
+            "package.json",
+            "src/**",
+            "test/**",
+            "vitest.config.ts"
+          ]
+        },
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "push",
+          "paths": [
+            ".github/workflows/**",
+            "package-lock.json",
+            "package.json",
+            "src/**",
+            "test/**",
+            "vitest.config.ts"
+          ]
+        },
+        {
+          "event": "workflow_dispatch"
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/setup-node"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "job": "build",
+          "step": "Install site dependencies",
+          "text": "npm ci"
+        },
+        {
+          "job": "build",
+          "step": "Build site",
+          "text": "npm run build"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/pages.yml",
+      "landings": [],
+      "mentions": [],
+      "name": "Deploy site to GitHub Pages",
+      "permissions": [
+        "contents:read",
+        "id-token:write",
+        "pages:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 3
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "job": "build",
+          "matched": true,
+          "path": "site/astro.config.mjs",
+          "runKind": "executes",
+          "via": "astro build"
+        },
+        {
+          "directory": true,
+          "job": "build",
+          "matched": true,
+          "path": "site/src/",
+          "runKind": "executes",
+          "via": "astro build"
+        }
+      ],
+      "runsCount": 2,
+      "secrets": [],
+      "sends": {
+        "deploysPages": true,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "push",
+          "paths": [
+            ".github/workflows/pages.yml",
+            "site/**"
+          ]
+        },
+        {
+          "event": "workflow_dispatch"
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/deploy-pages",
+        "actions/setup-node",
+        "actions/upload-pages-artifact"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "job": "publish",
+          "step": "2",
+          "text": "npm ci"
+        },
+        {
+          "job": "publish",
+          "step": "3",
+          "text": "npm run build"
+        },
+        {
+          "job": "publish",
+          "step": "4",
+          "text": "npm test"
+        },
+        {
+          "job": "publish",
+          "step": "5",
+          "text": "npm publish --access public --provenance"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/publish.yml",
+      "landings": [],
+      "mentions": [],
+      "name": "Publish",
+      "permissions": [
+        "contents:read",
+        "id-token:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "test",
+          "depth": 0,
+          "files": 15
+        },
+        {
+          "boundary": "src",
+          "depth": 1,
+          "enters": {
+            "file": "src/apply.ts",
+            "from": "test/apply.test.ts"
+          },
+          "files": 18
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "directory": true,
+          "job": "publish",
+          "matched": true,
+          "path": "test/",
+          "runKind": "executes",
+          "via": "vitest vitest.config.ts"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [
+        "NPM_TOKEN"
+      ],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": true,
+        "publishesTo": [
+          "npm"
+        ],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "event": "release",
+          "types": [
+            "published"
+          ]
+        },
+        {
+          "event": "workflow_dispatch"
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/setup-node"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [],
+      "elsewhere": [],
+      "file": "package.json",
+      "kind": "package",
+      "landings": [],
+      "mentions": [],
+      "name": "@mcptoolshop/registry-sync",
+      "permissions": [],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "src",
+          "depth": 0,
+          "files": 15
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "path": "src/index.ts",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [],
+      "uses": [],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [],
+      "elsewhere": [],
+      "file": "package.json",
+      "kind": "command",
+      "landings": [],
+      "mentions": [],
+      "name": "registry-sync",
+      "permissions": [],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "src",
+          "depth": 0,
+          "files": 18
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "path": "src/cli.ts",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [],
+      "uses": [],
+      "usesWorkflowToken": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "test",
+      "fromTests": true,
+      "kind": "file",
+      "to": "src"
+    }
+  ],
+  "generatedFrom": {
+    "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487",
+    "tracked": 80
+  },
+  "landings": [
+    {
+      "readers": [
+        {
+          "by": "templates/ci-node-cli.yml",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "templates/ci-node-lib.yml",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "package-lock.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "src/cli.ts",
+          "call": "readFileSync",
+          "confidence": "ast"
+        },
+        {
+          "by": "src/providers/github.ts",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "templates/ci-node-cli.yml",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "templates/ci-node-lib.yml",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "package.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "content-collection",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "autogenerate",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs/handbook",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tsup.config.ts",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "src/cli.ts",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tsup.config.ts",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "vitest.config.ts",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "src/index.ts",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "vitest.config.ts",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "src/types.ts",
+      "writers": []
+    }
+  ],
+  "overlaps": [],
+  "submodules": [],
+  "symlinks": [],
+  "testFiles": 15,
+  "unassigned": []
+}

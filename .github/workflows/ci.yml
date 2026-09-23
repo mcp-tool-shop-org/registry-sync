@@ -10,6 +10,7 @@ on:
       - 'test/**'
       - 'vitest.config.ts'
       - '.github/workflows/**'
+      - 'atlas/**'
   pull_request:
     branches: [main]
     paths:
@@ -19,6 +20,7 @@ on:
       - 'test/**'
       - 'vitest.config.ts'
       - '.github/workflows/**'
+      - 'atlas/**'
   workflow_dispatch:
 
 concurrency:
@@ -34,6 +36,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Atlas check
+        run: npx --yes @dogfood-lab/atlas@1.15.0 check
       - run: npm ci
       - run: npm run build
       - run: npm test

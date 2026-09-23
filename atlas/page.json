@@ -1,0 +1,232 @@
+{
+  "authored": [
+    ".claude/",
+    ".github/",
+    "root",
+    "site/",
+    "templates/"
+  ],
+  "breaks": [
+    {
+      "doors": 4,
+      "importedBy": [],
+      "importedByTests": [
+        "test"
+      ],
+      "kind": "part",
+      "name": "src",
+      "partLabel": "src"
+    },
+    {
+      "doors": 2,
+      "importedBy": [],
+      "importedByTests": [],
+      "kind": "part",
+      "name": "test",
+      "partLabel": "test"
+    }
+  ],
+  "changes": {
+    "first": true
+  },
+  "changesTogether": [],
+  "changesTogetherNote": [
+    "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
+  ],
+  "changesTogetherWithTests": 0,
+  "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487",
+  "defaultBranch": "main",
+  "derived": "7 parts, mostly TypeScript (38 files). Work enters through 5 doors; the busiest is CI, which reaches 2 parts. It publishes to npm. People run registry-sync. People import @mcptoolshop/registry-sync.",
+  "doors": [
+    {
+      "checks": [],
+      "checksCount": 0,
+      "file": ".github/workflows/ci.yml",
+      "id": ".github/workflows/ci.yml",
+      "landings": [],
+      "name": "CI",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "test",
+          "depth": 0,
+          "files": 15
+        },
+        {
+          "boundary": "src",
+          "depth": 1,
+          "files": 18
+        }
+      ],
+      "runs": [
+        "test/"
+      ],
+      "runsCount": 1,
+      "sends": [],
+      "stages": [],
+      "triggers": [
+        "on a pull request touching 6 paths",
+        "on a push to main touching 6 paths",
+        "or by hand"
+      ]
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "file": ".github/workflows/publish.yml",
+      "id": ".github/workflows/publish.yml",
+      "landings": [],
+      "name": "Publish",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "test",
+          "depth": 0,
+          "files": 15
+        },
+        {
+          "boundary": "src",
+          "depth": 1,
+          "files": 18
+        }
+      ],
+      "runs": [
+        "test/"
+      ],
+      "runsCount": 1,
+      "sends": [
+        "publishes to npm"
+      ],
+      "stages": [],
+      "triggers": [
+        "when a release is published",
+        "or by hand"
+      ]
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "file": ".github/workflows/pages.yml",
+      "id": ".github/workflows/pages.yml",
+      "landings": [],
+      "name": "Deploy site to GitHub Pages",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 3
+        }
+      ],
+      "runs": [
+        "site/astro.config.mjs",
+        "site/src/"
+      ],
+      "runsCount": 2,
+      "sends": [
+        "deploys the site"
+      ],
+      "stages": [],
+      "triggers": [
+        "on a push to main touching 2 paths",
+        "or by hand"
+      ]
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "file": "package.json",
+      "id": "package.json#@mcptoolshop/registry-sync",
+      "kind": "package",
+      "landings": [],
+      "name": "@mcptoolshop/registry-sync",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "src",
+          "depth": 0,
+          "files": 15
+        }
+      ],
+      "runs": [
+        "src/index.ts"
+      ],
+      "runsCount": 1,
+      "sends": [],
+      "stages": [],
+      "triggers": []
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "file": "package.json",
+      "id": "package.json#registry-sync",
+      "kind": "command",
+      "landings": [],
+      "name": "registry-sync",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "src",
+          "depth": 0,
+          "files": 18
+        }
+      ],
+      "runs": [
+        "src/cli.ts"
+      ],
+      "runsCount": 1,
+      "sends": [],
+      "stages": [],
+      "triggers": []
+    }
+  ],
+  "duplicates": [],
+  "duplicatesLead": null,
+  "duplicatesNote": [],
+  "edges": [
+    {
+      "from": "test",
+      "fromTests": true,
+      "to": "src"
+    }
+  ],
+  "generated": [],
+  "generatedAt": "2026-09-23T22:38:01.923Z",
+  "limits": [
+    "4 writes and 1 read use paths built at run time and are not named here.",
+    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions."
+  ],
+  "mainDoor": ".github/workflows/ci.yml",
+  "partLabels": {
+    ".claude": ".claude",
+    ".github": ".github",
+    "root": "the repository root",
+    "site": "the site",
+    "src": "src",
+    "templates": "templates",
+    "test": "test"
+  },
+  "parts": 7,
+  "readers": [],
+  "repo": "mcp-tool-shop-org/registry-sync",
+  "sequences": [],
+  "startDoor": ".github/workflows/ci.yml",
+  "startHere": [
+    ".github/workflows/ci.yml",
+    "test/apply.test.ts",
+    "src/apply.ts"
+  ],
+  "summary": null,
+  "summaryFrom": null,
+  "testFiles": 15,
+  "testedBy": {
+    "src": 14
+  },
+  "unnamedWrites": 4,
+  "unread": [],
+  "unreadNote": [],
+  "untested": [],
+  "untestedNote": [],
+  "written": 0
+}
