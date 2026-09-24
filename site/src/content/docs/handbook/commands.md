@@ -94,6 +94,8 @@ Executes the plan. All actions in v1 are **non-destructive**:
 - Creates GitHub **issues** for publish, update, and prune actions
 - Opens GitHub **PRs** with CI workflow files for scaffold actions
 
+An orphaned package has no repo of its own, so prune issues go to one tracking repo: `pruneRepo` in the config, `.github` by default. The plan names it on every prune action.
+
 ```bash
 registry-sync apply --confirm [--target npmjs|ghcr|all]
 ```
