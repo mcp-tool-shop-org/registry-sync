@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Security
+- vitest and @vitest/coverage-v8 3.2.7 → 5.0.1, clearing GHSA-82fw-gwwq-j7x9 (moderate, in @vitest/mocker, reached through both) that had turned CI's `npm audit --audit-level=moderate` step red. vite 8.3.0 now comes in as vitest's required peer. Dev dependencies only; the published package is unchanged.
+- Still open, below the audit gate: GHSA-g7r4-m6w7-qqqr (low) in esbuild 0.27.3, which tsup's latest release pins at `^0.27.0`. It is a file read through esbuild's dev server on Windows, which nothing here starts.
+
+### Tests
+- Coverage floor moved to the new reading: vitest 4 and later also count the branches inside functions no test calls, so the unchanged code and its 206 tests read lines 74.81, branches 71.02, functions 85.49, statements 76.07 (vitest 3: 79.57, 90, 82.81, 79.57). The floor sits on those numbers with no slack, and `autoUpdate` keeps ratcheting from there.
+
 ## 1.1.1 (2026-03-25)
 
 ### Added
