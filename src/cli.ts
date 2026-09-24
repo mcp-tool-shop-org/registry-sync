@@ -285,6 +285,22 @@ async function runApply(args: ParsedArgs): Promise<void> {
   console.error(
     `\n${GREEN}✓ ${s.succeeded} succeeded${RESET}  ${RED}${s.failed} failed${RESET}  ${DIM}${s.skipped} skipped${RESET}`,
   );
+
+  // The results are already out; a failed action must still fail the exit code.
+  if (s.failed > 0) {
+    const attempted = s.succeeded + s.failed;
+    throw s.succeeded > 0
+      ? new SyncError(
+          'APPLY_PARTIAL',
+          `${s.failed} of ${attempted} actions failed; ${s.succeeded} went through`,
+          'apply is not idempotent: a re-run files the issues that went through again',
+        )
+      : new SyncError(
+          'APPLY_FAILED',
+          `${s.failed} of ${attempted} actions failed; none went through`,
+          "Each action's error is in the results",
+        );
+  }
 }
 
 async function runDiff(args: ParsedArgs): Promise<void> {
@@ -368,6 +384,12 @@ ${BOLD}Examples:${RESET}
   ${DIM}# Compare two audit snapshots${RESET}
   registry-sync diff --before audit-old.json --from audit-new.json
 
+${BOLD}Exit Codes:${RESET}
+  0  OK
+  1  Auth or input error
+  2  API error, or apply where no action went through
+  3  apply where some actions failed and some went through
+
 ${BOLD}Config:${RESET}
   Place ${CYAN}registry-sync.config.json${RESET} in your project root.
   Falls back to sensible defaults if not found.
@@ -389,6 +411,12 @@ function printVersion(): void {
 }
 
 // --- Main ---
+
+// 0 ok · 1 auth or input error · 2 API error or nothing applied · 3 apply partly went through
+function exitCodeFor(err: SyncError): number {
+  if (err.code.startsWith('AUTH_') || err.code.startsWith('INPUT_')) return 1;
+  return err.code === 'APPLY_PARTIAL' ? 3 : 2;
+}
 
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
   const args = parseArgs(argv);
@@ -425,7 +453,7 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     if (err instanceof SyncError) {
       console.error(`${RED}Error [${err.code}]:${RESET} ${err.message}`);
       console.error(`${DIM}Hint: ${err.hint}${RESET}`);
-      process.exit(err.code.startsWith('AUTH_') || err.code.startsWith('INPUT_') ? 1 : 2);
+      process.exit(exitCodeFor(err));
     }
     console.error(`${RED}Unexpected error:${RESET}`, err);
     process.exit(2);

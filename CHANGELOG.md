@@ -5,13 +5,16 @@
 ### Added
 - `atlas/`: a generated map of the repository (its parts, the doors work enters through, what changes together), regenerated with `npx @dogfood-lab/atlas map` from `atlas/boundaries.yaml` and never edited by hand. CI's `test` job runs `atlas check`, pinned at `@dogfood-lab/atlas@1.15.0`, so the committed map cannot drift from the boundaries, and `atlas/**` joins both of its paths filters.
 
+### Fixed
+- `apply --confirm` exited 0 however many of its actions failed, so a script could not tell a failed run from a clean one. It now exits 3 when some actions failed and some went through (`APPLY_PARTIAL`), because a re-run would file those issues again, and 2 when none went through (`APPLY_FAILED`). The per-action results still print, or go to `--out`, before the error. `help` lists the exit codes, which now match what `SHIP_GATE.md` already promised.
+
 ### Security
 - vitest and @vitest/coverage-v8 3.2.7 → 5.0.1, clearing GHSA-82fw-gwwq-j7x9 (moderate, in @vitest/mocker, reached through both) that had turned CI's `npm audit --audit-level=moderate` step red. vite 8.3.0 now comes in as vitest's required peer. Dev dependencies only; the published package is unchanged.
 - Still open, below the audit gate: GHSA-g7r4-m6w7-qqqr (low) in esbuild 0.27.3, which tsup's latest release pins at `^0.27.0`. It is a file read through esbuild's dev server on Windows, which nothing here starts.
 
 ### Tests
 - Coverage floor moved to the new reading: vitest 4 and later also count the branches inside functions no test calls, so the unchanged code and its 206 tests read lines 74.81, branches 71.02, functions 85.49, statements 76.07 (vitest 3: 79.57, 90, 82.81, 79.57). The floor sits on those numbers with no slack, and `autoUpdate` keeps ratcheting from there.
-- Tests for the `diff` formatters (table, JSON, markdown), which had none, and for every CLI command driven through `main()`: help, version, audit, plan, apply and diff, with their `--from`, `--out`, `--format`, `--target` and `--limit` paths and the exit codes for input, auth, API and unexpected errors. `main()` now takes its argv so the tests can run it in-process. 255 tests, up from 206, and the floor ratchets to lines 97.77, branches 88.55, functions 99.23, statements 97.12.
+- Tests for the `diff` formatters (table, JSON, markdown), which had none, and for every CLI command driven through `main()`: help, version, audit, plan, apply and diff, with their `--from`, `--out`, `--format`, `--target` and `--limit` paths and the exit codes for input, auth, API, apply and unexpected errors. `main()` now takes its argv so the tests can run it in-process. 256 tests, up from 206, and the floor ratchets to lines 97.79, branches 88.69, functions 99.24, statements 97.13.
 
 ## 1.1.1 (2026-03-25)
 

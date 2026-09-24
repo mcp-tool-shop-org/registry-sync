@@ -166,6 +166,8 @@ describe('main: help, version, unknown commands', () => {
       expect(run.code).toBe(0);
       expect(run.stdout).toContain('Usage:\n  registry-sync <command> [flags]');
       expect(run.stdout).toContain('apply    Execute the plan (requires --confirm)');
+      expect(run.stdout).toContain('2  API error, or apply where no action went through');
+      expect(run.stdout).toContain('3  apply where some actions failed and some went through');
     }
   });
 
@@ -387,7 +389,7 @@ describe('main: apply', () => {
     expect(run.stderr).toContain('Applying... 2/2');
   });
 
-  it('keeps going past a failed action and reports which one failed', async () => {
+  it('keeps going past a failed action, reports which one failed, and exits 3', async () => {
     issuesApi({ 'tool-old': 500 });
     const from = writeJson('audit.json', makeAudit());
     const run = await runCli(['apply', '--from', from, '--confirm']);
@@ -400,9 +402,14 @@ describe('main: apply', () => {
     ]);
     expect(result.summary).toEqual({ succeeded: 1, failed: 1, skipped: 1 });
     expect(run.stderr).toContain('1 succeeded  1 failed  1 skipped');
+
+    // Part of the remote change happened, and a re-run would repeat it: that is not success.
+    expect(run.code).toBe(3);
+    expect(run.stderr).toContain('Error [APPLY_PARTIAL]: 1 of 2 actions failed; 1 went through');
+    expect(run.stderr).toContain('Hint: apply is not idempotent: a re-run files the issues that went through again');
   });
 
-  it('reports every action as failed when none went through', async () => {
+  it('reports every action as failed and exits 2 when none went through', async () => {
     issuesApi({ 'tool-new': 500, 'tool-old': 500 });
     const from = writeJson('audit.json', makeAudit());
     const run = await runCli(['apply', '--from', from, '--confirm']);
@@ -411,6 +418,25 @@ describe('main: apply', () => {
     expect(result.results.map((r) => r.success)).toEqual([false, false]);
     expect(result.summary).toEqual({ succeeded: 0, failed: 2, skipped: 1 });
     expect(run.stderr).toContain('0 succeeded  2 failed  1 skipped');
+
+    expect(run.code).toBe(2);
+    expect(run.stderr).toContain('Error [APPLY_FAILED]: 2 of 2 actions failed; none went through');
+    expect(run.stderr).toContain("Hint: Each action's error is in the results");
+  });
+
+  it('writes the --out results before exiting on a failure', async () => {
+    issuesApi({ 'tool-old': 500 });
+    const from = writeJson('audit.json', makeAudit());
+    const out = join(dir, 'results.json');
+    const run = await runCli(['apply', '--from', from, '--confirm', '--out', out]);
+    expect(run.code).toBe(3);
+    expect(run.stderr).toContain(`Wrote results to ${out}`);
+    const written = JSON.parse(readFileSync(out, 'utf-8')) as ApplyResult;
+    expect(written.results.map((r) => [r.action.repo, r.success])).toEqual([
+      ['tool-new', true],
+      ['tool-old', false],
+    ]);
+    expect(written.summary).toEqual({ succeeded: 1, failed: 1, skipped: 1 });
   });
 });
 
