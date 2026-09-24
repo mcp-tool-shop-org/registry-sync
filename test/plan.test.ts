@@ -19,6 +19,26 @@ function makeAudit(overrides?: Partial<AuditResult>): AuditResult {
   };
 }
 
+// An archived repo that would otherwise need an npm update and a GHCR workflow.
+function archivedAudit(): AuditResult {
+  return makeAudit({
+    repoCount: 1,
+    rows: [{
+      repo: {
+        name: 'old-tool', fullName: 'test-org/old-tool',
+        language: null, archived: true, isPrivate: false,
+        pushedAt: '2026-01-01', topics: [], defaultBranch: 'main',
+        hasPackageJson: true, hasDockerfile: true,
+        packageJsonName: '@test/old-tool', packageJsonVersion: '2.0.0',
+      },
+      presence: [
+        { registry: 'npmjs', published: true, publishedVersion: '1.0.0', drift: 'behind' },
+        { registry: 'ghcr', published: false, drift: 'missing' },
+      ],
+    }],
+  });
+}
+
 describe('plan', () => {
   it('generates publish action for missing npm package', () => {
     const audit = makeAudit({
@@ -417,6 +437,22 @@ describe('plan', () => {
     expect(result.actions[0].type).toBe('skip');
     expect(result.actions[0].skipReason).toBe('private');
     expect(result.actions[0].details).toContain('private');
+  });
+
+  it('skips every registry of an archived repo, whatever its drift', () => {
+    const result = plan(archivedAudit(), config);
+    expect(result.actions.map(a => [a.type, a.target, a.skipReason, a.details])).toEqual([
+      ['skip', 'npmjs', 'archived', 'Archived repo, read-only on GitHub (behind)'],
+      ['skip', 'ghcr', 'archived', 'Archived repo, read-only on GitHub (missing)'],
+    ]);
+    expect(result.summary).toEqual({ publish: 0, update: 0, scaffold: 0, prune: 0, skip: 2 });
+  });
+
+  it('target filter applies to archived skips', () => {
+    const result = plan(archivedAudit(), config, 'ghcr');
+    expect(result.actions.map(a => [a.type, a.target, a.skipReason])).toEqual([
+      ['skip', 'ghcr', 'archived'],
+    ]);
   });
 
   it('target filter ghcr excludes npm actions', () => {

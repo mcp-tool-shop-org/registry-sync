@@ -77,6 +77,7 @@ export type SkipReason =
   | 'ahead'
   | 'private'
   | 'excluded'
+  | 'archived'
   | 'suspected-vscode-extension';
 
 export interface PlannedAction {

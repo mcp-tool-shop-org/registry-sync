@@ -40,6 +40,19 @@ export function plan(
       // Apply target filter
       if (filter !== 'all' && presence.registry !== filter) continue;
 
+      // GitHub makes archived repos read-only, so any issue or PR apply opened there would fail.
+      if (row.repo.archived) {
+        actions.push({
+          type: 'skip',
+          target: presence.registry,
+          repo: row.repo.name,
+          details: `Archived repo, read-only on GitHub (${presence.drift})`,
+          risk: 'low',
+          skipReason: 'archived',
+        });
+        continue;
+      }
+
       switch (presence.drift) {
         case 'behind':
           actions.push({
