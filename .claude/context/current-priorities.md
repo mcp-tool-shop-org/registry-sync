@@ -19,7 +19,7 @@ Write-path / mutation truth — same family as any system where the outcome surf
 3. **Partial failure is visible** — if 3 of 5 actions succeed, the summary shows `succeeded: 3, failed: 2`. Failed actions include error messages.
 4. **Apply continues past failure** — one failed action does not abort remaining actions. All planned actions are attempted.
 5. **Structured error codes** — SyncError includes code, message, and hint. Auth errors are distinguishable from apply errors at the exit-code level.
-6. **Exit code contract** — 0 = success, 1 = auth/input error, 2 = apply/API failure.
+6. **Exit code contract** — 0 = success, 1 = auth/input error, 2 = apply/API failure (for apply: no action went through), 3 = partial apply (some actions failed, some went through). A failed action never exits 0. (3 added 2026-09-24 by Director ruling; until then apply exited 0 whatever failed.)
 7. **No disk persistence in apply** — apply results are returned in-memory and formatted for output. No state file is written.
 8. **Token resolution is fail-fast** — missing token throws AUTH_MISSING before any mutation is attempted.
 
