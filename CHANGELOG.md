@@ -5,7 +5,12 @@
 ### Added
 - `atlas/`: a generated map of the repository (its parts, the doors work enters through, what changes together), regenerated with `npx @dogfood-lab/atlas map` from `atlas/boundaries.yaml` and never edited by hand. CI's `test` job runs `atlas check`, pinned at `@dogfood-lab/atlas@1.15.0`, so the committed map cannot drift from the boundaries, and `atlas/**` joins both of its paths filters.
 
+### Removed
+- `--no-skip`, which `help` listed as "Hide skip actions from plan output" but nothing read. The plan table and markdown already leave skip actions out and show only their count, so the flag could only ever have changed `--json`.
+- `--profile` and `--repo`, which were parsed and never used, and were not in `help`. Like any unknown flag they are now ignored, so a value placed before the command is read as the command and rejected.
+
 ### Fixed
+- `--include-archived` was listed in `help` but never reached the audit, so archived repos were always dropped. With the flag, archived repos stay in the audit and their GHCR containers are matched to them instead of being listed as orphans. `audit` takes it, and so do `plan` and `apply` when they run their own audit. `plan` turns every action on an archived repo into a skip with the new `SkipReason` `archived`, because GitHub makes archived repos read-only and `apply` could only fail there.
 - `apply --confirm` exited 0 however many of its actions failed, so a script could not tell a failed run from a clean one. It now exits 3 when some actions failed and some went through (`APPLY_PARTIAL`), because a re-run would file those issues again, and 2 when none went through (`APPLY_FAILED`). The per-action results still print, or go to `--out`, before the error. `help` lists the exit codes, which now match what `SHIP_GATE.md` already promised.
 
 ### Security

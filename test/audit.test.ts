@@ -79,6 +79,32 @@ describe('audit', () => {
     expect(result.rows.every(r => r.repo.name !== 'brand')).toBe(true);
   });
 
+  it('keeps archived repos when includeArchived is set', async () => {
+    setupMocks({ repos: [makeRepo('live'), makeRepo('old', { archived: true })] });
+    const result = await audit(config, undefined, { includeArchived: true });
+    expect(result.repoCount).toBe(2);
+    expect(result.rows.find(r => r.repo.name === 'old')?.repo.archived).toBe(true);
+  });
+
+  it('still drops excluded repos when includeArchived is set', async () => {
+    setupMocks({ repos: [makeRepo('old', { archived: true }), makeRepo('brand', { archived: true })] });
+    const result = await audit({ ...config, exclude: ['brand'] }, undefined, { includeArchived: true });
+    expect(result.rows.map(r => r.repo.name)).toEqual(['old']);
+  });
+
+  it("matches an included archived repo's GHCR container instead of calling it an orphan", async () => {
+    setupMocks({
+      repos: [makeRepo('old', { archived: true })],
+      containers: [{
+        name: 'old', packageType: 'container',
+        createdAt: '2026-01-01', updatedAt: '2026-01-15', visibility: 'public',
+      }],
+    });
+    const result = await audit(config, undefined, { includeArchived: true });
+    expect(result.orphans).toEqual([]);
+    expect(result.rows[0].presence.find(p => p.registry === 'ghcr')?.published).toBe(true);
+  });
+
   it('enriches repos with package.json info', async () => {
     setupMocks({
       repos: [makeRepo('tool')],

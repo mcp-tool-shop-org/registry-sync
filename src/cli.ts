@@ -31,10 +31,7 @@ export interface ParsedArgs {
   format?: OutputFormat;
   target?: RegistryTarget | 'all';
   confirm?: boolean;
-  profile?: string;
-  repo?: string;
   includeArchived?: boolean;
-  noSkip?: boolean;
   concurrency?: number;
   from?: string;
   before?: string;
@@ -63,17 +60,8 @@ export function parseArgs(argv: string[]): ParsedArgs {
       case '--confirm':
         args.confirm = true;
         break;
-      case '--profile':
-        args.profile = argv[++i];
-        break;
-      case '--repo':
-        args.repo = argv[++i];
-        break;
       case '--include-archived':
         args.includeArchived = true;
-        break;
-      case '--no-skip':
-        args.noSkip = true;
         break;
       case '--concurrency':
       case '-c': {
@@ -160,7 +148,7 @@ async function runAudit(args: ParsedArgs): Promise<void> {
 
   const result = await audit(config, (p) => {
     process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-  }, { concurrency: args.concurrency });
+  }, { concurrency: args.concurrency, includeArchived: args.includeArchived });
   process.stderr.write('\r\x1b[K'); // Clear progress line
 
   const format = args.format || 'table';
@@ -200,7 +188,7 @@ async function runPlan(args: ParsedArgs): Promise<void> {
     process.stderr.write(`${DIM}Running audit...${RESET}\n`);
     auditResult = await audit(config, (p) => {
       process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-    }, { concurrency: args.concurrency });
+    }, { concurrency: args.concurrency, includeArchived: args.includeArchived });
     process.stderr.write('\r\x1b[K');
   }
 
@@ -253,7 +241,7 @@ async function runApply(args: ParsedArgs): Promise<void> {
     process.stderr.write(`${DIM}Running audit...${RESET}\n`);
     auditResult = await audit(config, (p) => {
       process.stderr.write(`\r${DIM}${p.phase}... ${p.current}/${p.total || '?'}${RESET}`);
-    }, { concurrency: args.concurrency });
+    }, { concurrency: args.concurrency, includeArchived: args.includeArchived });
     process.stderr.write('\r\x1b[K');
   }
 
@@ -360,7 +348,7 @@ ${BOLD}Common Flags:${RESET}
   --target <target>    Filter by registry: npmjs, ghcr, all (default: all)
   --type <target>      Alias for --target
   --out <file>         Write output to file instead of stdout
-  --include-archived   Include archived repos in audit
+  --include-archived   Include archived repos in audit (plan skips them)
 
 ${BOLD}Scale Flags:${RESET}
   --concurrency <n>    Parallel GitHub API requests (1-20, default: 5)
@@ -369,7 +357,6 @@ ${BOLD}Scale Flags:${RESET}
 
 ${BOLD}Apply Flags:${RESET}
   --confirm            Required for apply — execute actions
-  --no-skip            Hide skip actions from plan output
 
 ${BOLD}Examples:${RESET}
   ${DIM}# Full audit → save to file${RESET}

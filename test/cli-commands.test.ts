@@ -115,6 +115,13 @@ function makeAudit(overrides?: Partial<AuditResult>): AuditResult {
   };
 }
 
+// makeAudit() plus an archived repo that would otherwise need an npm update.
+function auditWithArchived(): AuditResult {
+  const gone = row('tool-gone', [{ registry: 'npmjs', published: true, publishedVersion: '1.0.0', drift: 'behind' }]);
+  gone.repo.archived = true;
+  return makeAudit({ repoCount: 4, rows: [...makeAudit().rows, gone] });
+}
+
 /** audit() reports one progress tick and returns the fixture for whichever org it was asked about. */
 function auditReturns(result: AuditResult = makeAudit()) {
   vi.mocked(audit).mockImplementation(async (config, onProgress) => {
@@ -168,6 +175,8 @@ describe('main: help, version, unknown commands', () => {
       expect(run.stdout).toContain('apply    Execute the plan (requires --confirm)');
       expect(run.stdout).toContain('2  API error, or apply where no action went through');
       expect(run.stdout).toContain('3  apply where some actions failed and some went through');
+      expect(run.stdout).toContain('--include-archived   Include archived repos in audit (plan skips them)');
+      expect(run.stdout).not.toContain('--no-skip');
     }
   });
 
@@ -213,6 +222,15 @@ describe('main: audit', () => {
     const run = await runCli(['audit']);
     expect(run.stderr).toContain('Listing repos... 0/?');
     expect(run.stderr).toContain('Checking npm... 2/3');
+  });
+
+  it('passes --include-archived through to audit(), and leaves it off by default', async () => {
+    auditReturns();
+    await runCli(['audit']);
+    await runCli(['audit', '--include-archived']);
+    const [[, , plain], [, , archived]] = vi.mocked(audit).mock.calls;
+    expect(plain?.includeArchived).toBeUndefined();
+    expect(archived).toEqual({ includeArchived: true });
   });
 
   it('prints JSON with --json', async () => {
@@ -268,6 +286,23 @@ describe('main: plan', () => {
     expect(run.stderr).toContain('Scanning repos... 1/3');
     expect(run.stdout).toMatch(/^Sync Plan: test-org {2}\(/);
     expect(run.stdout).toContain('tool-new');
+  });
+
+  it('lists an archived repo as a skip, with the reason', async () => {
+    const from = writeJson('audit.json', auditWithArchived());
+    const run = await runCli(['plan', '--from', from, '--json']);
+    const parsed = JSON.parse(run.stdout) as PlanResult;
+    expect(parsed.actions.find((a) => a.repo === 'tool-gone')).toMatchObject({
+      type: 'skip',
+      skipReason: 'archived',
+      details: 'Archived repo, read-only on GitHub (behind)',
+    });
+  });
+
+  it('passes --include-archived to a fresh audit', async () => {
+    auditReturns();
+    await runCli(['plan', '--include-archived']);
+    expect(vi.mocked(audit).mock.calls[0][2]).toEqual({ includeArchived: true });
   });
 
   it('keeps only the --target registry', async () => {
@@ -437,6 +472,28 @@ describe('main: apply', () => {
       ['tool-old', false],
     ]);
     expect(written.summary).toEqual({ succeeded: 1, failed: 1, skipped: 1 });
+  });
+
+  it('never sends a write to an archived repo', async () => {
+    issuesApi();
+    const from = writeJson('audit.json', auditWithArchived());
+    const run = await runCli(['apply', '--from', from, '--confirm']);
+    expect(run.code).toBe(0);
+
+    const urls = vi.mocked(globalThis.fetch).mock.calls.map(([url]) => String(url));
+    expect(urls).toHaveLength(2);
+    expect(urls.some((u) => u.includes('/tool-gone/'))).toBe(false);
+
+    const result = JSON.parse(run.stdout) as ApplyResult;
+    expect(result.results.map((r) => r.action.repo)).toEqual(['tool-new', 'tool-old']);
+    expect(result.summary).toEqual({ succeeded: 2, failed: 0, skipped: 2 });
+  });
+
+  it('passes --include-archived to a fresh audit', async () => {
+    auditReturns();
+    issuesApi();
+    await runCli(['apply', '--include-archived', '--confirm']);
+    expect(vi.mocked(audit).mock.calls[0][2]).toEqual({ includeArchived: true });
   });
 });
 

@@ -26,6 +26,8 @@ export interface AuditProgress {
 
 export interface AuditOptions {
   concurrency?: number;
+  /** Keep archived repos in the audit. plan() turns their actions into skips. */
+  includeArchived?: boolean;
 }
 
 export async function audit(
@@ -44,7 +46,7 @@ export async function audit(
 
   // 2. Filter
   const repos = allRepos.filter(
-    (r) => !r.archived && !config.exclude.includes(r.name),
+    (r) => (options?.includeArchived || !r.archived) && !config.exclude.includes(r.name),
   );
 
   // 3. Enrich each repo with package.json + Dockerfile info
