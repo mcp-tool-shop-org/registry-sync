@@ -30,6 +30,7 @@ Place a `registry-sync.config.json` in your project root:
 | `exclude` | string[] | Repo names to skip during audit |
 | `targets.npm.enabled` | boolean | Enable npm registry auditing |
 | `targets.ghcr.enabled` | boolean | Enable GHCR registry auditing |
+| `pruneRepo` | string | Repo that receives prune issues, since an orphaned package has no repo of its own (default: `.github`) |
 
 If no config file is found, registry-sync falls back to defaults. The `--org` CLI flag overrides the config file value.
 

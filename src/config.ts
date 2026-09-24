@@ -5,6 +5,9 @@ import { SyncError } from './errors.js';
 
 const CONFIG_FILENAME = 'registry-sync.config.json';
 
+/** Where apply files prune issues: an orphaned package has no repo of its own. */
+export const DEFAULT_PRUNE_REPO = '.github';
+
 export function defaultConfig(): SyncConfig {
   return {
     org: 'mcp-tool-shop-org',
@@ -13,6 +16,7 @@ export function defaultConfig(): SyncConfig {
       npm: { enabled: true },
       ghcr: { enabled: true },
     },
+    pruneRepo: DEFAULT_PRUNE_REPO,
   };
 }
 
@@ -33,6 +37,7 @@ export function loadConfig(startDir?: string): SyncConfig {
         npm: { enabled: parsed.targets?.npm?.enabled ?? defaults.targets.npm.enabled },
         ghcr: { enabled: parsed.targets?.ghcr?.enabled ?? defaults.targets.ghcr.enabled },
       },
+      pruneRepo: parsed.pruneRepo || defaults.pruneRepo,
     };
   } catch (err) {
     throw new SyncError(

@@ -120,9 +120,10 @@ describe('apply', () => {
     expect(body.title).toContain('1.1.0');
   });
 
-  it('creates issue for prune action', async () => {
+  // An orphan has no repo, so an issue filed under its package name could only 404.
+  it('files a prune issue in the tracking repo the plan names', async () => {
     vi.mocked(globalThis.fetch).mockResolvedValue(
-      new Response(JSON.stringify({ html_url: 'https://github.com/test-org/orphan-pkg/issues/1' }), {
+      new Response(JSON.stringify({ html_url: 'https://github.com/test-org/.github/issues/7' }), {
         status: 201,
       }),
     );
@@ -133,7 +134,8 @@ describe('apply', () => {
           type: 'prune',
           target: 'ghcr',
           repo: 'orphan-pkg',
-          details: 'Orphaned package',
+          issueRepo: '.github',
+          details: 'Orphaned ghcr package — no matching repo in the audit; issue goes to .github',
           risk: 'high',
         },
       ],
@@ -141,8 +143,39 @@ describe('apply', () => {
     });
 
     const result = await apply(plan, config);
-    expect(result.results[0].success).toBe(true);
+    expect(result.results[0]).toMatchObject({ success: true, url: 'https://github.com/test-org/.github/issues/7' });
     expect(result.summary.succeeded).toBe(1);
+
+    const [url, init] = vi.mocked(globalThis.fetch).mock.calls[0];
+    expect(url).toBe('https://api.github.com/repos/test-org/.github/issues');
+    const body = JSON.parse(init!.body as string);
+    expect(body.title).toBe('registry-sync: Orphaned ghcr package orphan-pkg');
+    expect(body.body).toContain('`orphan-pkg` is published to ghcr, but no repository in the audit matches it');
+  });
+
+  it('names the repo it called when a prune issue cannot be filed', async () => {
+    vi.mocked(globalThis.fetch).mockResolvedValue(new Response('{}', { status: 404 }));
+
+    const plan = makePlan({
+      actions: [
+        {
+          type: 'prune',
+          target: 'ghcr',
+          repo: 'orphan-pkg',
+          issueRepo: 'registry-tracker',
+          details: 'Orphaned ghcr package — no matching repo in the audit; issue goes to registry-tracker',
+          risk: 'high',
+        },
+      ],
+      summary: { publish: 0, update: 0, scaffold: 0, prune: 1, skip: 0 },
+    });
+
+    const result = await apply(plan, config);
+    expect(result.results[0]).toMatchObject({
+      success: false,
+      error: 'Failed to create issue on test-org/registry-tracker: 404',
+    });
+    expect(result.summary).toEqual({ succeeded: 0, failed: 1, skipped: 0 });
   });
 
   it('retries without labels on 422', async () => {
@@ -396,19 +429,19 @@ describe('apply', () => {
 
   it('issue body for prune contains orphaned language', async () => {
     vi.mocked(globalThis.fetch).mockResolvedValue(
-      new Response(JSON.stringify({ html_url: 'https://github.com/test-org/pkg/issues/1' }), { status: 201 }),
+      new Response(JSON.stringify({ html_url: 'https://github.com/test-org/.github/issues/1' }), { status: 201 }),
     );
 
     const plan = makePlan({
       actions: [
-        { type: 'prune', target: 'ghcr', repo: 'pkg', details: 'Orphaned', risk: 'high' },
+        { type: 'prune', target: 'ghcr', repo: 'pkg', issueRepo: '.github', details: 'Orphaned', risk: 'high' },
       ],
       summary: { publish: 0, update: 0, scaffold: 0, prune: 1, skip: 0 },
     });
 
     await apply(plan, config);
     const body = JSON.parse(vi.mocked(globalThis.fetch).mock.calls[0][1]!.body as string);
-    expect(body.body).toContain('no matching repository');
+    expect(body.body).toContain('no repository in the audit matches it');
   });
 
   // --- executeAction dispatch ---

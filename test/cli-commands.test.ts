@@ -11,7 +11,9 @@ import type { AuditResult, AuditRow, ApplyResult, DiffResult, PlanResult, SyncCo
 // audit() walks a real GitHub org; every command here is fed a fixture instead.
 vi.mock('../src/audit.js', () => ({ audit: vi.fn() }));
 // loadConfig() searches upward from the working directory; pin what it finds.
-vi.mock('../src/config.js', () => ({
+// The rest of the module (plan() reads DEFAULT_PRUNE_REPO) stays real.
+vi.mock('../src/config.js', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../src/config.js')>()),
   loadConfig: (): SyncConfig => ({
     org: 'test-org',
     exclude: [],
@@ -305,6 +307,14 @@ describe('main: plan', () => {
     expect(vi.mocked(audit).mock.calls[0][2]).toEqual({ includeArchived: true });
   });
 
+  it('shows where each prune issue will go', async () => {
+    const from = writeJson('audit.json', makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-image' }] }));
+    const run = await runCli(['plan', '--from', from]);
+    expect(run.stdout).toMatch(
+      /^prune\s+ghcr\s+old-image\s+Orphaned ghcr package — no matching repo in the audit; issue goes to \.github$/m,
+    );
+  });
+
   it('keeps only the --target registry', async () => {
     const withImage = makeAudit({
       rows: [
@@ -494,6 +504,25 @@ describe('main: apply', () => {
     issuesApi();
     await runCli(['apply', '--include-archived', '--confirm']);
     expect(vi.mocked(audit).mock.calls[0][2]).toEqual({ includeArchived: true });
+  });
+
+  it("files an orphan's prune issue in the tracking repo, not under the package name", async () => {
+    issuesApi();
+    const from = writeJson('audit.json', makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-image' }] }));
+    const run = await runCli(['apply', '--from', from, '--confirm']);
+    expect(run.code).toBe(0);
+
+    const urls = vi.mocked(globalThis.fetch).mock.calls.map(([url]) => String(url));
+    expect(urls).toContain('https://api.github.com/repos/test-org/.github/issues');
+    expect(urls.some((u) => u.includes('/old-image/'))).toBe(false);
+
+    const result = JSON.parse(run.stdout) as ApplyResult;
+    const prune = result.results.find((r) => r.action.type === 'prune');
+    expect(prune).toMatchObject({
+      success: true,
+      url: 'https://github.com/test-org/.github/issues/1',
+      action: { repo: 'old-image', issueRepo: '.github' },
+    });
   });
 });
 
