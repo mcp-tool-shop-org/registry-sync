@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- `atlas/`: a generated map of the repository (its parts, the doors work enters through, what changes together), regenerated with `npx @dogfood-lab/atlas map` from `atlas/boundaries.yaml` and never edited by hand. CI's `test` job runs `atlas check`, pinned at `@dogfood-lab/atlas@1.15.0`, so the committed map cannot drift from the boundaries, and `atlas/**` joins both of its paths filters.
+
 ### Security
 - vitest and @vitest/coverage-v8 3.2.7 → 5.0.1, clearing GHSA-82fw-gwwq-j7x9 (moderate, in @vitest/mocker, reached through both) that had turned CI's `npm audit --audit-level=moderate` step red. vite 8.3.0 now comes in as vitest's required peer. Dev dependencies only; the published package is unchanged.
 - Still open, below the audit gate: GHSA-g7r4-m6w7-qqqr (low) in esbuild 0.27.3, which tsup's latest release pins at `^0.27.0`. It is a file read through esbuild's dev server on Windows, which nothing here starts.
