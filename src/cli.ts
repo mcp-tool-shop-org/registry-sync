@@ -390,8 +390,8 @@ function printVersion(): void {
 
 // --- Main ---
 
-async function main(): Promise<void> {
-  const args = parseArgs(process.argv.slice(2));
+export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
+  const args = parseArgs(argv);
 
   try {
     switch (args.command) {

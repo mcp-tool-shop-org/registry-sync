@@ -11,6 +11,7 @@
 
 ### Tests
 - Coverage floor moved to the new reading: vitest 4 and later also count the branches inside functions no test calls, so the unchanged code and its 206 tests read lines 74.81, branches 71.02, functions 85.49, statements 76.07 (vitest 3: 79.57, 90, 82.81, 79.57). The floor sits on those numbers with no slack, and `autoUpdate` keeps ratcheting from there.
+- Tests for the `diff` formatters (table, JSON, markdown), which had none, and for every CLI command driven through `main()`: help, version, audit, plan, apply and diff, with their `--from`, `--out`, `--format`, `--target` and `--limit` paths and the exit codes for input, auth, API and unexpected errors. `main()` now takes its argv so the tests can run it in-process. 255 tests, up from 206, and the floor ratchets to lines 97.77, branches 88.55, functions 99.23, statements 97.12.
 
 ## 1.1.1 (2026-03-25)
 
