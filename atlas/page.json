@@ -27,52 +27,138 @@
     }
   ],
   "changes": {
-    "first": true
+    "fileCounts": {
+      "added": 3,
+      "changed": 80,
+      "moved": 0,
+      "parts": 7,
+      "removed": 0
+    },
+    "items": [
+      {
+        "kind": "door",
+        "sentence": "CI's pull request trigger now also names `atlas/**` and `codecov.yml`.",
+        "subjects": [
+          ".github/workflows/ci.yml"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "CI's push trigger now also names `atlas/**` and `codecov.yml`.",
+        "subjects": [
+          ".github/workflows/ci.yml"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "CI now also runs src/cli.ts.",
+        "subjects": [
+          ".github/workflows/ci.yml",
+          "src/cli.ts"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "And 2 more changes to doors.",
+        "subjects": []
+      },
+      {
+        "kind": "landing",
+        "sentence": "CHANGELOG.md is now read by test/version.test.ts.",
+        "subjects": [
+          "CHANGELOG.md",
+          "test/version.test.ts"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "README.md is now read by test/providers/github.test.ts.",
+        "subjects": [
+          "README.md",
+          "test/providers/github.test.ts"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "package.json is now also read by test/cli-commands.test.ts and test/version.test.ts.",
+        "subjects": [
+          "package.json",
+          "test/cli-commands.test.ts",
+          "test/version.test.ts"
+        ]
+      },
+      {
+        "kind": "counts",
+        "sentence": "3 files added and 80 changed content, across 7 parts.",
+        "subjects": []
+      }
+    ],
+    "since": {
+      "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487",
+      "generatedAt": "2026-09-23T22:38:01.923Z"
+    },
+    "unchanged": false
   },
   "changesTogether": [],
   "changesTogetherNote": [
     "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487",
+  "commit": "779aa9a2e955b49fb0fc2ddcc046d88b31dcab17",
   "defaultBranch": "main",
-  "derived": "7 parts, mostly TypeScript (38 files). Work enters through 5 doors; the busiest is CI, which reaches 2 parts. It publishes to npm. People run registry-sync. People import @mcptoolshop/registry-sync.",
+  "derived": "7 parts, mostly TypeScript (40 files), CSS (2), Astro (1) and JavaScript (1). Work enters through 5 doors; CI and Publish each reach 2 parts, and CI is followed because a pull request goes through it. It publishes to npm. It deploys a site to GitHub Pages. People run registry-sync. People import @mcptoolshop/registry-sync.",
   "doors": [
     {
+      "builds": [
+        "src/index.ts"
+      ],
       "checks": [],
       "checksCount": 0,
+      "checksMore": 0,
       "file": ".github/workflows/ci.yml",
       "id": ".github/workflows/ci.yml",
       "landings": [],
       "name": "CI",
+      "programs": [
+        "gh"
+      ],
       "pushes": false,
       "reach": [
         {
-          "boundary": "test",
+          "boundary": "src",
           "depth": 0,
-          "files": 15
+          "files": 19
         },
         {
-          "boundary": "src",
-          "depth": 1,
-          "files": 18
+          "boundary": "test",
+          "depth": 0,
+          "files": 17
         }
       ],
       "runs": [
+        "src/cli.ts",
         "test/"
       ],
-      "runsCount": 1,
-      "sends": [],
+      "runsCount": 2,
+      "runsMore": 0,
+      "sends": [
+        "uploads coverage to Codecov",
+        "changes other repositories through the GitHub API"
+      ],
       "stages": [],
       "triggers": [
-        "on a pull request touching 6 paths",
-        "on a push to main touching 6 paths",
+        "on a pull request to main touching 8 paths",
+        "on a push to main touching 8 paths",
         "or by hand"
       ]
     },
     {
+      "builds": [
+        "src/index.ts"
+      ],
       "checks": [],
       "checksCount": 0,
+      "checksMore": 0,
       "file": ".github/workflows/publish.yml",
       "id": ".github/workflows/publish.yml",
       "landings": [],
@@ -80,20 +166,21 @@
       "pushes": false,
       "reach": [
         {
-          "boundary": "test",
+          "boundary": "src",
           "depth": 0,
-          "files": 15
+          "files": 19
         },
         {
-          "boundary": "src",
-          "depth": 1,
-          "files": 18
+          "boundary": "test",
+          "depth": 0,
+          "files": 17
         }
       ],
       "runs": [
         "test/"
       ],
       "runsCount": 1,
+      "runsMore": 0,
       "sends": [
         "publishes to npm"
       ],
@@ -106,6 +193,7 @@
     {
       "checks": [],
       "checksCount": 0,
+      "checksMore": 0,
       "file": ".github/workflows/pages.yml",
       "id": ".github/workflows/pages.yml",
       "landings": [],
@@ -115,7 +203,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 3
+          "files": 5
         }
       ],
       "runs": [
@@ -123,6 +211,7 @@
         "site/src/"
       ],
       "runsCount": 2,
+      "runsMore": 0,
       "sends": [
         "deploys the site"
       ],
@@ -135,6 +224,7 @@
     {
       "checks": [],
       "checksCount": 0,
+      "checksMore": 0,
       "file": "package.json",
       "id": "package.json#@mcptoolshop/registry-sync",
       "kind": "package",
@@ -152,6 +242,7 @@
         "src/index.ts"
       ],
       "runsCount": 1,
+      "runsMore": 0,
       "sends": [],
       "stages": [],
       "triggers": []
@@ -159,11 +250,15 @@
     {
       "checks": [],
       "checksCount": 0,
+      "checksMore": 0,
       "file": "package.json",
       "id": "package.json#registry-sync",
       "kind": "command",
       "landings": [],
       "name": "registry-sync",
+      "programs": [
+        "gh"
+      ],
       "pushes": false,
       "reach": [
         {
@@ -176,7 +271,10 @@
         "src/cli.ts"
       ],
       "runsCount": 1,
-      "sends": [],
+      "runsMore": 0,
+      "sends": [
+        "changes other repositories through the GitHub API"
+      ],
       "stages": [],
       "triggers": []
     }
@@ -191,11 +289,14 @@
       "to": "src"
     }
   ],
+  "engine": "1.24.0",
   "generated": [],
-  "generatedAt": "2026-09-23T22:38:01.923Z",
+  "generatedAt": "2026-09-30T20:11:54.186Z",
   "limits": [
-    "4 writes and 1 read use paths built at run time and are not named here.",
-    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions."
+    "4 writes and 4 reads go to a path their caller passes, not to this repository.",
+    "2 reads go to the directory the command is run in (package.json and registry-sync.config.json), not to this repository.",
+    "1 read goes to the directory the command is run in (registry-sync.config.json) or a path its caller passes, not to this repository.",
+    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions."
   ],
   "mainDoor": ".github/workflows/ci.yml",
   "partLabels": {
@@ -210,21 +311,301 @@
   "parts": 7,
   "readers": [],
   "repo": "mcp-tool-shop-org/registry-sync",
-  "sequences": [],
+  "sequences": [
+    {
+      "entry": "main",
+      "file": "src/cli.ts",
+      "inner": [
+        {
+          "file": "src/audit.ts",
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`",
+          "steps": [
+            {
+              "name": "listOrgRepos",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listOrgRepos`"
+            },
+            {
+              "name": "pLimit",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`pLimit`"
+            },
+            {
+              "name": "readPackageJson",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`readPackageJson`"
+            },
+            {
+              "name": "hasDockerfile",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`hasDockerfile`"
+            },
+            {
+              "name": "getNpmPackageInfo",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`getNpmPackageInfo`"
+            },
+            {
+              "name": "compareSemver",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`compareSemver`"
+            },
+            {
+              "name": "listGhcrPackages",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listGhcrPackages`"
+            }
+          ]
+        },
+        {
+          "file": "src/audit.ts",
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`",
+          "steps": [
+            {
+              "name": "listOrgRepos",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listOrgRepos`"
+            },
+            {
+              "name": "pLimit",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`pLimit`"
+            },
+            {
+              "name": "readPackageJson",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`readPackageJson`"
+            },
+            {
+              "name": "hasDockerfile",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`hasDockerfile`"
+            },
+            {
+              "name": "getNpmPackageInfo",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`getNpmPackageInfo`"
+            },
+            {
+              "name": "compareSemver",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`compareSemver`"
+            },
+            {
+              "name": "listGhcrPackages",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listGhcrPackages`"
+            }
+          ]
+        },
+        {
+          "file": "src/audit.ts",
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`",
+          "steps": [
+            {
+              "name": "listOrgRepos",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listOrgRepos`"
+            },
+            {
+              "name": "pLimit",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`pLimit`"
+            },
+            {
+              "name": "readPackageJson",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`readPackageJson`"
+            },
+            {
+              "name": "hasDockerfile",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`hasDockerfile`"
+            },
+            {
+              "name": "getNpmPackageInfo",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`getNpmPackageInfo`"
+            },
+            {
+              "name": "compareSemver",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`compareSemver`"
+            },
+            {
+              "name": "listGhcrPackages",
+              "part": "src",
+              "partLabel": "src",
+              "phrase": "`listGhcrPackages`"
+            }
+          ]
+        }
+      ],
+      "part": "src",
+      "partLabel": "src",
+      "phrase": "`main`",
+      "steps": [
+        {
+          "name": "loadConfig",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`loadConfig`"
+        },
+        {
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`"
+        },
+        {
+          "name": "formatAuditJson",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatAuditJson`"
+        },
+        {
+          "name": "formatAuditMarkdown",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatAuditMarkdown`"
+        },
+        {
+          "name": "formatAuditTable",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatAuditTable`"
+        },
+        {
+          "name": "loadConfig",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`loadConfig`"
+        },
+        {
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`"
+        },
+        {
+          "name": "plan",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`plan`"
+        },
+        {
+          "name": "formatPlanJson",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatPlanJson`"
+        },
+        {
+          "name": "formatPlanMarkdown",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatPlanMarkdown`"
+        },
+        {
+          "name": "formatPlanTable",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatPlanTable`"
+        },
+        {
+          "name": "loadConfig",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`loadConfig`"
+        },
+        {
+          "name": "audit",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`audit`"
+        },
+        {
+          "name": "plan",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`plan`"
+        },
+        {
+          "name": "apply",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`apply`"
+        },
+        {
+          "name": "formatApplyJson",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`formatApplyJson`"
+        },
+        {
+          "name": "diff",
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`diff`"
+        },
+        {
+          "count": 3,
+          "name": null,
+          "part": "src",
+          "partLabel": "src",
+          "phrase": "`diff.ts`"
+        }
+      ]
+    }
+  ],
   "startDoor": ".github/workflows/ci.yml",
   "startHere": [
     ".github/workflows/ci.yml",
-    "test/apply.test.ts",
-    "src/apply.ts"
+    "src/cli.ts",
+    "src/config.ts",
+    "src/audit.ts",
+    "src/format/json.ts",
+    "src/format/markdown.ts",
+    "src/format/table.ts",
+    "src/plan.ts"
   ],
   "summary": null,
   "summaryFrom": null,
-  "testFiles": 15,
+  "testFiles": 17,
   "testedBy": {
-    "src": 14
+    "src": 16
   },
-  "unnamedWrites": 4,
+  "unnamedWrites": 0,
   "unread": [],
+  "unreadFiles": 0,
   "unreadNote": [],
   "untested": [],
   "untestedNote": [],

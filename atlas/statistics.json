@@ -1,4 +1,8 @@
 {
+  "authorship": {
+    "parts": [],
+    "places": []
+  },
   "boundaries": [
     {
       "breakage": {
@@ -45,7 +49,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "root",
-      "qualifyingSourceCommits": 1,
+      "qualifyingSourceCommits": 3,
       "rebaseline": null
     },
     {
@@ -79,7 +83,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "src",
-      "qualifyingSourceCommits": 1,
+      "qualifyingSourceCommits": 2,
       "rebaseline": null
     },
     {
@@ -111,7 +115,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "test",
-      "qualifyingSourceCommits": 3,
+      "qualifyingSourceCommits": 2,
       "rebaseline": null
     }
   ],
@@ -120,32 +124,12 @@
     "files": [
       {
         "commits": 1,
-        "lines": 36,
-        "path": ".claude/context/brand-rules.md"
-      },
-      {
-        "commits": 1,
-        "lines": 32,
+        "lines": 2,
         "path": ".claude/context/current-priorities.md"
       },
       {
-        "commits": 1,
-        "lines": 34,
-        "path": ".claude/context/product-brief.md"
-      },
-      {
-        "commits": 1,
-        "lines": 88,
-        "path": ".claude/context/repo-map.md"
-      },
-      {
-        "commits": 1,
-        "lines": 49,
-        "path": ".claude/workflows/protect-mutation-truth.md"
-      },
-      {
-        "commits": 4,
-        "lines": 12,
+        "commits": 5,
+        "lines": 196,
         "path": ".github/workflows/ci.yml"
       },
       {
@@ -159,44 +143,54 @@
         "path": ".github/workflows/publish.yml"
       },
       {
-        "commits": 2,
-        "lines": 2,
-        "path": ".gitignore"
-      },
-      {
-        "commits": 2,
-        "lines": 33,
+        "commits": 4,
+        "lines": 21,
         "path": "CHANGELOG.md"
       },
       {
         "commits": 1,
-        "lines": 25,
-        "path": "README.md"
+        "lines": 82,
+        "path": "atlas/README.md"
       },
       {
         "commits": 1,
-        "lines": 366,
-        "path": "TEST-PLAN.md"
+        "lines": 30,
+        "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 4,
-        "lines": 1007,
-        "path": "package-lock.json"
+        "commits": 1,
+        "lines": 232,
+        "path": "atlas/page.json"
       },
       {
-        "commits": 3,
-        "lines": 7,
-        "path": "package.json"
+        "commits": 1,
+        "lines": 400,
+        "path": "atlas/statistics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1858,
+        "path": "atlas/structure.json"
       },
       {
         "commits": 2,
-        "lines": 160,
-        "path": "site/src/content/docs/handbook/beginners.md"
+        "lines": 36,
+        "path": "codecov.yml"
+      },
+      {
+        "commits": 3,
+        "lines": 1878,
+        "path": "package-lock.json"
       },
       {
         "commits": 1,
-        "lines": 40,
-        "path": "site/src/content/docs/handbook/commands.md"
+        "lines": 4,
+        "path": "package.json"
+      },
+      {
+        "commits": 1,
+        "lines": 80,
+        "path": "site/src/content/docs/handbook/beginners.md"
       },
       {
         "commits": 1,
@@ -205,162 +199,62 @@
       },
       {
         "commits": 2,
-        "lines": 72,
+        "lines": 55,
         "path": "src/cli.ts"
       },
       {
         "commits": 1,
-        "lines": 6,
-        "path": "src/config.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 161,
-        "path": "src/diff.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 3,
-        "path": "src/errors.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 8,
-        "path": "src/fetch.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 166,
-        "path": "src/format/diff.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 1,
-        "path": "src/format/markdown.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 1,
-        "path": "src/format/table.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 7,
-        "path": "src/index.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 11,
+        "lines": 13,
         "path": "src/plan.ts"
       },
       {
         "commits": 1,
-        "lines": 69,
-        "path": "src/providers/ghcr.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 47,
-        "path": "src/providers/github.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 11,
-        "path": "src/providers/npm.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 43,
+        "lines": 1,
         "path": "src/types.ts"
       },
       {
-        "commits": 2,
-        "lines": 452,
-        "path": "test/apply.test.ts"
-      },
-      {
         "commits": 1,
-        "lines": 243,
+        "lines": 26,
         "path": "test/audit.test.ts"
       },
       {
         "commits": 2,
-        "lines": 82,
-        "path": "test/auth.test.ts"
+        "lines": 597,
+        "path": "test/cli-commands.test.ts"
       },
       {
         "commits": 1,
-        "lines": 199,
+        "lines": 8,
         "path": "test/cli.test.ts"
       },
       {
-        "commits": 2,
-        "lines": 86,
-        "path": "test/config.test.ts"
+        "commits": 1,
+        "lines": 277,
+        "path": "test/format-diff.test.ts"
       },
       {
         "commits": 1,
-        "lines": 170,
-        "path": "test/diff.test.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 56,
-        "path": "test/errors.test.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 359,
-        "path": "test/fetch.test.ts"
-      },
-      {
-        "commits": 2,
-        "lines": 285,
-        "path": "test/format.test.ts"
-      },
-      {
-        "commits": 2,
-        "lines": 117,
+        "lines": 36,
         "path": "test/plan.test.ts"
       },
       {
-        "commits": 1,
-        "lines": 63,
-        "path": "test/providers/ghcr.test.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 117,
-        "path": "test/providers/github.test.ts"
-      },
-      {
-        "commits": 2,
-        "lines": 40,
-        "path": "test/providers/npm.test.ts"
-      },
-      {
-        "commits": 2,
-        "lines": 37,
-        "path": "test/version.test.ts"
-      },
-      {
-        "commits": 1,
-        "lines": 21,
+        "commits": 3,
+        "lines": 22,
         "path": "vitest.config.ts"
       }
     ]
   },
   "confidence": {
     "level": "low",
-    "reason": "fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions"
+    "reason": "fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions"
   },
-  "generatedAt": "2026-09-23T22:38:01.923Z",
+  "generatedAt": "2026-09-30T20:11:54.186Z",
   "generatedFrom": {
-    "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487"
+    "commit": "779aa9a2e955b49fb0fc2ddcc046d88b31dcab17"
   },
   "pairs": [],
   "parameters": {
-    "appliedChangesetLimit": 20,
+    "appliedChangesetLimit": 22,
     "changeset": 50,
     "changesetFraction": 0.25,
     "cohesionDrop": 0.2,
@@ -369,16 +263,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "both",
-    "headDate": "2026-09-07T08:55:12-04:00",
-    "inScopeFiles": 80,
+    "headDate": "2026-09-26T19:44:50-07:00",
+    "inScopeFiles": 88,
     "pinnedStart": null,
-    "priorFloor": null,
-    "qualifyingCommits": 11,
+    "priorFloor": "fallen",
+    "qualifyingCommits": 8,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-03-11T12:55:12.000Z",
+    "since": "2026-03-31T02:44:50.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",
@@ -388,7 +282,9 @@
       ".tsx",
       ".mts",
       ".cts",
-      ".py"
+      ".py",
+      ".rs",
+      ".gd"
     ],
     "sourceFileReach": 20,
     "sourceFileRise": 25,
