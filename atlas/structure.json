@@ -9,23 +9,23 @@
       "externals": 0,
       "files": [
         {
-          "hash": "ebe5dcce6c5d198112ff7626acb58d7dfcd72264f4f87af2a79627579e5f4b36",
+          "hash": "12a7ba8ef9d35b671f084842adc6185e7dd8b7fbc62387216b9b3386ed8d3fed",
           "path": ".claude/context/brand-rules.md"
         },
         {
-          "hash": "f554dc87c3c55d41faff36fb12298b18651165a32abd029d0fed1c40042461a1",
+          "hash": "24625bb9cd67fc4f040388bd456e311f22cc02be3b7014e42dbc59959b2945c3",
           "path": ".claude/context/current-priorities.md"
         },
         {
-          "hash": "c08a92077c43c17b9a9a0e948fc91223e2e63df6870632bb4503b833d6a64909",
+          "hash": "938496df05917bdc6600c609095a25fa1c0b66c30efbbc35bfe96f88aa76f5c8",
           "path": ".claude/context/product-brief.md"
         },
         {
-          "hash": "18f338dc6f6b7377dc935f3777877f43d6686a15aff9e4cbc1f709a69e179017",
+          "hash": "0fcc77a673b1e39d338849dfdd3296774fa521cc77ca6877924d05bd610b2e91",
           "path": ".claude/context/repo-map.md"
         },
         {
-          "hash": "f2e4d3a3c3c09615dcda19d41f6ddf9c6720b39cbc4af89a561017f568f1090a",
+          "hash": "df06da55ead31436b9327c22640510f8df1888097c1c482e21207cac024a049a",
           "path": ".claude/workflows/protect-mutation-truth.md"
         }
       ],
@@ -48,15 +48,15 @@
       "externals": 0,
       "files": [
         {
-          "hash": "b340f423367f125308dfff9dba555d54086e24d1db1a5105ef55761ed2fc1d22",
+          "hash": "aed2fedcfef869d14007f8f3be88d6c2db24875e1de491dd5791309ca1d4069c",
           "path": ".github/workflows/ci.yml"
         },
         {
-          "hash": "4eb81eeb113bdba84a09846e4b80ab63d20507cb41935566c110e37f99afe899",
+          "hash": "93dc62c74dfddae3a1dc3291b236a3e266cc0f9963100f2967357b3f3833b310",
           "path": ".github/workflows/pages.yml"
         },
         {
-          "hash": "cc36c3caefb876a59be4d3357d57b18695a667db46208a1480891df4ccbe2821",
+          "hash": "fd4a19119c22caac3c8aa139d767c7addc499535b7cb82f482e6c6986886e12c",
           "path": ".github/workflows/publish.yml"
         }
       ],
@@ -79,83 +79,87 @@
       "externals": 0,
       "files": [
         {
-          "hash": "9c9a45f053dc8b111cc92cae2cc55b681d05ab969de272c463ddb5bd61b23435",
+          "hash": "3fb053451e8f3070aa3712e98dc2cd84033a722eafb686a6197ab7736d8e728a",
           "path": ".gitignore"
         },
         {
-          "hash": "fcfa5e3357f1be73559f89e0f67b4a3fa49c7d291109be60a1c2941f8e6e8a3b",
+          "hash": "14e108aedec6b867131777461cea5a220bb52236f921dc0fb2051a7a7a158751",
           "path": "CHANGELOG.md"
         },
         {
-          "hash": "5ae6b3c8f446f0a7cb95176e4dadb91b68aaffb16b3be09f64f5de248b6a973a",
+          "hash": "367e5141e4f5884e5791c4021f33a9faa958840a5decf44e1b273a87aad1c459",
           "path": "LICENSE"
         },
         {
-          "hash": "e52a34723db075f71775155c910f1ca31cfbd32434b747325e15f925e08a10be",
+          "hash": "60ed7c93f257485724ad78143d22dfbc52a46f8b97bb6579fd08a8ea1c9949f9",
           "path": "README.es.md"
         },
         {
-          "hash": "1516c37cb53b1464f2f710af6b613e219246c3d0ded09d912f1967bb23c909bc",
+          "hash": "25243563cc697bb26bf8180b27cb56aab24428792d5b520129a8bdb0410e1c81",
           "path": "README.fr.md"
         },
         {
-          "hash": "c385b69954e800f5689fcdbc8452b21c8a6e15bfec7738f72acaf07afee762ee",
+          "hash": "3b4a4407ad9ece66d1258707ea705dbe624a2f79d959eb38e4b1e62c021eb3af",
           "path": "README.hi.md"
         },
         {
-          "hash": "bdc623ff2fff9944c397ea7c2a57265752db250c303f010c92f6788c59e9e84b",
+          "hash": "c3ee3f242b59753670ad857c07ff06dbc529d91ba0ed49252ba5ad094b9c1a39",
           "path": "README.it.md"
         },
         {
-          "hash": "293390c5323ab092a2bbaee48ab3fb72cf5407c85628fd54a5cd4bc2eb6386dd",
+          "hash": "ae6cf4e4edd48d14882292278c1d9d6e934caa4cd08fa11f7c061ed972f956af",
           "path": "README.ja.md"
         },
         {
-          "hash": "3320b0f558666829be6e7948c96f62a4f088c7d885905ca76b2f03038ff18ccb",
+          "hash": "9ac43df9837e42727491293c157352b028bcffc96757a1e203b8bcd712d53577",
           "path": "README.md"
         },
         {
-          "hash": "9cd59c19ccfa0536e85721298db2410f1fae70855dfe1618d04fa011a7ed3337",
+          "hash": "a34049493e1f48d29cf98840fdea38207acf9b109ef9119ae6419d8b4815ab87",
           "path": "README.pt-BR.md"
         },
         {
-          "hash": "f3693d50fee13ccd5468556d7c04dfdea6b5e047ce8e127b712d42ccd4f67a95",
+          "hash": "c141c96babf32ef9260ee838a0747e875d322c3881092f5368b481f16345efd2",
           "path": "README.zh.md"
         },
         {
-          "hash": "3c97799787538a61aed96675d7e9a21bf189a77e9bd7afa414113c5aa7840dfc",
+          "hash": "b00fe74cf255d8d6944fb5374a73f2502e777569e36e2d5f52656be9af010c32",
           "path": "SCORECARD.md"
         },
         {
-          "hash": "cba6ed8601e066319ab84287152c9b10a12c4d14ba4f94f740427b6752294b55",
+          "hash": "cefe8733b2fd7de605753bb9d50efa13cf42e5fe1e17d5f575124de3df580f2c",
           "path": "SECURITY.md"
         },
         {
-          "hash": "f2d6a4877ece5f08b24d923046dcdef741a2c6772b6e33fe5cba738be52590f4",
+          "hash": "3e704416db5080f6970f28b6de99224afb99a054ffe1495d033bd67f132e2b57",
           "path": "SHIP_GATE.md"
         },
         {
-          "hash": "ed96ac15561d363006aa8ace6c2fb7c7f1dbc37ae4670a0670b36254758cb1e4",
+          "hash": "c16a9dc71549e5ad1cd55798e58958f572b8cea74bbcf7ffe607d99ea2b2b823",
           "path": "TEST-PLAN.md"
         },
         {
-          "hash": "7b9f6ac1efd7b367896c8fe74a60cb49a076a9b1bcf3a5c87dc927097b8ffc0f",
+          "hash": "59ca3f6a5be96b80fee73bebf2b778211208d17cd3fb82e2134608dff0729c76",
+          "path": "codecov.yml"
+        },
+        {
+          "hash": "2008eafed356a06e31989203e7f111685534c78b01be7501fe2f51d35189963e",
           "path": "package-lock.json"
         },
         {
-          "hash": "501ef8f7522b59f0f40fb6b6a2153591c64c04669b39341a66dfd25a9c896529",
+          "hash": "d7fddc3ba4b0cd525a66a58fe86e138f85598192c19b99783b27ad9301f246d8",
           "path": "package.json"
         },
         {
-          "hash": "b42dbdd450647c847725c2d9ab3fe639edd10ab65572844dfd03fb1e32c09a37",
+          "hash": "d6baaeea33cc4ff5fd641a66eb62e39a3b6d57fe8370c19b4de75e9272e7dc5b",
           "path": "tsconfig.json"
         },
         {
-          "hash": "aa42e2be62556832f67a4a7c3d244715ff37c8dfd60e6a1983d5f039aeb974d8",
+          "hash": "299cbc522f9d65ed70ff6943b0a3eb408458be386c4159208e381a4e1a90f549",
           "path": "tsup.config.ts"
         },
         {
-          "hash": "e259aa2c81c3cd27fff00e29aa7db39a0eebe40baf21621dd9ed2ff6783c2e36",
+          "hash": "f48c0a3a8674f5128d63974de51a43de50b5dc5715780f1261906bf79506cbb5",
           "path": "vitest.config.ts"
         }
       ],
@@ -166,7 +170,8 @@
       "name": "root",
       "origin": "authored",
       "role": "config",
-      "testedBy": 0,
+      "testedBy": 1,
+      "testedByScript": true,
       "unresolvedSites": 0
     },
     {
@@ -178,63 +183,73 @@
       "externals": 0,
       "files": [
         {
-          "hash": "32294be09fcc6335fc2e69085da43b15f989c99ab90f59a063a4623f5262dc02",
+          "hash": "8cfce189cbaa5623db23a470c2a2714a9611196c0091bc80ea9e9f6b9779a5b6",
           "path": "site/astro.config.mjs"
         },
         {
-          "hash": "934153a7438b652e94617d97ea19396905ac28d8481a6899c6b07e7bd6157780",
+          "hash": "8a89de72e0a25c7d8139064d90367b4a8ef9ab3f5935a7a908c69383072e52b9",
           "path": "site/package-lock.json"
         },
         {
-          "hash": "c91d5c08ebc3433d5387a07fa206e35009b1a69e3ef9f003e6fb367b2de4dac1",
+          "hash": "e3948f3adea612a50f80b0084dc874569b512d5150b14de8d1323a5fff09cd6d",
           "path": "site/package.json"
         },
         {
-          "hash": "ec030f2e4bf6dc57eaca075d390c228b3212cf29db267e32ef92e110de1acdcc",
+          "constantOnly": true,
+          "hash": "ee756dfba4122d2acc94a39b2555d9f200fff56a87a8c0b10f9cd01df26a8b62",
           "path": "site/src/content.config.ts"
         },
         {
-          "hash": "76cbc18232fc997a673dfbc42556dce279dfae705fa5d081ff78e841377e33e7",
+          "hash": "817eeb15c8006efb96c50ac969c91320eaff9b7a59085cffa2983d99d9cd8b57",
           "path": "site/src/content/docs/handbook/beginners.md"
         },
         {
-          "hash": "b259d2a1a9fde494211e2c1e627b866a305bac888b3aaaad176c3ad1cfd0bfc2",
+          "hash": "f04762678ee06c922b8062de66456f2ab902800957d104dd088a7f3c41f665b0",
           "path": "site/src/content/docs/handbook/commands.md"
         },
         {
-          "hash": "67e9baed2efd8207611df3c93162fdabf0c7032514c633e49fc5c7d30c8bc58e",
+          "hash": "4b0b59ed3c022a6157976dac8ef29402d43ead92c0797d894c6625c9597452cc",
           "path": "site/src/content/docs/handbook/configuration.md"
         },
         {
-          "hash": "c252511e9690104995801ee4cdd94853c47187008f0faa9bf9085c7764febf72",
+          "hash": "ca6a597b933605959139e0438a4ca6f058e6c6c05efae9dc2c5c2db94574649c",
           "path": "site/src/content/docs/handbook/getting-started.md"
         },
         {
-          "hash": "abc8865075280e39eb0cb3d46c839cdca1a9b99b629dea9402d9e8dcc1e97efb",
+          "hash": "e17faa6fb97ef9bc8d111bbd20f5b3ae51d094782bd535219aa962cfe6c030e9",
           "path": "site/src/content/docs/handbook/index.md"
         },
         {
-          "hash": "cb2ccacb586e8884ec27f5fb1d1feabc3485b36389c02cde9e3885f7934d4634",
+          "hash": "84ae6918e44ea7a209c9df1ec1f409e043fc20f6295e772793e2247832855016",
           "path": "site/src/content/docs/handbook/security.md"
         },
         {
-          "hash": "a699ad78a6d27d6864ccfe4c3a4a01993aca28ecb4a3d20893f37db9f9b1a522",
+          "hash": "391533713539035d3c92282579d43de0f137067867fdb502d7eaea3c74601d2a",
+          "importOrder": [
+            "site/src/styles/global.css",
+            "site/src/site-config.ts"
+          ],
+          "importsFiles": [
+            "site/src/site-config.ts",
+            "site/src/styles/global.css"
+          ],
           "path": "site/src/pages/index.astro"
         },
         {
-          "hash": "0a1adba857cb49a555617f3e958be49ecc94313c7b1f604efcdcfb07b8a6ac49",
+          "constantOnly": true,
+          "hash": "aad4080f4eba3ec31c6b8235b7f4571c7025d3d357b5871e5bc11876926479e3",
           "path": "site/src/site-config.ts"
         },
         {
-          "hash": "5995279a40a9a63426a93feec129006b261cc7200426a398914d0317722ef19b",
+          "hash": "29ee8df91833e694bdba973126b34a6177de4cf01dab6d9ef7d3126e8e2b67fb",
           "path": "site/src/styles/global.css"
         },
         {
-          "hash": "9d8dddc46c99a1863e6980810ca6375e764db806f99696446751cbdc5be1a1d9",
+          "hash": "51d012e49bcba75b105bdc8aa7a6d1a6733a00ace857b24423c75215ebcff631",
           "path": "site/src/styles/starlight-custom.css"
         },
         {
-          "hash": "61fc24492db9aef7ec38eb91cfeebaef96155014bb5f22648fd8ed2327c6cae2",
+          "hash": "b5b0a5b04a14cddd7713c5e1c82e86c79c17c2f86b170e26e9b170b3d5e01cd9",
           "path": "site/tsconfig.json"
         }
       ],
@@ -249,10 +264,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 1,
+      "dynamicReads": 0,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 4,
+      "dynamicWrites": 0,
       "entryPoints": [
         "src/cli.ts",
         "src/index.ts"
@@ -265,7 +280,49 @@
           "exports": [
             "apply"
           ],
-          "hash": "d44781a85e9356c920b38d05c79a55866cb46822f60a60ef816e406e09991380",
+          "failurePaths": [
+            {
+              "in": "apply",
+              "kind": "catch",
+              "line": 47
+            },
+            {
+              "in": "createIssue",
+              "kind": "throw",
+              "line": 127
+            },
+            {
+              "in": "createIssue",
+              "kind": "throw",
+              "line": 136
+            },
+            {
+              "in": "createWorkflowPR",
+              "kind": "throw",
+              "line": 203
+            },
+            {
+              "in": "createWorkflowPR",
+              "kind": "throw",
+              "line": 210
+            },
+            {
+              "in": "createWorkflowPR",
+              "kind": "throw",
+              "line": 232
+            },
+            {
+              "in": "createWorkflowPR",
+              "kind": "throw",
+              "line": 259
+            },
+            {
+              "in": "createWorkflowPR",
+              "kind": "throw",
+              "line": 286
+            }
+          ],
+          "hash": "c0e83a28eed10005f07e696aab3ba749ac3afdbda8e1c82578fa19833916fe01",
           "importsFiles": [
             "src/auth.ts",
             "src/errors.ts",
@@ -344,7 +401,7 @@
           "exports": [
             "audit"
           ],
-          "hash": "c7efee9881fd41afc2b1e5e0a4c27058838770515d1533cf8859971f4a4bb886",
+          "hash": "f1363125d055dc2939bc94f2a1744007029151c5a44d14aaeb1f9bbca3e43389",
           "importsFiles": [
             "src/fetch.ts",
             "src/providers/ghcr.ts",
@@ -358,49 +415,49 @@
             {
               "calls": [
                 {
-                  "line": 42,
+                  "line": 44,
                   "name": "listOrgRepos",
                   "target": {
                     "file": "src/providers/github.ts"
                   }
                 },
                 {
-                  "line": 51,
+                  "line": 53,
                   "name": "pLimit",
                   "target": {
                     "file": "src/fetch.ts"
                   }
                 },
                 {
-                  "line": 59,
+                  "line": 61,
                   "name": "readPackageJson",
                   "target": {
                     "file": "src/providers/github.ts"
                   }
                 },
                 {
-                  "line": 60,
+                  "line": 62,
                   "name": "hasDockerfile",
                   "target": {
                     "file": "src/providers/github.ts"
                   }
                 },
                 {
-                  "line": 88,
+                  "line": 90,
                   "name": "getNpmPackageInfo",
                   "target": {
                     "file": "src/providers/npm.ts"
                   }
                 },
                 {
-                  "line": 93,
+                  "line": 95,
                   "name": "compareSemver",
                   "target": {
                     "file": "src/semver.ts"
                   }
                 },
                 {
-                  "line": 141,
+                  "line": 143,
                   "name": "listGhcrPackages",
                   "target": {
                     "file": "src/providers/ghcr.ts"
@@ -418,7 +475,19 @@
           "exports": [
             "getGitHubToken"
           ],
-          "hash": "765d26ac7e4f1b41f1e6a742f264b01647ce4f64e85fbad4b8325545e5204d40",
+          "failurePaths": [
+            {
+              "in": "getGitHubToken",
+              "kind": "catch",
+              "line": 26
+            },
+            {
+              "in": "getGitHubToken",
+              "kind": "throw",
+              "line": 30
+            }
+          ],
+          "hash": "cf17a25e3e65c622da04674f0f414b82bfec55a1a38d26ec27e3d2d4bcd565bc",
           "importsFiles": [
             "src/errors.ts"
           ],
@@ -429,9 +498,47 @@
           "entryRule": 1,
           "exports": [
             "loadAuditFromFile",
+            "main",
             "parseArgs"
           ],
-          "hash": "d7f139c03d612e07fb25bb09505d9391332d50008e4d65d50a7d850561833000",
+          "failurePaths": [
+            {
+              "in": "loadAuditFromFile",
+              "kind": "throw",
+              "line": 126
+            },
+            {
+              "in": "loadAuditFromFile",
+              "kind": "catch",
+              "line": 133
+            },
+            {
+              "in": "loadAuditFromFile",
+              "kind": "throw",
+              "line": 134
+            },
+            {
+              "in": "loadAuditFromFile",
+              "kind": "throw",
+              "line": 135
+            },
+            {
+              "in": "runApply",
+              "kind": "throw",
+              "line": 280
+            },
+            {
+              "in": "printVersion",
+              "kind": "catch",
+              "line": 395
+            },
+            {
+              "in": "main",
+              "kind": "catch",
+              "line": 439
+            }
+          ],
+          "hash": "a2eb9ed8c053419b36f87fccf2de0aefdc8d61e231b292fa74a90bcabd422cb1",
           "importsFiles": [
             "src/apply.ts",
             "src/audit.ts",
@@ -450,35 +557,35 @@
             {
               "calls": [
                 {
-                  "line": 158,
+                  "line": 146,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
                   }
                 },
                 {
-                  "line": 161,
+                  "line": 149,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
                   }
                 },
                 {
-                  "line": 170,
+                  "line": 158,
                   "name": "formatAuditJson",
                   "target": {
                     "file": "src/format/json.ts"
                   }
                 },
                 {
-                  "line": 173,
+                  "line": 161,
                   "name": "formatAuditMarkdown",
                   "target": {
                     "file": "src/format/markdown.ts"
                   }
                 },
                 {
-                  "line": 177,
+                  "line": 165,
                   "name": "formatAuditTable",
                   "target": {
                     "file": "src/format/table.ts"
@@ -493,42 +600,42 @@
             {
               "calls": [
                 {
-                  "line": 190,
+                  "line": 178,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
                   }
                 },
                 {
-                  "line": 201,
+                  "line": 189,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
                   }
                 },
                 {
-                  "line": 207,
+                  "line": 195,
                   "name": "plan",
                   "target": {
                     "file": "src/plan.ts"
                   }
                 },
                 {
-                  "line": 213,
+                  "line": 201,
                   "name": "formatPlanJson",
                   "target": {
                     "file": "src/format/json.ts"
                   }
                 },
                 {
-                  "line": 216,
+                  "line": 204,
                   "name": "formatPlanMarkdown",
                   "target": {
                     "file": "src/format/markdown.ts"
                   }
                 },
                 {
-                  "line": 220,
+                  "line": 208,
                   "name": "formatPlanTable",
                   "target": {
                     "file": "src/format/table.ts"
@@ -543,7 +650,8 @@
             {
               "calls": [
                 {
-                  "line": 190,
+                  "branch": "!args.confirm",
+                  "line": 178,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
@@ -551,7 +659,8 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 201,
+                  "branch": "!args.confirm",
+                  "line": 189,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
@@ -559,7 +668,8 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 207,
+                  "branch": "!args.confirm",
+                  "line": 195,
                   "name": "plan",
                   "target": {
                     "file": "src/plan.ts"
@@ -567,7 +677,8 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 213,
+                  "branch": "!args.confirm",
+                  "line": 201,
                   "name": "formatPlanJson",
                   "target": {
                     "file": "src/format/json.ts"
@@ -575,7 +686,8 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 216,
+                  "branch": "!args.confirm",
+                  "line": 204,
                   "name": "formatPlanMarkdown",
                   "target": {
                     "file": "src/format/markdown.ts"
@@ -583,7 +695,8 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 220,
+                  "branch": "!args.confirm",
+                  "line": 208,
                   "name": "formatPlanTable",
                   "target": {
                     "file": "src/format/table.ts"
@@ -591,35 +704,35 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 243,
+                  "line": 231,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
                   }
                 },
                 {
-                  "line": 254,
+                  "line": 242,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
                   }
                 },
                 {
-                  "line": 260,
+                  "line": 248,
                   "name": "plan",
                   "target": {
                     "file": "src/plan.ts"
                   }
                 },
                 {
-                  "line": 271,
+                  "line": 259,
                   "name": "apply",
                   "target": {
                     "file": "src/apply.ts"
                   }
                 },
                 {
-                  "line": 276,
+                  "line": 264,
                   "name": "formatApplyJson",
                   "target": {
                     "file": "src/format/json.ts"
@@ -634,28 +747,28 @@
             {
               "calls": [
                 {
-                  "line": 302,
+                  "line": 306,
                   "name": "diff",
                   "target": {
                     "file": "src/diff.ts"
                   }
                 },
                 {
-                  "line": 308,
+                  "line": 312,
                   "name": "formatDiffJson",
                   "target": {
                     "file": "src/format/diff.ts"
                   }
                 },
                 {
-                  "line": 311,
+                  "line": 315,
                   "name": "formatDiffMarkdown",
                   "target": {
                     "file": "src/format/diff.ts"
                   }
                 },
                 {
-                  "line": 315,
+                  "line": 319,
                   "name": "formatDiffTable",
                   "target": {
                     "file": "src/format/diff.ts"
@@ -670,7 +783,7 @@
             {
               "calls": [
                 {
-                  "line": 158,
+                  "line": 146,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
@@ -680,56 +793,56 @@
                 {
                   "inner": [
                     {
-                      "line": 42,
+                      "line": 44,
                       "name": "listOrgRepos",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 51,
+                      "line": 53,
                       "name": "pLimit",
                       "target": {
                         "file": "src/fetch.ts"
                       }
                     },
                     {
-                      "line": 59,
+                      "line": 61,
                       "name": "readPackageJson",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 60,
+                      "line": 62,
                       "name": "hasDockerfile",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 88,
+                      "line": 90,
                       "name": "getNpmPackageInfo",
                       "target": {
                         "file": "src/providers/npm.ts"
                       }
                     },
                     {
-                      "line": 93,
+                      "line": 95,
                       "name": "compareSemver",
                       "target": {
                         "file": "src/semver.ts"
                       }
                     },
                     {
-                      "line": 141,
+                      "line": 143,
                       "name": "listGhcrPackages",
                       "target": {
                         "file": "src/providers/ghcr.ts"
                       }
                     }
                   ],
-                  "line": 161,
+                  "line": 149,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
@@ -737,7 +850,7 @@
                   "via": "runAudit"
                 },
                 {
-                  "line": 170,
+                  "line": 158,
                   "name": "formatAuditJson",
                   "target": {
                     "file": "src/format/json.ts"
@@ -745,7 +858,7 @@
                   "via": "runAudit"
                 },
                 {
-                  "line": 173,
+                  "line": 161,
                   "name": "formatAuditMarkdown",
                   "target": {
                     "file": "src/format/markdown.ts"
@@ -753,7 +866,7 @@
                   "via": "runAudit"
                 },
                 {
-                  "line": 177,
+                  "line": 165,
                   "name": "formatAuditTable",
                   "target": {
                     "file": "src/format/table.ts"
@@ -761,7 +874,7 @@
                   "via": "runAudit"
                 },
                 {
-                  "line": 190,
+                  "line": 178,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
@@ -771,56 +884,56 @@
                 {
                   "inner": [
                     {
-                      "line": 42,
+                      "line": 44,
                       "name": "listOrgRepos",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 51,
+                      "line": 53,
                       "name": "pLimit",
                       "target": {
                         "file": "src/fetch.ts"
                       }
                     },
                     {
-                      "line": 59,
+                      "line": 61,
                       "name": "readPackageJson",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 60,
+                      "line": 62,
                       "name": "hasDockerfile",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 88,
+                      "line": 90,
                       "name": "getNpmPackageInfo",
                       "target": {
                         "file": "src/providers/npm.ts"
                       }
                     },
                     {
-                      "line": 93,
+                      "line": 95,
                       "name": "compareSemver",
                       "target": {
                         "file": "src/semver.ts"
                       }
                     },
                     {
-                      "line": 141,
+                      "line": 143,
                       "name": "listGhcrPackages",
                       "target": {
                         "file": "src/providers/ghcr.ts"
                       }
                     }
                   ],
-                  "line": 201,
+                  "line": 189,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
@@ -828,7 +941,7 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 207,
+                  "line": 195,
                   "name": "plan",
                   "target": {
                     "file": "src/plan.ts"
@@ -836,7 +949,7 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 213,
+                  "line": 201,
                   "name": "formatPlanJson",
                   "target": {
                     "file": "src/format/json.ts"
@@ -844,7 +957,7 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 216,
+                  "line": 204,
                   "name": "formatPlanMarkdown",
                   "target": {
                     "file": "src/format/markdown.ts"
@@ -852,7 +965,7 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 220,
+                  "line": 208,
                   "name": "formatPlanTable",
                   "target": {
                     "file": "src/format/table.ts"
@@ -860,7 +973,7 @@
                   "via": "runPlan"
                 },
                 {
-                  "line": 243,
+                  "line": 231,
                   "name": "loadConfig",
                   "target": {
                     "file": "src/config.ts"
@@ -870,56 +983,56 @@
                 {
                   "inner": [
                     {
-                      "line": 42,
+                      "line": 44,
                       "name": "listOrgRepos",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 51,
+                      "line": 53,
                       "name": "pLimit",
                       "target": {
                         "file": "src/fetch.ts"
                       }
                     },
                     {
-                      "line": 59,
+                      "line": 61,
                       "name": "readPackageJson",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 60,
+                      "line": 62,
                       "name": "hasDockerfile",
                       "target": {
                         "file": "src/providers/github.ts"
                       }
                     },
                     {
-                      "line": 88,
+                      "line": 90,
                       "name": "getNpmPackageInfo",
                       "target": {
                         "file": "src/providers/npm.ts"
                       }
                     },
                     {
-                      "line": 93,
+                      "line": 95,
                       "name": "compareSemver",
                       "target": {
                         "file": "src/semver.ts"
                       }
                     },
                     {
-                      "line": 141,
+                      "line": 143,
                       "name": "listGhcrPackages",
                       "target": {
                         "file": "src/providers/ghcr.ts"
                       }
                     }
                   ],
-                  "line": 254,
+                  "line": 242,
                   "name": "audit",
                   "target": {
                     "file": "src/audit.ts"
@@ -927,7 +1040,7 @@
                   "via": "runApply"
                 },
                 {
-                  "line": 260,
+                  "line": 248,
                   "name": "plan",
                   "target": {
                     "file": "src/plan.ts"
@@ -945,7 +1058,7 @@
                       "via": "createIssue"
                     }
                   ],
-                  "line": 271,
+                  "line": 259,
                   "name": "apply",
                   "target": {
                     "file": "src/apply.ts"
@@ -953,7 +1066,7 @@
                   "via": "runApply"
                 },
                 {
-                  "line": 276,
+                  "line": 264,
                   "name": "formatApplyJson",
                   "target": {
                     "file": "src/format/json.ts"
@@ -961,7 +1074,7 @@
                   "via": "runApply"
                 },
                 {
-                  "line": 302,
+                  "line": 306,
                   "name": "diff",
                   "target": {
                     "file": "src/diff.ts"
@@ -969,7 +1082,7 @@
                   "via": "runDiff"
                 },
                 {
-                  "line": 308,
+                  "line": 312,
                   "name": "formatDiffJson",
                   "target": {
                     "file": "src/format/diff.ts"
@@ -977,7 +1090,7 @@
                   "via": "runDiff"
                 },
                 {
-                  "line": 311,
+                  "line": 315,
                   "name": "formatDiffMarkdown",
                   "target": {
                     "file": "src/format/diff.ts"
@@ -985,7 +1098,7 @@
                   "via": "runDiff"
                 },
                 {
-                  "line": 315,
+                  "line": 319,
                   "name": "formatDiffTable",
                   "target": {
                     "file": "src/format/diff.ts"
@@ -993,7 +1106,7 @@
                   "via": "runDiff"
                 }
               ],
-              "exported": false,
+              "exported": true,
               "invokedAtTopLevel": true,
               "isDefaultExport": false,
               "name": "main"
@@ -1006,7 +1119,23 @@
             "loadConfig",
             "starterConfig"
           ],
-          "hash": "c46d811b50eda0277cadf93bf8c8d7b10a5a927d7410c1c8c3ed527b5ae09d3d",
+          "failurePaths": [
+            {
+              "in": "loadConfig",
+              "kind": "catch",
+              "line": 37
+            },
+            {
+              "in": "loadConfig",
+              "kind": "throw",
+              "line": 38
+            }
+          ],
+          "hash": "7ff6b453ae3f26caf172ebfa1dda6a57efa913d16d1aeb978f50e0b6b7ad79f3",
+          "importOrder": [
+            "src/types.ts",
+            "src/errors.ts"
+          ],
           "importsFiles": [
             "src/errors.ts",
             "src/types.ts"
@@ -1019,7 +1148,7 @@
           "exports": [
             "diff"
           ],
-          "hash": "22fc59ae76dc59fc45448aa03ef6477e2a30c458a8ff4beef1d136467db4cadd",
+          "hash": "27d9b66c05d687270b0b9fd329b19befa2d151841a1b84b72f417fba760ba6f0",
           "importsFiles": [
             "src/types.ts"
           ],
@@ -1030,7 +1159,7 @@
           "exports": [
             "wrapError"
           ],
-          "hash": "5d6e4a379e092f8a431152102e313b671ed45f0a2d4ac8619774fa663cb1f02d",
+          "hash": "b5f4faf5dd985b9a0b07d34e20fa709b6ceba989645acece52d1d5846ee78032",
           "path": "src/errors.ts"
         },
         {
@@ -1040,7 +1169,43 @@
             "fetchNpm",
             "pLimit"
           ],
-          "hash": "b368188325fd0108ea6f8f039511c585172968361058aa83b4a3d2f34522a8e5",
+          "failurePaths": [
+            {
+              "in": "fetchGitHub",
+              "kind": "catch",
+              "line": 67
+            },
+            {
+              "in": "fetchGitHub",
+              "kind": "throw",
+              "line": 82
+            },
+            {
+              "in": "fetchGitHub",
+              "kind": "throw",
+              "line": 105
+            },
+            {
+              "in": "fetchGitHubPaginated",
+              "kind": "throw",
+              "line": 128
+            },
+            {
+              "in": "fetchNpm",
+              "kind": "catch",
+              "line": 163
+            },
+            {
+              "in": "fetchNpm",
+              "kind": "throw",
+              "line": 184
+            }
+          ],
+          "hash": "4963db76a1004e0279380d0d3c23c47f10651f537cbf79af97306e2517f59a28",
+          "importOrder": [
+            "src/errors.ts",
+            "src/auth.ts"
+          ],
           "importsFiles": [
             "src/auth.ts",
             "src/errors.ts"
@@ -1053,7 +1218,7 @@
             "formatDiffMarkdown",
             "formatDiffTable"
           ],
-          "hash": "75104c3af021d5c79025a4809c13c09d16d2c9b587b39f2689d967a847a9fe1d",
+          "hash": "7ddb977e063fba9ce21c6c14296b48bb88d5b6446583963a621208a133fbe2c3",
           "importsFiles": [
             "src/types.ts"
           ],
@@ -1065,7 +1230,7 @@
             "formatAuditJson",
             "formatPlanJson"
           ],
-          "hash": "a2ab522142a76e9165edcd5c5706bb0f6f787b3ac141e26d547df375954d6929",
+          "hash": "da4d404c8009d0df52631279b5b481763bc5b08aba94d1dbf08e489d1570b740",
           "importsFiles": [
             "src/types.ts"
           ],
@@ -1076,7 +1241,7 @@
             "formatAuditMarkdown",
             "formatPlanMarkdown"
           ],
-          "hash": "f6bd047ff0f2b8c8904b86529460a6ed99b18ab7bbdbc684922e4de604f58e92",
+          "hash": "8ea85a850e55f2b973d9d83b877821ff9181ea990a91afb5d479961ac5667792",
           "importsFiles": [
             "src/types.ts"
           ],
@@ -1087,14 +1252,25 @@
             "formatAuditTable",
             "formatPlanTable"
           ],
-          "hash": "21069f46c0e7b784fa2f1b6fbf44e7a05ba4c822119a3c52fb423fe859a804d4",
+          "hash": "5139f04a309293710bc74b8b4463a5e5bc8a3af46b6942dc3cb197450d2ed310",
           "importsFiles": [
             "src/types.ts"
           ],
           "path": "src/format/table.ts"
         },
         {
-          "hash": "c4b245349b2379523dbb408dd735f67a929e9f64cbbd9af8869fef8724259223",
+          "hash": "69c094879476b363c63be584fba1449d456eaebd94a5a35c4d6c6412005c68ee",
+          "importOrder": [
+            "src/audit.ts",
+            "src/plan.ts",
+            "src/apply.ts",
+            "src/config.ts",
+            "src/errors.ts",
+            "src/semver.ts",
+            "src/diff.ts",
+            "src/format/diff.ts",
+            "src/types.ts"
+          ],
           "importsFiles": [
             "src/apply.ts",
             "src/audit.ts",
@@ -1106,7 +1282,8 @@
             "src/semver.ts",
             "src/types.ts"
           ],
-          "path": "src/index.ts"
+          "path": "src/index.ts",
+          "reexportsOnly": true
         },
         {
           "entry": "plan",
@@ -1114,7 +1291,7 @@
           "exports": [
             "plan"
           ],
-          "hash": "5f57f41ab5bdcd922446118ab1be208a6f51b52f1942124109a421dad85c7a8d",
+          "hash": "ff51ffb83e282ed7eef94221c12a6f5d4b6cc22d2a47780a7aa5a857a42025d7",
           "importsFiles": [
             "src/types.ts"
           ],
@@ -1126,7 +1303,14 @@
             "getGhcrPackage",
             "listGhcrPackages"
           ],
-          "hash": "ac06644731f04cd6d1040d2571112b95afd5eb1544c4c410c78f685eb5f12874",
+          "failurePaths": [
+            {
+              "in": "listGhcrPackages",
+              "kind": "catch",
+              "line": 34
+            }
+          ],
+          "hash": "21d7725d85fd723934abecb4718ca6302a0e94d595eb7e57596954d847dc4619",
           "importsFiles": [
             "src/fetch.ts",
             "src/types.ts"
@@ -1140,7 +1324,14 @@
             "readFileContent",
             "readPackageJson"
           ],
-          "hash": "4277221940b408d9a9d5a3675cb212a9f7b6180a23ee8f22d96cce7b8109dafe",
+          "failurePaths": [
+            {
+              "in": "readPackageJson",
+              "kind": "catch",
+              "line": 76
+            }
+          ],
+          "hash": "20dfcac01bf3f057fc60972663a7d7a9f50ec867dab24649a57cc00601b38264",
           "importsFiles": [
             "src/fetch.ts",
             "src/types.ts"
@@ -1151,7 +1342,7 @@
           "exports": [
             "getNpmPackageInfo"
           ],
-          "hash": "70045520dc1600db3f7bcc95a48f415b6feb198595ce00c24c570ff5fc411834",
+          "hash": "33c18664a63c2a97be485db86d836597f3d7f5898cf91d47999b10c803f3396b",
           "importsFiles": [
             "src/fetch.ts",
             "src/types.ts"
@@ -1163,11 +1354,11 @@
             "compareSemver",
             "isDrift"
           ],
-          "hash": "509575016a155f84f9473ac6c40fd78661466d8bd58c8d7b2021cf088a3611b1",
+          "hash": "e65b9559274a28ada8ff89b92f2de91027093b52d0513aa3dfe851c252322e49",
           "path": "src/semver.ts"
         },
         {
-          "hash": "cabd14f5286a7b3e5230f87c9f42f40e47f0a044c4a4d9061dd202efa52a28bc",
+          "hash": "083ef6c5a06665aa6bc0d9017065c80d0d937e0f016b189017af8f1bf0329e4c",
           "path": "src/types.ts"
         }
       ],
@@ -1177,8 +1368,44 @@
       "importConfidence": "full",
       "name": "src",
       "origin": "authored",
+      "outsidePlaces": [
+        {
+          "reads": 4,
+          "where": [
+            "caller"
+          ],
+          "writes": 4
+        },
+        {
+          "reads": 1,
+          "where": [
+            "caller",
+            "cwd:registry-sync.config.json"
+          ],
+          "writes": 0
+        },
+        {
+          "reads": 1,
+          "where": [
+            "cwd:package.json"
+          ],
+          "writes": 0
+        },
+        {
+          "reads": 1,
+          "where": [
+            "cwd:registry-sync.config.json"
+          ],
+          "writes": 0
+        }
+      ],
+      "outsideReads": 7,
+      "outsideWrites": 4,
       "role": "code",
-      "testedBy": 14,
+      "testRunners": [
+        "vitest"
+      ],
+      "testedBy": 16,
       "unresolvedSites": 0
     },
     {
@@ -1190,15 +1417,15 @@
       "externals": 0,
       "files": [
         {
-          "hash": "3ec6c0e439f1c1e83691f6a0e53e13620c2dfa803045d7ea50ee4cc529d3845d",
+          "hash": "5378e8a3efeb6fa969c54923217f66b3b64f9633acd4b52d5dbda05de669c108",
           "path": "templates/ci-container.yml"
         },
         {
-          "hash": "42807081140b90f63485a5ae22433096fcf116a04ef632d8af380f8b611609e1",
+          "hash": "66bbd793f30a3d417cdd2eee2795c432902c390855e8d04eb26e0fa0baeea001",
           "path": "templates/ci-node-cli.yml"
         },
         {
-          "hash": "261e1315d4b14c0a5eb0832a89c08fa63d9ef7f01b4d608ca85f0f539f6ec63e",
+          "hash": "2debbd1e7b5f8002b5167da5db27d1a99809cf7b68488732970235c998b1c36e",
           "path": "templates/ci-node-lib.yml"
         }
       ],
@@ -1221,16 +1448,24 @@
       "externals": 0,
       "files": [
         {
-          "hash": "7a2b16bf3aa13a268878becdbbf2be39fdcf59d57304981020648b6917869e64",
+          "hash": "637b81be0bf4eff43b33565c9d2fa0f93651b3e9d0e4f0b9813d302de3139630",
           "importsFiles": [
             "src/apply.ts",
             "src/fetch.ts",
             "src/types.ts"
           ],
-          "path": "test/apply.test.ts"
+          "path": "test/apply.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "786cd242c10297e13a00a01c90a1bad4f3879cd2291afb47958055cb94cce30f",
+          "hash": "323d3034c99e5a012116b33b711ac7443a0ad440c342b5fd9e26d5abb4dc07ce",
+          "importOrder": [
+            "src/audit.ts",
+            "src/providers/github.ts",
+            "src/providers/npm.ts",
+            "src/providers/ghcr.ts",
+            "src/types.ts"
+          ],
           "importsFiles": [
             "src/audit.ts",
             "src/providers/ghcr.ts",
@@ -1238,102 +1473,156 @@
             "src/providers/npm.ts",
             "src/types.ts"
           ],
-          "path": "test/audit.test.ts"
+          "path": "test/audit.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "576293307a7001138d0f7a6bd5abd86d201688d433f41dbb5454eba63180380c",
+          "hash": "c2b3ac6dd0f410ef5003ed0107782a783bbe8698f3a3b5bb5aac40495db21652",
           "importsFiles": [
             "src/auth.ts"
           ],
-          "path": "test/auth.test.ts"
+          "path": "test/auth.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "8fea44cfa220c172e8550bed9069110b2f88221e25a3420c7fc09d4e64caa560",
+          "hash": "d10ca1ac3368614c4f4e5fa5723fd131081ad15492d57a81fab398ea758fa5e2",
+          "importOrder": [
+            "src/cli.ts",
+            "src/audit.ts",
+            "src/errors.ts",
+            "src/types.ts"
+          ],
+          "importsFiles": [
+            "src/audit.ts",
+            "src/cli.ts",
+            "src/errors.ts",
+            "src/types.ts"
+          ],
+          "path": "test/cli-commands.test.ts",
+          "testFramework": "vitest"
+        },
+        {
+          "hash": "7b4e6bd598aeb80b878a1cc755249e086cdcdf46214b136583447fe59a96b70a",
           "importsFiles": [
             "src/cli.ts"
           ],
-          "path": "test/cli.test.ts"
+          "path": "test/cli.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "884da570403562c9049c941d2fe11cabf33facf19fed1beca75ec983f374ea58",
+          "hash": "26b9c0cb2a605232bdd78e5816ec787b554cb3041e5db8268b18e110c044d86e",
           "importsFiles": [
             "src/config.ts"
           ],
-          "path": "test/config.test.ts"
+          "path": "test/config.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "9747474388ee972577278137c7251f03d91dc1c788ba0573ab6ce406ee257a6c",
+          "hash": "193845d6b3074ee6cba8fc3a3f92844b2c728f5f04114de642668078abf5b91e",
           "importsFiles": [
             "src/diff.ts",
             "src/types.ts"
           ],
-          "path": "test/diff.test.ts"
+          "path": "test/diff.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "3c1e024664fc5fd4f333bc48b7410e6a7246d396e9107730ccfdf2313dfe55ea",
+          "hash": "c8f03faaa45ba44051c8822d99a8fc59e0a521ca1ffabb51259bf27dcaebe6fc",
           "importsFiles": [
             "src/errors.ts"
           ],
-          "path": "test/errors.test.ts"
+          "path": "test/errors.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "33edf26cfb35aa55653f47d067879954a231dd9da50019939a04425d9082d0e9",
+          "hash": "f341ee511b6802e8e9c06197b01be043d70bf7e7dfa20a88bd9b769339a265e7",
           "importsFiles": [
             "src/fetch.ts"
           ],
-          "path": "test/fetch.test.ts"
+          "path": "test/fetch.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "999b45bd829882e5b7a3fbc396cdf090eaa44b701244b3a77e5e7529536bd1da",
+          "hash": "ef89cafbd16fc2346941e1c74c2583e8e7dbf810e8f424e26516e72957112e8f",
+          "importsFiles": [
+            "src/format/diff.ts",
+            "src/types.ts"
+          ],
+          "path": "test/format-diff.test.ts",
+          "testFramework": "vitest"
+        },
+        {
+          "hash": "7e476d8d1c4cfe2c7a3d7aa08a54ceaf6bf043635d8361cda324b1635be412e3",
+          "importOrder": [
+            "src/format/table.ts",
+            "src/format/json.ts",
+            "src/format/markdown.ts",
+            "src/types.ts"
+          ],
           "importsFiles": [
             "src/format/json.ts",
             "src/format/markdown.ts",
             "src/format/table.ts",
             "src/types.ts"
           ],
-          "path": "test/format.test.ts"
+          "path": "test/format.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "9acf1f05a534f3dde581e77fb018b075e4ba9a99d6f1ffd589ccd6d8b01bad42",
+          "hash": "e2d5098d55b2dc5d975690b710e43874cd95ca157eab251584aad0e735f62e57",
           "importsFiles": [
             "src/plan.ts",
             "src/types.ts"
           ],
-          "path": "test/plan.test.ts"
+          "path": "test/plan.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "77d4b48639a0e7f4d51685c9d11681aa581494d6a2fb763ba3d35919c50d7fad",
+          "hash": "69ccbb33822b3c1de6fce2bac49f810349a011336ef4be0af65215512f74deb9",
+          "importOrder": [
+            "src/providers/ghcr.ts",
+            "src/fetch.ts"
+          ],
           "importsFiles": [
             "src/fetch.ts",
             "src/providers/ghcr.ts"
           ],
-          "path": "test/providers/ghcr.test.ts"
+          "path": "test/providers/ghcr.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "b78b185b92f76748fbb143e01aa6ab2c6de1a0cab2e6b19c0b2327e8ff913701",
+          "hash": "05f84c977115670abc23bba673cab4b3ad9ce382eca9a71fca631fae8a878978",
+          "importOrder": [
+            "src/providers/github.ts",
+            "src/fetch.ts"
+          ],
           "importsFiles": [
             "src/fetch.ts",
             "src/providers/github.ts"
           ],
-          "path": "test/providers/github.test.ts"
+          "path": "test/providers/github.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "c1b8adfdee88d35cf1876bedb7c5c80b19afacfaab9206be8c5981aacabf9018",
+          "hash": "d2c162dc326c43763e62059e78e605d6d984b0e929ea93d8728feebd7981df6d",
           "importsFiles": [
             "src/providers/npm.ts"
           ],
-          "path": "test/providers/npm.test.ts"
+          "path": "test/providers/npm.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "7537cfb0677bc3629919e79c3ba4fc9d918b2ad8fcfa80d282a52724a704b379",
+          "hash": "6df2a4abdc0977c8875c3d333b7679dd6342ccb5ac854367ced35366ebd04047",
           "importsFiles": [
             "src/semver.ts"
           ],
-          "path": "test/semver.test.ts"
+          "path": "test/semver.test.ts",
+          "testFramework": "vitest"
         },
         {
-          "hash": "a1704bcc574982f0b9cd7c5afe2b9ebff0f75cea8ee3ad1a207e5bff210631e6",
-          "path": "test/version.test.ts"
+          "hash": "0de2fd987f594b99aa3c6574f0278cc4183d63f0af7626fbe22e60d84fafaf83",
+          "path": "test/version.test.ts",
+          "testFramework": "vitest"
         }
       ],
       "globs": [
@@ -1343,6 +1632,9 @@
       "name": "test",
       "origin": "authored",
       "role": "test",
+      "testRunners": [
+        "vitest"
+      ],
       "testedBy": 0,
       "unresolvedSites": 0
     }
@@ -1352,61 +1644,147 @@
       "checksCount": 0,
       "commands": [
         {
+          "dir": "",
           "job": "test",
-          "step": "2",
-          "text": "npm ci"
+          "programs": [
+            "npx"
+          ],
+          "step": "Atlas check"
         },
         {
+          "dir": "",
           "job": "test",
-          "step": "3",
-          "text": "npm run build"
+          "programs": [
+            "npm"
+          ],
+          "step": "3"
         },
         {
+          "dir": "",
           "job": "test",
-          "step": "4",
-          "text": "npm test"
+          "programs": [
+            "npm"
+          ],
+          "step": "4"
         },
         {
+          "dir": "",
           "job": "test",
-          "step": "5",
-          "text": "node dist/cli.js help"
+          "programs": [
+            "npm"
+          ],
+          "step": "5"
         },
         {
+          "dir": "",
           "job": "test",
-          "step": "6",
-          "text": "npm audit --audit-level=moderate"
+          "programs": [
+            "node"
+          ],
+          "step": "8"
         },
         {
+          "dir": "",
           "job": "test",
-          "step": "7",
-          "text": "npm pack --dry-run"
+          "programs": [
+            "npm"
+          ],
+          "step": "9"
+        },
+        {
+          "dir": "",
+          "job": "test",
+          "programs": [
+            "npm"
+          ],
+          "step": "10"
         }
       ],
       "elsewhere": [],
       "file": ".github/workflows/ci.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "test",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        },
+        {
+          "basis": "declared",
+          "name": "codecov",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ]
+        }
+      ],
       "landings": [],
       "mentions": [],
       "name": "CI",
-      "permissions": [],
+      "permissions": [
+        "contents:read",
+        "id-token:write"
+      ],
+      "programs": [
+        "gh"
+      ],
       "pushes": false,
       "reach": [
         {
-          "boundary": "test",
+          "boundary": "src",
           "depth": 0,
-          "files": 15
+          "files": 19
         },
         {
-          "boundary": "src",
-          "depth": 1,
-          "enters": {
-            "file": "src/apply.ts",
-            "from": "test/apply.test.ts"
-          },
-          "files": 18
+          "boundary": "test",
+          "depth": 0,
+          "files": 17
         }
       ],
       "readers": [],
       "runs": [
+        {
+          "job": "test",
+          "path": "src/cli.ts",
+          "runKind": "executes"
+        },
+        {
+          "built": true,
+          "job": "test",
+          "path": "src/index.ts",
+          "runKind": "executes"
+        },
         {
           "directory": true,
           "job": "test",
@@ -1416,9 +1794,10 @@
           "via": "vitest vitest.config.ts"
         }
       ],
-      "runsCount": 1,
+      "runsCount": 3,
       "secrets": [],
       "sends": {
+        "changesRepositories": true,
         "deploysPages": false,
         "dispatchesTo": [],
         "opensIssues": false,
@@ -1429,6 +1808,20 @@
         "releases": false
       },
       "stages": [],
+      "tests": [
+        {
+          "config": "vitest.config.ts",
+          "coverage": true,
+          "files": 17,
+          "job": "test",
+          "junit": true,
+          "runner": "vitest",
+          "step": "5",
+          "through": [
+            "npm test"
+          ]
+        }
+      ],
       "triggers": [
         {
           "branches": [
@@ -1437,6 +1830,8 @@
           "event": "pull_request",
           "paths": [
             ".github/workflows/**",
+            "atlas/**",
+            "codecov.yml",
             "package-lock.json",
             "package.json",
             "src/**",
@@ -1451,6 +1846,8 @@
           "event": "push",
           "paths": [
             ".github/workflows/**",
+            "atlas/**",
+            "codecov.yml",
             "package-lock.json",
             "package.json",
             "src/**",
@@ -1464,7 +1861,10 @@
       ],
       "uses": [
         "actions/checkout",
-        "actions/setup-node"
+        "actions/download-artifact",
+        "actions/setup-node",
+        "actions/upload-artifact",
+        "codecov/codecov-action"
       ],
       "usesWorkflowToken": false
     },
@@ -1472,18 +1872,74 @@
       "checksCount": 0,
       "commands": [
         {
+          "dir": "site",
           "job": "build",
-          "step": "Install site dependencies",
-          "text": "npm ci"
+          "programs": [
+            "npm"
+          ],
+          "step": "Install site dependencies"
         },
         {
+          "dir": "site",
           "job": "build",
-          "step": "Build site",
-          "text": "npm run build"
+          "programs": [
+            "npm"
+          ],
+          "step": "Build site"
         }
       ],
       "elsewhere": [],
       "file": ".github/workflows/pages.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "build",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        },
+        {
+          "basis": "declared",
+          "environment": {
+            "name": "github-pages"
+          },
+          "name": "deploy",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ]
+        }
+      ],
       "landings": [],
       "mentions": [],
       "name": "Deploy site to GitHub Pages",
@@ -1497,7 +1953,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 3
+          "files": 5
         }
       ],
       "readers": [],
@@ -1558,28 +2014,71 @@
       "checksCount": 0,
       "commands": [
         {
+          "dir": "",
           "job": "publish",
-          "step": "2",
-          "text": "npm ci"
+          "programs": [
+            "npm"
+          ],
+          "step": "2"
         },
         {
+          "dir": "",
           "job": "publish",
-          "step": "3",
-          "text": "npm run build"
+          "programs": [
+            "npm"
+          ],
+          "step": "3"
         },
         {
+          "dir": "",
           "job": "publish",
-          "step": "4",
-          "text": "npm test"
+          "programs": [
+            "npm"
+          ],
+          "step": "4"
         },
         {
+          "dir": "",
           "job": "publish",
-          "step": "5",
-          "text": "npm publish --access public --provenance"
+          "programs": [
+            "npm"
+          ],
+          "step": "5"
         }
       ],
       "elsewhere": [],
       "file": ".github/workflows/publish.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "publish",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        }
+      ],
       "landings": [],
       "mentions": [],
       "name": "Publish",
@@ -1590,22 +2089,24 @@
       "pushes": false,
       "reach": [
         {
-          "boundary": "test",
+          "boundary": "src",
           "depth": 0,
-          "files": 15
+          "files": 19
         },
         {
-          "boundary": "src",
-          "depth": 1,
-          "enters": {
-            "file": "src/apply.ts",
-            "from": "test/apply.test.ts"
-          },
-          "files": 18
+          "boundary": "test",
+          "depth": 0,
+          "files": 17
         }
       ],
       "readers": [],
       "runs": [
+        {
+          "built": true,
+          "job": "publish",
+          "path": "src/index.ts",
+          "runKind": "executes"
+        },
         {
           "directory": true,
           "job": "publish",
@@ -1615,7 +2116,7 @@
           "via": "vitest vitest.config.ts"
         }
       ],
-      "runsCount": 1,
+      "runsCount": 2,
       "secrets": [
         "NPM_TOKEN"
       ],
@@ -1625,6 +2126,13 @@
         "opensIssues": false,
         "opensIssuesOnFailure": false,
         "opensPullRequests": false,
+        "packages": [
+          {
+            "dir": "",
+            "name": "@mcptoolshop/registry-sync",
+            "registry": "npm"
+          }
+        ],
         "publishes": true,
         "publishesTo": [
           "npm"
@@ -1632,6 +2140,19 @@
         "releases": false
       },
       "stages": [],
+      "tests": [
+        {
+          "config": "vitest.config.ts",
+          "coverage": true,
+          "files": 17,
+          "job": "publish",
+          "runner": "vitest",
+          "step": "4",
+          "through": [
+            "npm test"
+          ]
+        }
+      ],
       "triggers": [
         {
           "event": "release",
@@ -1653,6 +2174,7 @@
       "checksCount": 0,
       "commands": [],
       "elsewhere": [],
+      "entry": "src/index.ts",
       "file": "package.json",
       "kind": "package",
       "landings": [],
@@ -1701,6 +2223,9 @@
       "mentions": [],
       "name": "registry-sync",
       "permissions": [],
+      "programs": [
+        "gh"
+      ],
       "pushes": false,
       "reach": [
         {
@@ -1719,6 +2244,7 @@
       "runsCount": 1,
       "secrets": [],
       "sends": {
+        "changesRepositories": true,
         "deploysPages": false,
         "dispatchesTo": [],
         "opensIssues": false,
@@ -1742,11 +2268,36 @@
       "to": "src"
     }
   ],
+  "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "e78b5d024fbc2ce12c2ce9eabf00b9f74b29a487",
-    "tracked": 80
+    "commit": "779aa9a2e955b49fb0fc2ddcc046d88b31dcab17",
+    "tracked": 83
   },
   "landings": [
+    {
+      "readers": [
+        {
+          "by": "test/version.test.ts",
+          "call": "readFileSync",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "CHANGELOG.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "test/providers/github.test.ts",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "README.md",
+      "writers": []
+    },
     {
       "readers": [
         {
@@ -1771,11 +2322,6 @@
           "confidence": "ast"
         },
         {
-          "by": "src/providers/github.ts",
-          "call": "literal",
-          "confidence": "ast"
-        },
-        {
           "by": "templates/ci-node-cli.yml",
           "call": "literal",
           "confidence": "text"
@@ -1784,6 +2330,18 @@
           "by": "templates/ci-node-lib.yml",
           "call": "literal",
           "confidence": "text"
+        },
+        {
+          "by": "test/cli-commands.test.ts",
+          "call": "readFileSync",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "test/version.test.ts",
+          "call": "readFileSync",
+          "confidence": "ast",
+          "fromTests": true
         }
       ],
       "target": "package.json",
@@ -1853,6 +2411,6 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 15,
+  "testFiles": 17,
   "unassigned": []
 }
