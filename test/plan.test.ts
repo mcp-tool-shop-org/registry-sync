@@ -162,6 +162,28 @@ describe('plan', () => {
     expect(result.summary.prune).toBe(1);
   });
 
+  it('sends prune issues to the .github tracking repo by default, and says so', () => {
+    const result = plan(makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] }), config);
+    expect(result.actions[0]).toMatchObject({
+      type: 'prune',
+      repo: 'old-deleted-tool',
+      issueRepo: '.github',
+      details: 'Orphaned ghcr package — no matching repo in the audit; issue goes to .github',
+    });
+  });
+
+  it('sends prune issues to config.pruneRepo when it is set', () => {
+    const audit = makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] });
+    const result = plan(audit, { ...config, pruneRepo: 'registry-tracker' });
+    expect(result.actions[0].issueRepo).toBe('registry-tracker');
+    expect(result.actions[0].details).toContain('issue goes to registry-tracker');
+  });
+
+  it('treats an empty pruneRepo as unset', () => {
+    const audit = makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] });
+    expect(plan(audit, { ...config, pruneRepo: '' }).actions[0].issueRepo).toBe('.github');
+  });
+
   it('generates skip for current packages', () => {
     const audit = makeAudit({
       repoCount: 1,

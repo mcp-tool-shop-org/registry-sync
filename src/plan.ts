@@ -6,6 +6,7 @@ import type {
   PlannedAction,
   RegistryTarget,
 } from './types.js';
+import { DEFAULT_PRUNE_REPO } from './config.js';
 
 /**
  * Detects if a repo is a VS Code extension (should not be published to npm).
@@ -130,14 +131,17 @@ export function plan(
     }
   }
 
-  // Add orphan prune actions
+  // Add orphan prune actions. An orphan has no repo of its own to hold the issue,
+  // so it goes to the tracking repo, and the plan says so.
+  const pruneRepo = config.pruneRepo || DEFAULT_PRUNE_REPO;
   for (const orphan of auditResult.orphans) {
     if (filter !== 'all' && orphan.registry !== filter) continue;
     actions.push({
       type: 'prune',
       target: orphan.registry,
       repo: orphan.packageName,
-      details: `Orphaned ${orphan.registry} package — no matching repo found`,
+      issueRepo: pruneRepo,
+      details: `Orphaned ${orphan.registry} package — no matching repo in the audit; issue goes to ${pruneRepo}`,
       risk: 'high',
     });
   }
