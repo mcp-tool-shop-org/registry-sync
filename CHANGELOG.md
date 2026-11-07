@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.2 (2026-11-07)
+## 1.2.0 (2026-11-07)
 
 ### Added
 - `atlas/`: a generated map of the repository (its parts, the doors work enters through, what changes together), regenerated with `npx @dogfood-lab/atlas map` from `atlas/boundaries.yaml` and never edited by hand. CI's `test` job runs `atlas check`, pinned at `@dogfood-lab/atlas@1.24.0`, so the committed map cannot drift from the boundaries, and `atlas/**` joins both of its paths filters.
@@ -20,7 +20,7 @@
 ### Security
 - devalue updated to 5.9.3 or later in the docs site, clearing GHSA-j22f-vq7h-c4qm and GHSA-mcm9-63f2-9j32. The published package is unchanged.
 - vitest and @vitest/coverage-v8 3.2.7 → 5.0.1, clearing GHSA-82fw-gwwq-j7x9 (moderate, in @vitest/mocker, reached through both) that had turned CI's `npm audit --audit-level=moderate` step red. vite 8.3.0 now comes in as vitest's required peer. Dev dependencies only; the published package is unchanged.
-- Still open, below the audit gate: GHSA-g7r4-m6w7-qqqr (low) in esbuild 0.27.3, which tsup's latest release pins at `^0.27.0`. It is a file read through esbuild's dev server on Windows, which nothing here starts.
+- vitest and @vitest/coverage-v8 5.0.1 → 5.1.0 and tsup 8.5.1 → 9.0.0 (which brings esbuild 0.28.2), clearing GHSA-qxg6-89mg-rqv8 and GHSA-xp26-3454-mjgp (@vitest/mocker), GHSA-g7r4-m6w7-qqqr (esbuild), GHSA-68fv-2mgg-jv7q (source-map-js), GHSA-9jrq-w75r-8gcw, GHSA-rq7h-c2jc-7f22 and GHSA-vfpm-58rq-9qcg (vite), and the three launch-editor advisories, which drops out of the tree. Dev dependencies only; the published files are the same 19.
 
 ### Tests
 - Coverage floor moved to the new reading: vitest 4 and later also count the branches inside functions no test calls, so the unchanged code and its 206 tests read lines 74.81, branches 71.02, functions 85.49, statements 76.07 (vitest 3: 79.57, 90, 82.81, 79.57). The floor sits on those numbers with no slack, and `autoUpdate` keeps ratcheting from there.
