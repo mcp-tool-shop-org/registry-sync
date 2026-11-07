@@ -19,6 +19,26 @@ function makeAudit(overrides?: Partial<AuditResult>): AuditResult {
   };
 }
 
+// An archived repo that would otherwise need an npm update and a GHCR workflow.
+function archivedAudit(): AuditResult {
+  return makeAudit({
+    repoCount: 1,
+    rows: [{
+      repo: {
+        name: 'old-tool', fullName: 'test-org/old-tool',
+        language: null, archived: true, isPrivate: false,
+        pushedAt: '2026-01-01', topics: [], defaultBranch: 'main',
+        hasPackageJson: true, hasDockerfile: true,
+        packageJsonName: '@test/old-tool', packageJsonVersion: '2.0.0',
+      },
+      presence: [
+        { registry: 'npmjs', published: true, publishedVersion: '1.0.0', drift: 'behind' },
+        { registry: 'ghcr', published: false, drift: 'missing' },
+      ],
+    }],
+  });
+}
+
 describe('plan', () => {
   it('generates publish action for missing npm package', () => {
     const audit = makeAudit({
@@ -140,6 +160,28 @@ describe('plan', () => {
     expect(pruneActions).toHaveLength(1);
     expect(pruneActions[0].risk).toBe('high');
     expect(result.summary.prune).toBe(1);
+  });
+
+  it('sends prune issues to the .github tracking repo by default, and says so', () => {
+    const result = plan(makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] }), config);
+    expect(result.actions[0]).toMatchObject({
+      type: 'prune',
+      repo: 'old-deleted-tool',
+      issueRepo: '.github',
+      details: 'Orphaned ghcr package — no matching repo in the audit; issue goes to .github',
+    });
+  });
+
+  it('sends prune issues to config.pruneRepo when it is set', () => {
+    const audit = makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] });
+    const result = plan(audit, { ...config, pruneRepo: 'registry-tracker' });
+    expect(result.actions[0].issueRepo).toBe('registry-tracker');
+    expect(result.actions[0].details).toContain('issue goes to registry-tracker');
+  });
+
+  it('treats an empty pruneRepo as unset', () => {
+    const audit = makeAudit({ orphans: [{ registry: 'ghcr', packageName: 'old-deleted-tool' }] });
+    expect(plan(audit, { ...config, pruneRepo: '' }).actions[0].issueRepo).toBe('.github');
   });
 
   it('generates skip for current packages', () => {
@@ -417,6 +459,22 @@ describe('plan', () => {
     expect(result.actions[0].type).toBe('skip');
     expect(result.actions[0].skipReason).toBe('private');
     expect(result.actions[0].details).toContain('private');
+  });
+
+  it('skips every registry of an archived repo, whatever its drift', () => {
+    const result = plan(archivedAudit(), config);
+    expect(result.actions.map(a => [a.type, a.target, a.skipReason, a.details])).toEqual([
+      ['skip', 'npmjs', 'archived', 'Archived repo, read-only on GitHub (behind)'],
+      ['skip', 'ghcr', 'archived', 'Archived repo, read-only on GitHub (missing)'],
+    ]);
+    expect(result.summary).toEqual({ publish: 0, update: 0, scaffold: 0, prune: 0, skip: 2 });
+  });
+
+  it('target filter applies to archived skips', () => {
+    const result = plan(archivedAudit(), config, 'ghcr');
+    expect(result.actions.map(a => [a.type, a.target, a.skipReason])).toEqual([
+      ['skip', 'ghcr', 'archived'],
+    ]);
   });
 
   it('target filter ghcr excludes npm actions', () => {

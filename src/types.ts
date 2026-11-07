@@ -77,12 +77,15 @@ export type SkipReason =
   | 'ahead'
   | 'private'
   | 'excluded'
+  | 'archived'
   | 'suspected-vscode-extension';
 
 export interface PlannedAction {
   type: ActionType;
   target: RegistryTarget;
   repo: string;
+  /** Repo apply files the issue in, when it is not `repo` itself (prune: the tracking repo). */
+  issueRepo?: string;
   fromVersion?: string;
   toVersion?: string;
   details: string;
@@ -173,6 +176,8 @@ export interface SyncConfig {
     npm: { enabled: boolean };
     ghcr: { enabled: boolean };
   };
+  /** Repo that receives prune issues, since an orphaned package has no repo of its own. Default: '.github'. */
+  pruneRepo?: string;
 }
 
 // --- Provider data ---

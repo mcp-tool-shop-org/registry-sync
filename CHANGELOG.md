@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.2.0 (2026-11-07)
+
+### Added
+- `atlas/`: a generated map of the repository (its parts, the doors work enters through, what changes together), regenerated with `npx @dogfood-lab/atlas map` from `atlas/boundaries.yaml` and never edited by hand. CI's `test` job runs `atlas check`, pinned at `@dogfood-lab/atlas@1.24.0`, so the committed map cannot drift from the boundaries, and `atlas/**` joins both of its paths filters.
+
+### Changed
+- CI now runs on every pull request, so docs-only changes report their required check. Pushes stay limited to the paths that matter. Atlas is pinned at 1.24.0.
+
+### Removed
+- `--no-skip`, which `help` listed as "Hide skip actions from plan output" but nothing read. The plan table and markdown already leave skip actions out and show only their count, so the flag could only ever have changed `--json`.
+- `--profile` and `--repo`, which were parsed and never used, and were not in `help`. Like any unknown flag they are now ignored, so a value placed before the command is read as the command and rejected.
+
+### Fixed
+- `prune` actions opened their issue on a repo named after the orphaned package, a repo that by construction does not exist (or is archived), so `apply` could only fail on them; the only test for it faked a 201. Prune issues now go to a tracking repo, set by the new config field `pruneRepo` (`.github` by default). The plan names that repo on every prune action (`issueRepo`, and in the details), and the issue title and body name the package.
+- `--include-archived` was listed in `help` but never reached the audit, so archived repos were always dropped. With the flag, archived repos stay in the audit and their GHCR containers are matched to them instead of being listed as orphans. `audit` takes it, and so do `plan` and `apply` when they run their own audit. `plan` turns every action on an archived repo into a skip with the new `SkipReason` `archived`, because GitHub makes archived repos read-only and `apply` could only fail there.
+- `apply --confirm` exited 0 however many of its actions failed, so a script could not tell a failed run from a clean one. It now exits 3 when some actions failed and some went through (`APPLY_PARTIAL`), because a re-run would file those issues again, and 2 when none went through (`APPLY_FAILED`). The per-action results still print, or go to `--out`, before the error. `help` lists the exit codes, which now match what `SHIP_GATE.md` already promised.
+
+### Security
+- devalue updated to 5.9.3 or later in the docs site, clearing GHSA-j22f-vq7h-c4qm and GHSA-mcm9-63f2-9j32. The published package is unchanged.
+- vitest and @vitest/coverage-v8 3.2.7 → 5.0.1, clearing GHSA-82fw-gwwq-j7x9 (moderate, in @vitest/mocker, reached through both) that had turned CI's `npm audit --audit-level=moderate` step red. vite 8.3.0 now comes in as vitest's required peer. Dev dependencies only; the published package is unchanged.
+- vitest and @vitest/coverage-v8 5.0.1 → 5.1.0 and tsup 8.5.1 → 9.0.0 (which brings esbuild 0.28.2), clearing GHSA-qxg6-89mg-rqv8 and GHSA-xp26-3454-mjgp (@vitest/mocker), GHSA-g7r4-m6w7-qqqr (esbuild), GHSA-68fv-2mgg-jv7q (source-map-js), GHSA-9jrq-w75r-8gcw, GHSA-rq7h-c2jc-7f22 and GHSA-vfpm-58rq-9qcg (vite), and the three launch-editor advisories, which drops out of the tree. Dev dependencies only; the published files are the same 19.
+
+### Tests
+- Coverage floor moved to the new reading: vitest 4 and later also count the branches inside functions no test calls, so the unchanged code and its 206 tests read lines 74.81, branches 71.02, functions 85.49, statements 76.07 (vitest 3: 79.57, 90, 82.81, 79.57). The floor sits on those numbers with no slack, and `autoUpdate` keeps ratcheting from there.
+- Tests for the `diff` formatters (table, JSON, markdown), which had none, and for every CLI command driven through `main()`: help, version, audit, plan, apply and diff, with their `--from`, `--out`, `--format`, `--target` and `--limit` paths and the exit codes for input, auth, API, apply and unexpected errors. `main()` now takes its argv so the tests can run it in-process. 256 tests, up from 206, and the floor ratchets to lines 97.79, branches 88.69, functions 99.24, statements 97.13.
+
 ## 1.1.1 (2026-03-25)
 
 ### Added

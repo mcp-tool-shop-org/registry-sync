@@ -15,9 +15,9 @@
   <a href="https://mcp-tool-shop-org.github.io/registry-sync/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
 </p>
 
-Moteur de synchronisation de l'état souhaité pour la publication de paquets dans plusieurs registres. Il analyse votre organisation GitHub par rapport à npmjs et GHCR, détecte les écarts de version, identifie les paquets orphelins et génère des plans d'action, un peu comme Terraform pour les registres de paquets.
+Moteur de synchronisation de l’état souhaité pour la publication de paquets dans plusieurs registres. Il effectue un audit de votre organisation GitHub par rapport à npmjs et GHCR, détecte les dérives de version, identifie les paquets orphelins et génère des plans d’action, comme Terraform pour les registres de paquets.
 
-La partie "écriture" complémentaire de [`registry-stats`](https://github.com/mcp-tool-shop-org/registry-stats).
+L’outil complémentaire pour les opérations d’écriture de [`registry-stats`](https://github.com/mcp-tool-shop-org/registry-stats).
 
 ## Installation
 
@@ -25,7 +25,7 @@ La partie "écriture" complémentaire de [`registry-stats`](https://github.com/m
 npm install -g @mcptoolshop/registry-sync
 ```
 
-Ou utilisez-le directement :
+Ou utilisez-le directement :
 
 ```bash
 npx @mcptoolshop/registry-sync audit --org my-org
@@ -51,47 +51,64 @@ registry-sync apply --confirm
 
 ### `audit`
 
-Analyse tous les dépôts d'une organisation GitHub, lit le fichier `package.json` de chaque dépôt et vérifie la présence d'un `Dockerfile`, puis interroge npmjs et GHCR pour créer une matrice de présence.
+Analyse tous les dépôts d’une organisation GitHub, lit le `package.json` de chaque dépôt et vérifie la présence de `Dockerfile`, puis interroge npmjs et GHCR pour créer une matrice de présence.
 
 ```
 registry-sync audit [--org <org>] [--format table|json|markdown]
 ```
 
-La sortie affiche l'état de la synchronisation par registre :
-- **✓** actuel — la version publiée correspond au dépôt
+La sortie affiche l’état de la dérive par registre :
+- **✓** à jour — la version publiée correspond au dépôt
 - **⚠** en retard — la version du dépôt est plus récente que la version publiée
+- **↓** en avance — la version publiée est plus récente que le dépôt (rétrogradation ou correctif rapide)
 - **manquant** — pas encore publié
 - **○** orphelin — publié, mais aucun dépôt correspondant
 
 ### `plan`
 
-Effectue une analyse et génère un plan d'action avec des niveaux de risque.
+Effectue un audit et génère un plan d’action avec des niveaux de risque.
 
 ```
 registry-sync plan [--org <org>] [--target npmjs|ghcr|all]
 ```
 
-Types d'actions :
-- **publish** — publication initiale dans un registre
-- **update** — mise à jour de la version nécessaire (le dépôt est plus récent que la version publiée)
-- **scaffold-workflow** — ajout d'un flux de travail de publication CI via une pull request
-- **prune** — un paquet orphelin doit être supprimé
+Types d’actions :
+- **publish** — première publication dans un registre
+- **update** — une mise à jour de version est nécessaire (le dépôt est plus récent que la version publiée)
+- **scaffold-workflow** — ajout d’un flux de travail de publication CI via une demande d’extraction
+- **prune** — un paquet orphelin doit être nettoyé
+
+### `diff`
+
+Compare deux instantanés d’audit pour identifier les changements entre les exécutions — nouvelle dérive, dérive résolue, dérive aggravée, nouveaux/supprimés dépôts et changements d’orphelins.
+
+```
+registry-sync diff --before audit-old.json --from audit-new.json [--format table|json|markdown]
+```
+
+Nécessite deux fichiers JSON d’audit précédemment enregistrés (à partir de `registry-sync audit --json -o <file>`). Aucune nouvelle requête d’API n’est effectuée — la comparaison est une simple opération sur les deux instantanés.
+
+Types de changements :
+- **new_drift** — le dépôt était à jour, maintenant en retard/manquant/en avance
+- **resolved** — la dérive était présente, maintenant à jour
+- **worsened** — la dérive s’est aggravée (par exemple, en retard → manquant)
+- **new_repo** / **removed_repo** — un dépôt a été ajouté ou supprimé entre les instantanés
 
 ### `apply`
 
-Exécute le plan. Toutes les actions sont non destructives en version 1 :
-- Crée des **problèmes** GitHub pour les actions de publication/mise à jour/suppression
-- Ouvre des **pull requests** GitHub avec les fichiers du flux de travail CI pour les actions de création de squelette
+Exécute le plan. Toutes les actions sont non destructives dans v1 :
+- Crée GitHub **tickets** pour les actions de publication/mise à jour/suppression
+- Ouvre GitHub **demandes d’extraction** avec des fichiers de flux de travail CI pour les actions de création de modèle
 
 ```
 registry-sync apply --confirm [--target npmjs|ghcr|all]
 ```
 
-Sans l'option `--confirm`, effectue une simulation (comme `plan`).
+Sans `--confirm`, affiche une exécution à blanc (comme `plan`).
 
 ## Configuration
 
-Placez le fichier `registry-sync.config.json` à la racine de votre projet :
+Placez `registry-sync.config.json` dans le répertoire racine de votre projet :
 
 ```json
 {
@@ -104,21 +121,21 @@ Placez le fichier `registry-sync.config.json` à la racine de votre projet :
 }
 ```
 
-Utilise les valeurs par défaut si aucun fichier de configuration n'est trouvé.
+Utilise des valeurs par défaut raisonnables si aucun fichier de configuration n’est trouvé.
 
 ## Authentification
 
-Nécessite un jeton GitHub avec la portée `repo` :
+Nécessite un jeton GitHub avec une portée `repo` :
 
-1. Variable d'environnement `GITHUB_TOKEN` (préférée)
-2. `gh auth token` (si l'interface de ligne de commande GitHub est installée)
+1. Variable d’environnement `GITHUB_TOKEN` (préféré)
+2. Solution de repli `gh auth token` (si l’outil en ligne de commande GitHub est installé)
 
-Un jeton npm n'est pas requis en version 1 (requêtes de lecture seule du registre).
+Le jeton npm n’est pas requis dans v1 (requêtes de registre en lecture seule).
 
 ## Utilisation en tant que bibliothèque
 
 ```typescript
-import { audit, plan, loadConfig } from '@mcptoolshop/registry-sync';
+import { audit, plan, diff, loadConfig } from '@mcptoolshop/registry-sync';
 
 const config = loadConfig();
 const auditResult = await audit(config);
@@ -126,19 +143,25 @@ const planResult = plan(auditResult, config);
 
 console.log(planResult.summary);
 // { publish: 9, update: 1, scaffold: 26, prune: 3, skip: 45 }
+
+// Compare two snapshots
+const oldAudit = JSON.parse(readFileSync('audit-old.json', 'utf-8'));
+const diffResult = diff(oldAudit, auditResult);
+console.log(diffResult.summary);
+// { newDrift: 2, resolved: 1, worsened: 0, unchanged: 40, ... }
 ```
 
 ## Sécurité et modèle de menace
 
-Consultez [SECURITY.md](./SECURITY.md) pour le modèle de sécurité complet.
+Consultez le fichier [SECURITY.md](./SECURITY.md) pour obtenir le modèle de sécurité complet.
 
-**Ce que cela touche :** API GitHub publique (métadonnées des dépôts, contenu des fichiers, problèmes, pull requests) et le registre npm public (métadonnées des paquets en lecture seule). Crée des problèmes et des pull requests sur les dépôts auxquels vous avez un accès en écriture lorsque `apply --confirm` est utilisé.
+**Ce que cela affecte :** API publique GitHub (métadonnées du dépôt, contenu des fichiers, tickets, demandes d’extraction) et le registre npm public (métadonnées des paquets en lecture seule). Crée des tickets et des demandes d’extraction sur les dépôts auxquels vous avez accès en écriture lorsque `apply --confirm` est utilisé.
 
-**Ce que cela NE touche PAS :** Aucun fichier local n'est modifié (lecture seule de la configuration). Aucune publication npm, aucun push Docker, aucun stockage d'informations d'identification. Aucune donnée ne quitte votre machine, à l'exception des appels aux API GitHub/npm.
+**Ce que cela n’affecte PAS :** Aucun fichier local n’est modifié (recherche de configuration en lecture seule). Aucune publication npm, aucun envoi Docker, aucun stockage d’informations d’identification. Aucune donnée ne quitte votre machine au-delà des requêtes d’API GitHub/npm.
 
-**Autorisations requises :** Jeton GitHub avec la portée `repo` (lecture pour l'analyse, écriture pour l'application). Aucun jeton npm requis.
+**Autorisations requises :** jeton GitHub avec une portée `repo` (lecture pour l’audit, écriture pour l’application). Aucun jeton npm n’est requis.
 
-**Aucune télémétrie.** Aucune analyse. Aucune communication avec un serveur distant. Aucune collecte de données de quelque sorte que ce soit.
+**Aucune télémétrie.** Pas d’analyse. Pas de communication vers le domicile. Aucune collecte de données de quelque nature que ce soit.
 
 ---
 

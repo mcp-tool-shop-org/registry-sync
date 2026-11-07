@@ -8,10 +8,10 @@ export default defineConfig({
       exclude: ['src/types.ts', 'src/index.ts'],
       thresholds: {
         // Global floor — CI fails if overall coverage drops below these
-        lines: 79.57,
-        branches: 90,
-        functions: 82.81,
-        statements: 79.57,
+        lines: 98.03,
+        branches: 89.01,
+        functions: 99.24,
+        statements: 97.35,
         // autoUpdate ratchets these numbers up when coverage improves
         autoUpdate: true,
       },

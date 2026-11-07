@@ -129,12 +129,8 @@ describe('parseArgs', () => {
     expect(parseArgs(['--include-archived']).includeArchived).toBe(true);
   });
 
-  it('parses --no-skip', () => {
-    expect(parseArgs(['--no-skip']).noSkip).toBe(true);
-  });
-
-  it('parses --repo', () => {
-    expect(parseArgs(['audit', '--repo', 'my-tool']).repo).toBe('my-tool');
+  it('ignores --no-skip, --profile and --repo like any unknown flag', () => {
+    expect(parseArgs(['plan', '--no-skip', '--profile', 'ci', '--repo', 'my-tool'])).toEqual({ command: 'plan' });
   });
 
   it('returns empty command for no args', () => {
