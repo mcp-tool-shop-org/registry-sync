@@ -12,6 +12,7 @@ describe('defaultConfig', () => {
     expect(config.exclude).toContain('brand');
     expect(config.targets.npm.enabled).toBe(true);
     expect(config.targets.ghcr.enabled).toBe(true);
+    expect(config.pruneRepo).toBe('.github');
   });
 });
 
@@ -29,6 +30,7 @@ describe('starterConfig', () => {
     const parsed = JSON.parse(starter);
     expect(parsed.org).toBe('mcp-tool-shop-org');
     expect(parsed.targets).toBeDefined();
+    expect(parsed.pruneRepo).toBe('.github');
   });
 
   it('ends with newline', () => {
@@ -61,6 +63,12 @@ describe('loadConfig with config file', () => {
     expect(config.org).toBe('custom-org');
     expect(config.targets.npm.enabled).toBe(true);
     expect(config.targets.ghcr.enabled).toBe(true);
+    expect(config.pruneRepo).toBe('.github');
+  });
+
+  it('reads pruneRepo from the config file', () => {
+    writeFileSync(join(tmpDir, 'registry-sync.config.json'), JSON.stringify({ pruneRepo: 'registry-tracker' }));
+    expect(loadConfig(tmpDir).pruneRepo).toBe('registry-tracker');
   });
 
   it('overrides individual target flags', () => {

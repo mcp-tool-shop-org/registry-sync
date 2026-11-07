@@ -83,15 +83,17 @@ async function createIssue(
   const titleMap: Record<string, string> = {
     publish: `registry-sync: Publish to ${action.target}`,
     update: `registry-sync: Update ${action.target} (${action.fromVersion} → ${action.toVersion})`,
-    prune: `registry-sync: Orphaned ${action.target} package`,
+    prune: `registry-sync: Orphaned ${action.target} package ${action.repo}`,
   };
 
   const title = titleMap[action.type] || `registry-sync: ${action.type}`;
   const body = buildIssueBody(action);
   const token = getGitHubToken();
+  // The plan names the repo that takes the issue when it is not the action's own (prune).
+  const issueRepo = action.issueRepo ?? action.repo;
 
   const res = await fetch(
-    `https://api.github.com/repos/${org}/${action.repo}/issues`,
+    `https://api.github.com/repos/${org}/${issueRepo}/issues`,
     {
       method: 'POST',
       headers: {
@@ -111,7 +113,7 @@ async function createIssue(
   if (!res.ok) {
     if (res.status === 422) {
       const retry = await fetch(
-        `https://api.github.com/repos/${org}/${action.repo}/issues`,
+        `https://api.github.com/repos/${org}/${issueRepo}/issues`,
         {
           method: 'POST',
           headers: {
@@ -126,7 +128,7 @@ async function createIssue(
       if (!retry.ok) {
         throw new SyncError(
           'APPLY_FAILED',
-          `Failed to create issue on ${org}/${action.repo}: ${retry.status}`,
+          `Failed to create issue on ${org}/${issueRepo}: ${retry.status}`,
           'Check token has repo write permissions',
         );
       }
@@ -135,7 +137,7 @@ async function createIssue(
     }
     throw new SyncError(
       'APPLY_FAILED',
-      `Failed to create issue on ${org}/${action.repo}: ${res.status}`,
+      `Failed to create issue on ${org}/${issueRepo}: ${res.status}`,
       'Check token has repo write permissions',
     );
   }
@@ -174,7 +176,9 @@ function buildIssueBody(action: PlannedAction): string {
     lines.push('');
     lines.push('### Steps to resolve');
     lines.push('');
-    lines.push('This package exists on the registry but has no matching repository.');
+    lines.push(
+      `\`${action.repo}\` is published to ${action.target}, but no repository in the audit matches it (archived and excluded repos are left out of the audit).`,
+    );
     lines.push('');
     lines.push('- If the repo was renamed/moved: update the package or redirect');
     lines.push('- If the repo was deleted: consider deprecating/removing the package');
