@@ -15,9 +15,9 @@
   <a href="https://mcp-tool-shop-org.github.io/registry-sync/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
 </p>
 
-マルチレジストリパッケージ公開のための、理想の状態を同期するエンジンです。GitHub組織をnpmjsおよびGHCRに対して監査し、バージョンズレを検出し、孤立したパッケージを見つけ、アクションプランを生成します。これは、パッケージレジストリのためのTerraformのようなものです。
+複数のレジストリにパッケージを公開するための、目的の状態を同期するエンジン。 GitHub組織をnpmjsおよびGHCRに対して監査し、バージョンズレを検出し、孤立したパッケージを見つけ、アクションプランを生成します。パッケージレジストリ向けのTerraformのようなものです。
 
-[`registry-stats`](https://github.com/mcp-tool-shop-org/registry-stats)の書き込み側のコンポーネントです。
+[`registry-stats`](https://github.com/mcp-tool-shop-org/registry-stats) の書き込み側のコンパニオンツール。
 
 ## インストール
 
@@ -51,47 +51,64 @@ registry-sync apply --confirm
 
 ### `audit`
 
-GitHub組織内のすべてのリポジトリをスキャンし、各リポジトリの`package.json`を読み込み、`Dockerfile`の有無を確認し、次にnpmjsおよびGHCRに対してクエリを実行して、存在状況のマトリックスを構築します。
+GitHub組織内のすべてのリポジトリをスキャンし、各リポジトリの`package.json`を読み取り、`Dockerfile`をチェックし、次にnpmjsとGHCRにクエリを送信して、存在状況のマトリックスを作成します。
 
 ```
 registry-sync audit [--org <org>] [--format table|json|markdown]
 ```
 
-出力は、レジストリごとの状態を示します。
-- **✓** current：公開バージョンがリポジトリと一致
-- **⚠** behind：リポジトリのバージョンが公開されているバージョンよりも新しい
-- **missing**：まだ公開されていない
-- **○** orphan：公開されているが、対応するリポジトリがない
+出力は、レジストリごとのドリフト状態を示します。
+- **✓** current — 公開されたバージョンがリポジトリと一致
+- **⚠** behind — リポジトリのバージョンが公開バージョンより古い
+- **↓** ahead — 公開されたバージョンがリポジトリより新しい（ロールバックまたはホットフィックス）
+- **missing** — まだ公開されていない
+- **○** orphan — 公開されているが、対応するリポジトリがない
 
 ### `plan`
 
-監査を実行し、リスクレベルとともにアクションプランを生成します。
+監査を実行し、リスクレベル付きのアクションプランを生成します。
 
 ```
 registry-sync plan [--org <org>] [--target npmjs|ghcr|all]
 ```
 
 アクションの種類：
-- **publish**：レジストリへの初回公開
-- **update**：バージョンを更新する必要がある（リポジトリが公開されているバージョンよりも新しい）
-- **scaffold-workflow**：PRを通じてCI公開ワークフローを追加
-- **prune**：孤立したパッケージをクリーンアップする必要がある
+- **publish** — レジストリへの初回公開
+- **update** — バージョン更新が必要（リポジトリが公開バージョンより新しい）
+- **scaffold-workflow** — PR経由でCI公開ワークフローを追加
+- **prune** — 孤立したパッケージのクリーンアップが必要
+
+### `diff`
+
+2つの監査スナップショットを比較し、実行間で何が変更されたかを表示します。新しいドリフト、解決されたドリフト、悪化したドリフト、新しい/削除されたリポジトリ、および孤立したパッケージの変更。
+
+```
+registry-sync diff --before audit-old.json --from audit-new.json [--format table|json|markdown]
+```
+
+以前に保存された2つの監査JSONファイル（`registry-sync audit --json -o <file>`から）が必要です。新しいAPI呼び出しは行われません。差分は、2つのスナップショットに対する純粋な計算です。
+
+変更の種類：
+- **new_drift** — リポジトリは最新の状態でしたが、現在は古い/存在しない/新しい
+- **resolved** — ドリフトが存在していましたが、現在は最新の状態
+- **worsened** — ドリフトが悪化（例：古い → 存在しない）
+- **new_repo** / **removed_repo** — スナップショット間でリポジトリが追加または削除
 
 ### `apply`
 
-プランを実行します。v1では、すべての操作は破壊的な変更を加えません。
-- 公開/更新/クリーンアップのアクションについて、GitHubの**イシュー**を作成します。
-- スキャフォールドアクションについては、CIワークフローファイルを含むGitHubの**プルリクエスト**を開きます。
+プランを実行します。すべての操作は、v1では破壊的な操作ではありません。
+- 公開/更新/削除アクションに対して、GitHub **issue**を作成します
+- スキャフォールドアクションに対して、CIワークフローファイルを含むGitHub **PR**を開きます
 
 ```
 registry-sync apply --confirm [--target npmjs|ghcr|all]
 ```
 
-`--confirm`オプションなしで実行すると、テスト実行（`plan`と同じ）を行います。
+`--confirm`がない場合、ドライラン（`plan`と同じ）を表示します。
 
 ## 設定
 
-プロジェクトのルートディレクトリに`registry-sync.config.json`を配置します。
+プロジェクトのルートに`registry-sync.config.json`を配置します。
 
 ```json
 {
@@ -104,21 +121,21 @@ registry-sync apply --confirm [--target npmjs|ghcr|all]
 }
 ```
 
-設定ファイルが見つからない場合は、デフォルトの設定が使用されます。
+設定ファイルが見つからない場合、適切なデフォルト値が使用されます。
 
 ## 認証
 
 `repo`スコープを持つGitHubトークンが必要です。
 
 1. `GITHUB_TOKEN`環境変数（推奨）
-2. `gh auth token`（GitHub CLIがインストールされている場合）
+2. `gh auth token`フォールバック（GitHubCLIがインストールされている場合）
 
-v1では、npmトークンは不要です（読み取り専用のレジストリクエリ）。
+v1ではnpmトークンは必要ありません（読み取り専用のレジストリクエリ）。
 
-## ライブラリの使用方法
+## ライブラリの使用
 
 ```typescript
-import { audit, plan, loadConfig } from '@mcptoolshop/registry-sync';
+import { audit, plan, diff, loadConfig } from '@mcptoolshop/registry-sync';
 
 const config = loadConfig();
 const auditResult = await audit(config);
@@ -126,20 +143,26 @@ const planResult = plan(auditResult, config);
 
 console.log(planResult.summary);
 // { publish: 9, update: 1, scaffold: 26, prune: 3, skip: 45 }
+
+// Compare two snapshots
+const oldAudit = JSON.parse(readFileSync('audit-old.json', 'utf-8'));
+const diffResult = diff(oldAudit, auditResult);
+console.log(diffResult.summary);
+// { newDrift: 2, resolved: 1, worsened: 0, unchanged: 40, ... }
 ```
 
 ## セキュリティと脅威モデル
 
 完全なセキュリティモデルについては、[SECURITY.md](./SECURITY.md)を参照してください。
 
-**影響範囲:** 公開されているGitHub API（リポジトリのメタデータ、ファイルの内容、イシュー、プルリクエスト）と、公開されているnpmレジストリ（読み取り専用のパッケージメタデータ）。`apply --confirm`を使用する場合、書き込みアクセス権を持つリポジトリにイシューとプルリクエストを作成します。
+**対象となるもの：** パブリックなGitHubAPI（リポジトリのメタデータ、ファイルの内容、issue、PR）およびパブリックなnpmレジストリ（読み取り専用のパッケージメタデータ）。 `apply --confirm`が使用されている場合、書き込みアクセス権を持つリポジトリにissueとPRを作成します。
 
-**影響範囲外:** ローカルファイルは変更されません（読み取り専用の設定ファイル参照）。npmの公開、Dockerのプッシュ、認証情報の保存は行われません。データは、GitHub/npm APIへの呼び出し以外では、マシンから外部に送信されません。
+**対象とならないもの：** ローカルファイルは変更されません（読み取り専用の設定の参照）。 npm publish、Docker push、認証情報の保存は行いません。 GitHub/npm API呼び出しを超えて、データがマシンから外部に送信されることはありません。
 
-**必要な権限:** `repo`スコープを持つGitHubトークン（監査には読み取り権限、`apply`には書き込み権限）。npmトークンは不要です。
+**必要な権限：** 監査用の読み取り、適用用の書き込み権限を持つ、`repo`スコープを持つGitHubトークン。 npmトークンは必要ありません。
 
-**テレメトリーはありません。** 分析もありません。ホームへの接続もありません。あらゆる種類のデータ収集もありません。
+**テレメトリはありません。** 分析もありません。 ホームへの接続もありません。 あらゆる種類のデータ収集も行いません。
 
 ---
 
-<a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>によって作成されました。
+<a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>によって構築されました。
