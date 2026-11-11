@@ -1,15 +1,14 @@
 # registry-sync: how it works
 
-Mapped at 2026-10-01 from commit fae9a7c by Atlas 1.24.0.
+Mapped at 2026-11-11 from commit b93b0e3 by Atlas 1.26.0.
 
 ## What this is
 
 7 parts, mostly TypeScript (40 files), CSS (2), Astro (1) and JavaScript (1). Work enters through 5 doors; CI and Publish each reach 2 parts, and CI is followed because a pull request goes through it. It publishes to npm. It deploys a site to GitHub Pages. People run registry-sync. People import @mcptoolshop/registry-sync.
 
-## What changed since 2026-09-30 (779aa9a)
+## What changed since 2026-10-01 (fae9a7c)
 
-- CI's pull request trigger no longer names `.github/workflows/**`, `atlas/**`, `codecov.yml`, `package-lock.json`, `package.json`, `src/**`, `test/**` and `vitest.config.ts`.
-- 1 file changed content, across 1 part.
+Nothing structural changed since 2026-10-01; 25 files changed content.
 
 ## What comes in
 
@@ -89,9 +88,11 @@ People write .claude/, .github/, the repository root, site/ and templates/. Noth
 
 ## Where to start
 
-.github/workflows/ci.yml → src/cli.ts → src/config.ts → src/audit.ts → src/format/json.ts → src/format/markdown.ts → src/format/table.ts → src/plan.ts
+.github/workflows/ci.yml → src/cli.ts → src/config.ts → src/types.ts
 
 Read those in order to follow one pull request end to end.
+
+Beside the path, src/cli.ts also calls src/audit.ts, src/format/json.ts, src/format/markdown.ts, src/format/table.ts and 4 more files.
 
 ## What this map cannot see
 
